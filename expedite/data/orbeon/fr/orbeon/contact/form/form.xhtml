@@ -1,0 +1,349 @@
+<xh:html xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+            xmlns:xi="http://www.w3.org/2001/XInclude"
+            xmlns:ev="http://www.w3.org/2001/xml-events"
+            xmlns:xf="http://www.w3.org/2002/xforms"
+            xmlns:xh="http://www.w3.org/1999/xhtml"
+            xmlns:saxon="http://saxon.sf.net/"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:exf="http://www.exforms.org/exf/1-0"
+            xmlns:sql="http://orbeon.org/oxf/xml/sql"
+            xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+            xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+            xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xh:head>
+        <xf:model id="fr-form-model" xxf:xpath-analysis="true">
+            <xf:instance id="fr-form-instance">
+                <form>
+                    <contact>
+                        <first-name/>
+                        <last-name/>
+                        <email/>
+                        <phone/>
+                    </contact>
+                    <message>
+                        <order-number/>
+                        <topic/>
+                        <comments/>
+                    </message>
+                </form>
+            </xf:instance>
+            <xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+                <xf:bind id="contact-bind" ref="contact" name="contact">
+                    <xf:bind id="first-name-bind" ref="first-name" type="xs:string" required="true()"
+                                 name="first-name"/>
+                    <xf:bind id="last-name-bind" ref="last-name" type="xs:string" required="true()"
+                                 name="last-name"/>
+                    <xf:bind id="email-bind" ref="email" type="xf:email" required="true()"
+                                 name="email"/>
+                    <xf:bind id="phone-bind" ref="phone" constraint=". = '' or matches(., '^\d{10}$')" name="phone"/>
+                </xf:bind>
+                <xf:bind id="message-bind" ref="message" name="message">
+                    <xf:bind id="order-number-bind" ref="order-number" type="xs:string"
+                                 required="true()"
+                                 name="order-number"/>
+                    <xf:bind id="topic-bind" ref="topic" type="xs:string" required="true()" name="topic"/>
+                    <xf:bind id="comments-bind" ref="comments" type="xs:string" required="true()"
+                                 name="comments"/>
+                </xf:bind>
+            </xf:bind>
+            <xf:instance id="fr-form-metadata" xxf:readonly="true">
+                <metadata>
+                    <application-name>orbeon</application-name>
+                    <form-name>contact</form-name>
+                    <title xml:lang="en">Contact</title>
+                    <description xml:lang="en">The Contact form is a simple form which can be created in a few minutes with Form Builder.</description>
+                    <title xml:lang="fr">Contact</title>
+                    <description xml:lang="fr">Le formulaire Contact peut être créé à l'aide de Form Builder en quelques minutes.</description>
+                </metadata>
+            </xf:instance>
+            <xf:instance id="fr-form-attachments">
+                <attachments>
+                    <css mediatype="text/css" filename="" size=""/>
+                    <pdf mediatype="application/pdf" filename="" size=""/>
+                </attachments>
+            </xf:instance>
+            <xf:instance id="fr-form-resources" xxf:readonly="true">
+                <resources>
+                    <resource xml:lang="en">
+                        <comments>
+                            <label>Questions and Comments</label>
+                            <hint>Your questions and/or comments</hint>
+                            <help/>
+                            <alert/>
+                        </comments>
+                        <order-number>
+                            <label>Order Number</label>
+                            <hint>The related order number</hint>
+                            <help/>
+                            <alert/>
+                        </order-number>
+                        <topic>
+                            <label>Topic</label>
+                            <hint>Please select the closest topic</hint>
+                            <help/>
+                            <alert/>
+                            <item>
+                                <label>Account</label>
+                                <value>account</value>
+                            </item>
+                            <item>
+                                <label>Orders</label>
+                                <value>orders</value>
+                            </item>
+                            <item>
+                                <label>Returns</label>
+                                <value>returns</value>
+                            </item>
+                            <item>
+                                <label>Repairs</label>
+                                <value>repairs</value>
+                            </item>
+                            <item>
+                                <label>Other</label>
+                                <value>other</value>
+                            </item>
+                        </topic>
+                        <contact>
+                            <label>Contact Information</label>
+                            <help/>
+                        </contact>
+                        <first-name>
+                            <label>First Name</label>
+                            <hint>Your first or given name</hint>
+                            <help/>
+                            <alert/>
+                        </first-name>
+                        <last-name>
+                            <label>Last Name</label>
+                            <hint>Your last name</hint>
+                            <help/>
+                            <alert/>
+                        </last-name>
+                        <email>
+                            <label>Email</label>
+                            <hint>Your email address</hint>
+                            <help/>
+                            <alert/>
+                        </email>
+                        <phone>
+                            <label>Phone Number</label>
+                            <hint>Optional phone number</hint>
+                            <help/>
+                            <alert/>
+                        </phone>
+                        <message>
+                            <label>Message</label>
+                            <help/>
+                        </message>
+                    </resource>
+                    <resource xml:lang="fr">
+                        <comments>
+                            <label>Questions et commentaires</label>
+                            <hint>Vos questions et/ou commentaires</hint>
+                            <help/>
+                            <alert/>
+                        </comments>
+                        <order-number>
+                            <label>Numéro de commande</label>
+                            <hint>Numéro de commande relatif</hint>
+                            <help/>
+                            <alert/>
+                        </order-number>
+                        <topic>
+                            <label>Sujet</label>
+                            <hint>Veuillez choisir le sujet le plus proche</hint>
+                            <help/>
+                            <alert/>
+                            <item>
+                                <label>Compte</label>
+                                <value>account</value>
+                            </item>
+                            <item>
+                                <label>Commandes</label>
+                                <value>orders</value>
+                            </item>
+                            <item>
+                                <label>Renvois</label>
+                                <value>returns</value>
+                            </item>
+                            <item>
+                                <label>réparations</label>
+                                <value>repairs</value>
+                            </item>
+                            <item>
+                                <label>Autre</label>
+                                <value>other</value>
+                            </item>
+                        </topic>
+                        <contact>
+                            <label>Informations de contact</label>
+                            <help/>
+                        </contact>
+                        <first-name>
+                            <label>Prénom</label>
+                            <hint>Votre prénom</hint>
+                            <help/>
+                            <alert/>
+                        </first-name>
+                        <last-name>
+                            <label>Nom de famille</label>
+                            <hint>Votre nom de famille</hint>
+                            <help/>
+                            <alert/>
+                        </last-name>
+                        <email>
+                            <label>Email</label>
+                            <hint>Your adresse email</hint>
+                            <help/>
+                            <alert/>
+                        </email>
+                        <phone>
+                            <label>Numéro de téléphone</label>
+                            <hint>Numéro de téléphone optionnel</hint>
+                            <help/>
+                            <alert/>
+                        </phone>
+                        <message>
+                            <label>Votre message</label>
+                            <help/>
+                        </message>
+                    </resource>
+                </resources>
+            </xf:instance>
+            <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+                <request/>
+            </xf:instance>
+            <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+                <response/>
+            </xf:instance>
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body>
+                <fr:section id="contact-section" bind="contact-bind">
+                    <xf:label ref="$form-resources/contact/label"/>
+                    <xf:help ref="$form-resources/contact/help"/>
+                    <fr:grid columns="2">
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input bind="first-name-bind" id="first-name-control" class="fr-summary fr-search">
+                                    <xf:label ref="$form-resources/first-name/label"/>
+                                    <xf:hint ref="$form-resources/first-name/hint"/>
+                                    <xf:help ref="$form-resources/first-name/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td>
+                                <xf:input xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                              xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+                                              xmlns:xbl="http://www.w3.org/ns/xbl"
+                                              xmlns:pipeline="java:org.orbeon.oxf.processor.pipeline.PipelineFunctionLibrary"
+                                              bind="last-name-bind"
+                                              id="last-name-control"
+                                              class="fr-summary fr-search">
+                                    <xf:label ref="$form-resources/last-name/label"/>
+                                    <xf:hint ref="$form-resources/last-name/hint"/>
+                                    <xf:help ref="$form-resources/last-name/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                              xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+                                              xmlns:xbl="http://www.w3.org/ns/xbl"
+                                              xmlns:pipeline="java:org.orbeon.oxf.processor.pipeline.PipelineFunctionLibrary"
+                                              bind="email-bind"
+                                              id="email-control"
+                                              class="fr-summary fr-search">
+                                    <xf:label ref="$form-resources/email/label"/>
+                                    <xf:hint ref="$form-resources/email/hint"/>
+                                    <xf:help ref="$form-resources/email/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td>
+                                <fr:us-phone xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                             xmlns:xbl="http://www.w3.org/ns/xbl"
+                                             xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+                                             xmlns:xxbl="http://orbeon.org/oxf/xml/xbl"
+                                             xmlns:pipeline="java:org.orbeon.oxf.processor.pipeline.PipelineFunctionLibrary"
+                                             bind="phone-bind"
+                                             id="phone-control">
+                                    <xf:label ref="$form-resources/phone/label"/>
+                                    <xf:hint ref="$form-resources/phone/hint"/>
+                                    <xf:help ref="$form-resources/phone/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </fr:us-phone>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="message-section" bind="message-bind">
+                    <xf:label ref="$form-resources/message/label"/>
+                    <xf:help ref="$form-resources/message/help"/>
+                    <fr:grid columns="2">
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                              xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+                                              xmlns:xbl="http://www.w3.org/ns/xbl"
+                                              xmlns:pipeline="java:org.orbeon.oxf.processor.pipeline.PipelineFunctionLibrary"
+                                              bind="order-number-bind"
+                                              id="order-number-control"
+                                              class="fr-summary fr-search">
+                                    <xf:label ref="$form-resources/order-number/label"/>
+                                    <xf:hint ref="$form-resources/order-number/hint"/>
+                                    <xf:help ref="$form-resources/order-number/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                            <xh:td>
+                                <xf:select1 xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                                xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+                                                xmlns:xbl="http://www.w3.org/ns/xbl"
+                                                xmlns:pipeline="java:org.orbeon.oxf.processor.pipeline.PipelineFunctionLibrary"
+                                                appearance="minimal"
+                                                bind="topic-bind"
+                                                id="topic-control">
+                                    <xf:label ref="$form-resources/topic/label"/>
+                                    <xf:hint ref="$form-resources/topic/hint"/>
+                                    <xf:help ref="$form-resources/topic/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                    <xf:item>
+                                        <xf:label>[Select...]</xf:label>
+                                        <xf:value/>
+                                    </xf:item>
+                                    <xf:itemset ref="$form-resources/topic/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                    <fr:grid columns="1">
+                        <xh:tr>
+                            <xh:td>
+                                <xf:textarea xmlns="http://orbeon.org/oxf/xml/form-builder"
+                                                 xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+                                                 xmlns:xbl="http://www.w3.org/ns/xbl"
+                                                 xmlns:pipeline="java:org.orbeon.oxf.processor.pipeline.PipelineFunctionLibrary"
+                                                 bind="comments-bind"
+                                                 id="comments-control">
+                                    <xf:label ref="$form-resources/comments/label"/>
+                                    <xf:hint ref="$form-resources/comments/hint"/>
+                                    <xf:help ref="$form-resources/comments/help"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:textarea>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>

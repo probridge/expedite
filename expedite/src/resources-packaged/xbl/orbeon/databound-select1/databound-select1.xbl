@@ -1,0 +1,138 @@
+<!--
+  Copyright (C) 2009 Orbeon, Inc.
+
+  This program is free software; you can redistribute it and/or modify it under the terms of the
+  GNU Lesser General Public License as published by the Free Software Foundation; either version
+  2.1 of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+  -->
+<xbl:xbl xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:xbl="http://www.w3.org/ns/xbl"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:xxbl="http://orbeon.org/oxf/xml/xbl"
+         xmlns:oxf="http://www.orbeon.com/oxf/processors">
+
+    <xbl:binding id="fr-databound-select1" element="fr|databound-select1" xxbl:mode="lhha binding value">
+        <fb:metadata>
+            <fb:display-name lang="en">Dynamic Data Dropdown</fb:display-name>
+            <fb:display-name lang="fi">Dynaamisen datan pudotusvalikko</fb:display-name>
+            <fb:display-name lang="fr">Menu données dynamique</fb:display-name>
+            <fb:display-name lang="ru">Список из веб-сервиса</fb:display-name>
+            <fb:display-name lang="de">Daten Dropdown-Liste</fb:display-name>
+            <fb:display-name lang="it">Tendina dati</fb:display-name>
+            <fb:icon lang="en">
+                <fb:small-icon>/forms/orbeon/builder/images/dropdown.png</fb:small-icon>
+                <fb:large-icon>/forms/orbeon/builder/images/dropdown.png</fb:large-icon>
+            </fb:icon>
+            <fb:datatype>xf:string</fb:datatype>
+            <fb:editors static-itemset="false"/>
+            <fb:template>
+                <fr:databound-select1 id="" appearance="minimal" ref="" resource="" xmlns:xf="http://www.w3.org/2002/xforms">
+                    <xf:label ref=""/>
+                    <xf:hint ref=""/>
+                    <xf:help ref=""/>
+                    <xf:alert ref=""/>
+                    <xf:itemset ref="item">
+                        <xf:label ref="label"/>
+                        <xf:value ref="value"/>
+                    </xf:itemset>
+                </fr:databound-select1>
+            </fb:template>
+            <fb:control-details>
+                <xf:input ref="@resource">
+                    <xf:label lang="en">Resource URL</xf:label>
+                    <xf:label lang="fi">Resurssi URL</xf:label>
+                    <xf:label lang="fr">URL de la ressource</xf:label>
+                    <xf:label lang="ru">URL ресурса</xf:label>
+                    <xf:label lang="it">URL della risorsa</xf:label>
+                    <xf:label lang="de">URL der Ressource</xf:label>
+                    <xf:hint lang="en">HTTP URL returning data used to populate the dropdown</xf:hint>
+                    <xf:hint lang="fi">HTTP URL palauttaa pudotusvalikon täyttämiseen käytettyä dataa</xf:hint>
+                    <xf:hint lang="fr">URL HTTP auquel réside le service</xf:hint>
+                    <xf:hint lang="ru">HTTP URL сервиса, данными из которого будет заполнен выпадающий список</xf:hint>
+                    <xf:hint lang="it">URL HTTP che da i dati per il menu a tendina</xf:hint>
+                    <xf:hint lang="de">HTTP URL die die Inhalte für das Dropdown-Menü liefert</xf:hint>
+                </xf:input>
+                <xf:input ref="xf:itemset/@ref">
+                    <xf:label ref="$resources/dialog-actions/items/label"/>
+                    <xf:hint ref="$resources/dialog-actions/items/hint"/>
+                </xf:input>
+                <xf:input ref="xf:itemset/xf:label/@ref">
+                    <xf:label ref="$resources/dialog-actions/label/label"/>
+                    <xf:hint ref="$resources/dialog-actions/label/hint"/>
+                </xf:input>
+                <xf:input ref="xf:itemset/xf:value/@ref">
+                    <xf:label ref="$resources/dialog-actions/value/label"/>
+                    <xf:hint ref="$resources/dialog-actions/value/hint"/>
+                </xf:input>
+            </fb:control-details>
+        </fb:metadata>
+        <xbl:resources>
+            <xbl:style>
+                div.xbl-fr-databound-select1 { display: inline; }
+            </xbl:style>
+        </xbl:resources>
+        <xbl:implementation>
+            <xf:model id="xbl-model">
+                <!-- Contains the data from which the itemset is populated -->
+                <xf:instance id="itemset"><dummy/></xf:instance>
+                <!-- What do when doing a refresh -->
+                <xf:submission id="get-itemset" method="get" resource="{event('resource')}" replace="instance" serialization="none">
+                    <xf:action ev:event="xforms-submit-error">
+                        <xf:insert ref="instance('itemset')" origin="xxf:element('dummy')"/>
+                    </xf:action>
+                </xf:submission>
+            </xf:model>
+        </xbl:implementation>
+        <xbl:template>
+            <!-- When the component is initialized or when resources URL changes, update our internal itemset -->
+            <xf:var name="resource-avt" xbl:attr="xbl:text=resource" xxbl:scope="outer"/>
+            <xf:var name="resource">
+                <xxf:sequence value="xxf:evaluate-avt($resource-avt)" xxbl:scope="outer"/>
+                <xf:action ev:event="xforms-enabled xforms-value-changed">
+                    <!-- Update itemset based on resource if not blank (can be blank e.g. in builder) -->
+                    <xf:send if="normalize-space($resource)" submission="get-itemset">
+                        <xf:property name="resource" value="$resource"/>
+                    </xf:send>
+                    <!-- Get sequence of values in the new itemset -->
+                    <xf:var
+                        name="new-values"
+                        select="xxf:itemset('select', 'xml', false())//value/string()"/>
+                    <!-- If the current value is not in the new itemset, set it to blank -->
+                    <xf:setvalue
+                        if="not(xxf:binding('fr-databound-select1') = ($new-values, ''))"
+                        ref="xxf:binding('fr-databound-select1')"/>
+                </xf:action>
+            </xf:var>
+
+            <!-- The concrete select1 -->
+            <xf:select1 ref="xxf:binding('fr-databound-select1')" id="select">
+                <!-- Blank item -->
+                <xf:item>
+                    <xf:label/>
+                    <xf:value/>
+                </xf:item>
+                <!-- Make sure to restore the evaluation context to the local instance. We don't switch scopes or
+                     models here because the select1 is bound via the xxf:binding() function. So if we don't
+                     change the context explicitly, the itemset will evaluate in the wrong context (and fail to
+                     produce the correct result). -->
+                <xf:choices context="instance()">
+                    <!-- Itemset unconventionally evaluates wrt inner scope -->
+                    <xbl:content includes=":root > xf|itemset, :root > xf|item, :root > xf|choices" xxbl:scope="inner"/>
+                </xf:choices>
+            </xf:select1>
+        </xbl:template>
+    </xbl:binding>
+</xbl:xbl>

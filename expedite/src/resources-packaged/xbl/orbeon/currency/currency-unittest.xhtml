@@ -1,0 +1,169 @@
+<!--
+  Copyright (C) 2010 Orbeon, Inc.
+
+  This program is free software; you can redistribute it and/or modify it under the terms of the
+  GNU Lesser General Public License as published by the Free Software Foundation; either version
+  2.1 of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+  -->
+<xh:html xmlns:xf="http://www.w3.org/2002/xforms"
+    xmlns:f="http://orbeon.org/oxf/xml/formatting"
+    xmlns:xh="http://www.w3.org/1999/xhtml"
+    xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+    xmlns:widget="http://orbeon.org/oxf/xml/widget"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:fr="http://orbeon.org/oxf/xml/form-runner">
+
+    <xh:head>
+        <xh:title>Currency</xh:title>
+        <xf:model>
+            <xf:instance id="instance">
+                <instance>
+                    <empty/>
+                    <value>1234</value>
+                    <double/>
+                    <prefix>£</prefix>
+                    <currency>4567</currency>
+                    <digits-after-decimal>3</digits-after-decimal>
+                    <float>123.456</float>
+                    <readonly is-readonly="true">42</readonly>
+                    <no-prefix>42</no-prefix>
+                    <repeat show="true">42</repeat>
+                    <required-empty/>
+                    <required-filled>42</required-filled>
+                    <setfocus>3.1415</setfocus>
+                    <large>12345678901234567890123</large>
+                </instance>
+            </xf:instance>
+            <xf:bind ref="double" readonly="false()" calculate="for $value in ../value return if ($value castable as xs:decimal) then ../value * 2 else ''"/>
+            <xf:bind ref="readonly" readonly="@is-readonly = 'true'"/>
+            <xf:bind ref="required-empty | required-filled" required="true()"/>
+        </xf:model>
+        <xh:style type="text/css">
+            .xbl-fr-currency .xforms-label { display: inline-block; width: 10em; }
+            .xbl-fr-currency { line-height: 2.5em; }
+            #large input { width: 18em }
+        </xh:style>
+        <xh:link type="text/css" rel="stylesheet" href="/ops/yui/logger/assets/logger.css"/>
+        <xh:script type="text/javascript" src="/ops/yui/logger/logger.js"/>
+        <xh:script type="text/javascript" src="/ops/yui/event-simulate/event-simulate.js"/>
+        <xh:script type="text/javascript" src="/ops/yui/yuitest/yuitest.js"/>
+        <xh:script type="text/javascript" src="/xbl/orbeon/currency/currency-unittest.js"/>
+    </xh:head>
+    <xh:body>
+        <xh:div>
+            <fr:currency ref="empty" id="empty">
+                <xf:label>Empty</xf:label>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="value" id="value">
+                <xf:label>Value</xf:label>
+                <xf:help>Help</xf:help>
+            </fr:currency>
+            <xf:output value="value" id="value-output"/>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="double" id="double">
+                <xf:label>Double</xf:label>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="currency" id="prefix-static" prefix="£">
+                <xf:label>Static prefix</xf:label>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="currency" id="prefix-dynamic">
+                <fr:prefix ref="../prefix"/>
+                <xf:label>Dynamic prefix</xf:label>
+            </fr:currency>
+            <xf:trigger id="change-prefix" appearance="minimal">
+                <xf:label>Switch to CHF</xf:label>
+                <xf:setvalue ev:event="DOMActivate" ref="prefix">CHF</xf:setvalue>
+            </xf:trigger>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="float" id="float-static" digits-after-decimal="3">
+                <xf:label>Static digits count</xf:label>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="float" id="float-dynamic">
+                <fr:digits-after-decimal ref="../digits-after-decimal"/>
+                <xf:label>Dynamic digits count</xf:label>
+            </fr:currency>
+            <xf:trigger id="change-digits" appearance="minimal">
+                <xf:label>Switch to 2</xf:label>
+                <xf:setvalue ev:event="DOMActivate" ref="digits-after-decimal">2</xf:setvalue>
+            </xf:trigger>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="float" id="float-no-digits" digits-after-decimal="0">
+                <xf:label>No digits after dec.</xf:label>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="readonly" id="readonly">
+                <xf:label>Read-only</xf:label>
+            </fr:currency>
+            <xf:trigger id="set-readonly" appearance="minimal">
+                <xf:label>Read-only</xf:label>
+                <xf:setvalue ev:event="DOMActivate" ref="readonly/@is-readonly">true</xf:setvalue>
+            </xf:trigger>
+            |
+            <xf:trigger id="set-readwrite" appearance="minimal">
+                <xf:label>Read-write</xf:label>
+                <xf:setvalue ev:event="DOMActivate" ref="readonly/@is-readonly">false</xf:setvalue>
+            </xf:trigger>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="no-prefix" id="no-prefix" prefix="">
+                <xf:label>No prefix</xf:label>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <xf:repeat ref="repeat[@show = 'true']" id="repeat">
+                <fr:currency ref="." id="in-repeat">
+                    <xf:label>In repeat</xf:label>
+                </fr:currency>
+            </xf:repeat>
+            <xf:trigger id="repeat-show-hide" appearance="minimal">
+                <xf:label>Show/hide</xf:label>
+                <xf:setvalue ev:event="DOMActivate" ref="repeat/@show" value="if (. = 'true') then 'false' else 'true'"/>
+            </xf:trigger>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="required-empty" id="required-empty" prefix="">
+                <xf:label>Required empty</xf:label>
+                <xf:alert>Value is required</xf:alert>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="required-filled" id="required-filled" prefix="">
+                <xf:label>Required filled</xf:label>
+                <xf:alert>Value is required</xf:alert>
+            </fr:currency>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="setfocus" id="setfocus" prefix="">
+                <xf:label>Setfocus</xf:label>
+            </fr:currency>
+            <xf:trigger id="setfocus-trigger" appearance="minimal">
+                <xf:label>Setfocus</xf:label>
+                <xf:setfocus ev:event="DOMActivate" control="setfocus"/>
+            </xf:trigger>
+        </xh:div>
+        <xh:div>
+            <fr:currency ref="large" id="large">
+                <xf:label>Large</xf:label>
+            </fr:currency>
+        </xh:div>
+    </xh:body>
+</xh:html>

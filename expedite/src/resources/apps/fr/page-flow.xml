@@ -1,0 +1,212 @@
+<!--
+  Copyright (C) 2010 Orbeon, Inc.
+
+  This program is free software; you can redistribute it and/or modify it under the terms of the
+  GNU Lesser General Public License as published by the Free Software Foundation; either version
+  2.1 of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+  -->
+<controller xmlns="http://www.orbeon.com/oxf/controller" matcher="regexp">
+
+    <!-- ==== Entry point for persistence services ================================================================= -->
+
+    <service path="/fr/service/persistence/.*" model="persistence/proxy.xpl"/>
+
+    <!-- ==== Built-in eXist-based persistence services ============================================================ -->
+
+    <!-- Create, Read, Update and Delete operations (id provided) -->
+    <service path="/fr/service/exist/crud/([^/]+/[^/]+/(form/[^/]+|data/([^/]+/[^/]+)?))"
+             model="persistence/exist/crud.xpl"/>
+
+    <!-- Search -->
+    <service path="/fr/service/exist/search/([^/^.]+)/([^/^.]+)"
+             view="persistence/exist/search.xpl"/>
+
+    <!-- Deployed forms services -->
+    <service path="/fr/service/exist/form(/([^/]+)(/([^/]+))?)?"
+             default-submission="persistence/form-instance.xml"
+             view="persistence/exist/form.xpl">
+        <setvalue ref="/*/app" matcher-group="2"/>
+        <setvalue ref="/*/form" matcher-group="4"/>
+    </service>
+
+    <!-- ==== Built-in Oracle, MySQL, and DB2 persistence services =========================================================== -->
+
+    <!-- Create, Read, Update and Delete operations (id provided) -->
+    <service path="/fr/service/(oracle|mysql|db2)/crud/([^/]+/[^/]+/(form/[^/]+|(data|draft)/([^/]+/[^/]+)?))"
+             model="persistence/relational/crud.xpl"/>
+    <service path="/fr/service/(oracle|mysql|db2)/crud-ng/([^/]+/[^/]+/(form/[^/]+|(data|draft)/([^/]+/[^/]+)?))"
+             model="persistence/relational/crud-ng.xpl"/>
+
+    <!-- Search -->
+    <service path="/fr/service/(oracle|mysql|db2)/search/([^/^.]+)/([^/^.]+)"
+             view="persistence/relational/search.xpl"/>
+
+    <!-- Deployed forms services -->
+    <service path="/fr/service/(oracle|mysql|db2)/form(/([^/]+)(/([^/]+))?)?"
+             default-submission="persistence/form-instance.xml"
+             view="persistence/relational/form.xpl">
+        <setvalue ref="/*/app" matcher-group="3"/>
+        <setvalue ref="/*/form" matcher-group="5"/>
+    </service>
+
+    <!-- ==== Built-in resource manager-based persistence services ================================================= -->
+
+    <!-- Create, Read, Update and Delete operations (id provided) -->
+    <service path="/fr/service/resource/crud/([^/]+/[^/]+/(form/[^/]+|data/[^/]+/[^/]+))"
+             model="persistence/resource/crud.xpl">
+    </service>
+
+    <!-- Deployed forms services -->
+    <service path="/fr/service/resource/form(/([^/]+)(/([^/]+))?)?" view="persistence/resource/form.xpl"/>
+    <service path="/fr/service/([^/]+)/reindex" model="persistence/reindex.xpl"/>
+
+    <!-- ==== Internationalization ================================================================================= -->
+
+    <!-- Service putting together Form Runner resources -->
+    <service path="/fr/service/i18n/fr-resources/([^/^.]+)/([^/^.]+)"
+          view="i18n/fr-resources.xpl"
+          default-submission="request-parameters.xml">
+        <setvalue ref="/*/app"  matcher-group="1"/>
+        <setvalue ref="/*/form" matcher-group="2"/>
+    </service>
+
+    <!-- ==== Other services ======================================================================================= -->
+
+    <!-- Email document -->
+    <service path="/fr/service/([^/^.]+)/([^/^.]+)/(email)(/([^/^.]+))?"
+             view="email/email-form.xpl"/>
+
+    <!-- Create PDF directly from an XForms engine live document -->
+    <page path="/fr/service/([^/^.]+)/([^/^.]+)/(pdf)/([^/^.]+)/([0-9A-Za-z\-]+)\.pdf"
+          view="print/pdf-instant-view.xpl">
+    </page>
+
+    <!-- Create PDF from a stored document -->
+    <service path="/fr/service/([^/^.]+)/([^/^.]+)/(pdf)(/([^/^.]+))?"
+             view="print/print-form.xpl"/>
+
+    <!-- Generate HTML to be saved -->
+    <page path="/fr/service/save-locally/save-generate" view="save-locally/save-generate.xpl"/>
+
+    <!-- Serve document previously produced -->
+    <service path="/fr/service/save-locally/serve" model="save-locally/serve.xpl"
+             default-submission="save-locally/serve-instance.xml">
+        <setvalue ref="/instance/uuid"     parameter="uuid"/>
+        <setvalue ref="/instance/filename" parameter="filename"/>
+    </service>
+
+    <!-- Validate a collection of form data -->
+    <service path="/fr/service/([^/^.]+)/([^/^.]+)/(validate)" view="import/validate.xpl"/>
+
+    <!-- Import a collection of form data -->
+    <service path="/fr/service/([^/^.]+)/([^/^.]+)/(import)" view="import/import.xpl"/>
+
+    <!-- Generate a schema for a form -->
+    <service path="/fr/service/([^/^.]+)/([^/^.]+)/(schema)"
+          model="detail/detail-model.xpl" view="schema/schema.xpl">
+    </service>
+
+    <!-- ==== Custom services and pages ============================================================================ -->
+
+    <!-- Custom persistence implementation provided by the application -->
+    <service path="/fr/service/custom/([^/^.]+)/crud/[^/]+/[^/]+/(form/[^/]+|data/[^/]+/[^/]+)"
+             model="/forms/${1}/service/crud.xpl">
+    </service>
+
+    <service path="/fr/service/custom/([^/^.]+)/search/[^/]+/[^/]+"
+             view="/forms/${1}/service/search.xpl"/>
+
+    <!-- Custom services provided by the application -->
+    <service path="/fr/service/custom/([^/^.]+)/([^/^.]+)"
+             view="/forms/${1}/service/${2}.xpl"/>
+
+    <!-- Custom services provided by Form Builder -->
+    <!-- NOTE: This shouldn't be here, but this service uses its own serialization -->
+    <service path="/fr/service/custom/([^/^.]+)/([^/^.]+)/toolbox"
+             model="/forms/${1}/${2}/service/toolbox.xpl"/>
+
+    <!-- Custom services provided by the form -->
+    <service path="/fr/service/custom/([^/^.]+)/([^/^.]+)/([^/^.]+)"
+             view="/forms/${1}/${2}/service/${3}.xpl"/>
+
+    <!-- Custom pages provided by the application -->
+    <page path="/fr/page/custom/([^/^.]+)/([^/^.]+)"
+          view="/forms/${1}/page/${2}.xhtml"/>
+
+    <!-- Custom pages provided by the form -->
+    <page path="/fr/page/custom/([^/^.]+)/([^/^.]+)/([^/^.]+)"
+          view="/forms/${1}/${2}/page/${3}.xhtml"/>
+
+    <!-- ==== Pages ================================================================================================ -->
+
+    <!-- NOTE: Put those here as some URLs starting with /fr/service or /fr/page can erroneously match on those -->
+
+    <!-- Home page -->
+    <page path="/fr/?" model="home/home.xhtml" view="html-view.xpl" default-submission="request-parameters.xml">
+        <setvalue ref="/*/app">*</setvalue>
+        <setvalue ref="/*/form">*</setvalue>
+        <setvalue ref="/*/mode">home</setvalue>
+    </page>
+
+    <!-- Summary -->
+    <page id="summary"
+          path="/fr/([^/^.]+)/([^/^.]+)(/summary)"
+          default-submission="request-parameters.xml"
+          model="summary/view.xhtml" view="html-view.xpl">
+        <setvalue ref="/*/app"      matcher-group="1"/>
+        <setvalue ref="/*/form"     matcher-group="2"/>
+        <setvalue ref="/*/mode">summary</setvalue>
+    </page>
+
+    <!-- New, edit or view document (supports POST of XML, or GET)  -->
+    <page path="/fr/([^/^.]+)/([^/^.]+)/(new|edit|view)(/([^/^.]+))?"
+          model="detail/detail-model.xpl" view="html-view.xpl">
+    </page>
+
+    <!-- View document as PDF (supports POST of XML, or GET) -->
+    <page path="/fr/([^/^.]+)/([^/^.]+)/(pdf)(/([^/^.]+))?"
+          model="detail/detail-model.xpl" view="print/pdf-view.xpl">
+    </page>
+
+    <!-- Test form by retrieving form from the database first -->
+    <page path="/fr/([^/^.]+)/([^/^.]+)/(test)/([^/^.]+)"
+          default-submission="request-parameters.xml"
+          model="test-model.xpl" view="html-view.xpl">
+        <setvalue ref="/*/app"      matcher-group="1"/>
+        <setvalue ref="/*/form"     matcher-group="2"/>
+        <setvalue ref="/*/mode"     matcher-group="3"/>
+        <setvalue ref="/*/document" matcher-group="4"/>
+    </page>
+
+    <!-- Test form "inline" (when being edited) with new empty document -->
+    <page path="/fr/([^/^.]+)/([^/^.]+)/(test)"
+          model="inline-test-model.xpl" view="html-view.xpl">
+        <setvalue ref="/*/app"      matcher-group="1"/>
+        <setvalue ref="/*/form"     matcher-group="2"/>
+        <setvalue ref="/*/mode"     matcher-group="3"/>
+    </page>
+
+    <!-- Import page  -->
+    <page path="/fr/([^/^.]+)/([^/^.]+)/(import)"
+          default-submission="request-parameters.xml" model="import/import.xhtml" view="html-view.xpl">
+        <setvalue ref="/*/app"      matcher-group="1"/>
+        <setvalue ref="/*/form"     matcher-group="2"/>
+        <setvalue ref="/*/mode"     matcher-group="3"/>
+    </page>
+
+    <!-- Login -->
+    <page path="/fr/login"       view="login.xhtml"/>
+    <page path="/fr/login-error" view="login-error.xhtml" public-methods="GET HEAD POST"/>
+
+    <!-- ==== Epilogue and handlers ================================================================================ -->
+
+    <!-- NOTE: Use top-level handlers -->
+    <epilogue url="oxf:/config/epilogue.xpl"/>
+
+</controller>

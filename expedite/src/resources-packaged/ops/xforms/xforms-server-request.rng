@@ -1,0 +1,157 @@
+<!--
+  Copyright (C) 2010 Orbeon, Inc.
+
+  This program is free software; you can redistribute it and/or modify it under the terms of the
+  GNU Lesser General Public License as published by the Free Software Foundation; either version
+  2.1 of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+  -->
+<grammar datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <start>
+        <element name="xxf:event-request">
+            <element name="xxf:uuid">
+                <data type="string"/>
+            </element>
+            <!-- Can be empty in case of non-Ajax request -->
+            <element name="xxf:sequence">
+                <choice>
+                    <data type="integer"/>
+                    <empty/>
+                </choice>
+            </element>
+            <optional>
+                <element name="xxf:static-state">
+                    <data type="string"/>
+                </element>
+                <element name="xxf:dynamic-state">
+                    <data type="string"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="xxf:initial-dynamic-state">
+                    <data type="string"/>
+                </element>
+            </optional>
+            <zeroOrMore>
+                <element name="xxf:server-events">
+                    <data type="string"/>
+                </element>
+            </zeroOrMore>
+            <optional>
+                <element name="xxf:files">
+                    <oneOrMore>
+                        <element name="parameter">
+                            <element name="name">
+                                <data type="string"/>
+                            </element>
+                            <optional>
+                                <element name="filename">
+                                    <data type="string"/>
+                                </element>
+                            </optional>
+                            <optional>
+                                <element name="content-type">
+                                    <data type="string"/>
+                                </element>
+                            </optional>
+                            <optional>
+                                <element name="content-length">
+                                    <data type="integer"/>
+                                </element>
+                            </optional>
+                            <element name="value">
+                                <optional>
+                                    <attribute name="xsi:type">
+                                        <data type="QName"/>
+                                    </attribute>
+                                </optional>
+                                <optional>
+                                    <data type="string"/>
+                                </optional>
+                            </element>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <element name="xxf:action">
+                <zeroOrMore>
+                    <element name="xxf:event">
+                        <choice>
+                            <!-- Most events -->
+                            <optional>
+                                <attribute name="name" type="NCName"/>
+                                <optional>
+                                    <attribute name="source-control-id">
+                                        <data type="string"/>
+                                    </attribute>
+                                </optional>
+                                <choice>
+                                    <data type="string"/>
+                                    <ref name="properties"/>
+                                </choice>
+                            </optional>
+                            <!-- xxforms-dnd event -->
+                            <group>
+                                <attribute name="name" type="NCName"/>
+                                <attribute name="source-control-id">
+                                    <data type="string"/>
+                                </attribute>
+                                <attribute name="dnd-start">
+                                    <data type="string"/>
+                                </attribute>
+                                <attribute name="dnd-end">
+                                    <data type="string"/>
+                                </attribute>
+                                <ref name="properties"/>
+                            </group>
+                            <!-- keypress event -->
+                            <group>
+                                <attribute name="name" type="keypress"/>
+                                <attribute name="source-control-id">
+                                    <data type="string"/>
+                                </attribute>
+                                <optional>
+                                    <attribute name="modifiers">
+                                        <data type="string"/>
+                                    </attribute>
+                                </optional>
+                                <attribute name="text">
+                                    <data type="string"/>
+                                </attribute>
+                                <ref name="properties"/>
+                            </group>
+                        </choice>
+                    </element>
+                </zeroOrMore>
+            </element>
+            <!-- Client may send more than one if needed (e.g. multiple delayed server events to be sent at the same time) -->
+            <zeroOrMore>
+                <element name="xxf:server-events">
+                    <data type="string"/>
+                </element>
+            </zeroOrMore>
+        </element>
+    </start>
+
+    <define name="properties">
+        <zeroOrMore>
+            <element name="xxf:property">
+                <attribute name="name">
+                    <data type="string"/>
+                </attribute>
+                <data type="string"/>
+            </element>
+        </zeroOrMore>
+    </define>
+
+</grammar>

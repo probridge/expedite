@@ -1,0 +1,334 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.fr-border {
+  padding: 0;
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.help-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url(bootstrap/img/glyphicons-halflings.png);
+  background-repeat: no-repeat;
+  background-position: -120px -96px;
+}
+.narrow-td {
+  width: 1px;
+}
+.fr-plain-checkbox-container {
+  width: 1px;
+}
+.fr-plain-checkbox-container label {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+}
+.fr-plain-checkbox-container label input[type="checkbox"] {
+  float: none;
+  margin: 0;
+}
+.fr-plain-checkbox-container label .label {
+  vertical-align: middle;
+}
+body.orbeon {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
+}
+.orbeon {
+  margin: 0;
+}
+.orbeon label,
+.orbeon button,
+.orbeon .btn {
+  font-size: 13px;
+}
+.orbeon a {
+  text-decoration: underline;
+}
+.orbeon .navbar-inverse {
+  margin: 10px 0;
+}
+.orbeon .navbar-inverse .navbar-inner {
+  background-color: #414141;
+  background-image: -moz-linear-gradient(top, #555555, #222222);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#222222));
+  background-image: -webkit-linear-gradient(top, #555555, #222222);
+  background-image: -o-linear-gradient(top, #555555, #222222);
+  background-image: linear-gradient(to bottom, #555555, #222222);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff555555', endColorstr='#ff222222', GradientType=0);
+  border: none;
+}
+.orbeon .navbar-inverse .navbar-inner .container {
+  line-height: 40px;
+}
+.orbeon .navbar-inverse .navbar-inner .container img,
+.orbeon .navbar-inverse .navbar-inner .container h1 {
+  vertical-align: middle;
+}
+.orbeon .navbar-inverse .navbar-inner .container img {
+  max-height: 40px;
+}
+.orbeon .navbar-inverse .navbar-inner .container h1 {
+  margin: 0 0 0 15px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: normal;
+  color: #bbbbbb;
+  text-shadow: none;
+  text-decoration: none;
+  display: inline;
+}
+.orbeon select,
+.orbeon textarea,
+.orbeon input[type="text"],
+.orbeon input[type="password"],
+.orbeon input[type="datetime"],
+.orbeon input[type="datetime-local"],
+.orbeon input[type="date"],
+.orbeon input[type="month"],
+.orbeon input[type="time"],
+.orbeon input[type="week"],
+.orbeon input[type="number"],
+.orbeon input[type="email"],
+.orbeon input[type="url"],
+.orbeon input[type="search"],
+.orbeon input[type="tel"],
+.orbeon input[type="color"],
+.orbeon .uneditable-input {
+  font-size: 13px;
+  margin-bottom: 0;
+  color: black;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 28px;
+  background-image: none;
+  *height: 24px;
+  *line-height: 24px;
+}
+.orbeon input[type="submit"],
+.orbeon input[type="reset"],
+.orbeon input[type="button"] {
+  background-image: none;
+}
+.orbeon input[type="submit"]:hover,
+.orbeon input[type="reset"]:hover,
+.orbeon input[type="button"]:hover {
+  background-image: none;
+}
+.orbeon input[type="file"] {
+  height: auto;
+  line-height: normal;
+  background-image: none;
+  background-color: none;
+  padding: 0;
+}
+.orbeon textarea {
+  height: 68px;
+}
+.orbeon label.radio,
+.orbeon label.checkbox {
+  margin-bottom: 5px;
+}
+.orbeon label.radio input[type="radio"],
+.orbeon label.checkbox input[type="radio"],
+.orbeon label.radio input[type="checkbox"],
+.orbeon label.checkbox input[type="checkbox"] {
+  margin-top: 3px;
+  *margin-top: 0;
+  margin-top: 0px\9;
+}
+.orbeon select[multiple],
+.orbeon .xforms-select1-appearance-compact select,
+.orbeon .xforms-select-appearance-compact select {
+  height: 78px;
+}
+.orbeon .pagination ul > li > .xforms-trigger {
+  cursor: pointer;
+}
+.orbeon .pagination ul > li > .xforms-trigger.xforms-readonly {
+  cursor: auto;
+}
+.orbeon .pagination ul > li a {
+  text-decoration: none;
+}
+.orbeon .pagination ul > li > a,
+.orbeon .pagination ul > li > span {
+  padding: 8px 12px;
+}
+.orbeon .pagination ul > li span a {
+  padding: 0;
+  border: none;
+  line-height: 20px;
+}
+.orbeon .input-append .add-on,
+.orbeon .input-prepend .add-on {
+  height: 18px;
+  *margin-top: 1px;
+  *height: 20px;
+}
+.orbeon .input-append,
+.orbeon .input-prepend {
+  margin-bottom: 0;
+}
+.orbeon .fr-grid tr th label {
+  margin: 0;
+}
+.orbeon .table {
+  margin: 0;
+}
+.orbeon .table th {
+  font-weight: normal;
+}
+.orbeon fieldset {
+  padding-left: 0;
+  padding-right: 0;
+}
+.orbeon fieldset > legend {
+  line-height: inherit;
+  font-size: 14.3px;
+}
+.orbeon .fr-grid .xforms-textarea.xforms-static pre,
+.orbeon .fr-grid .xforms-mediatype-text-html.xforms-static {
+  color: #333333;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.orbeon .btn-danger i,
+.orbeon .btn-warning i,
+.orbeon .btn-primary i,
+.orbeon .btn-inverse i,
+.orbeon .navbar-inverse i {
+  background-image: url(bootstrap/img/glyphicons-halflings-white.png);
+}
+.orbeon .nav > li > span > a {
+  display: block;
+}
+.orbeon .nav > li > span > a:hover {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+.orbeon .nav-list > li > span > a,
+.orbeon .nav-list .nav-header {
+  margin-left: -15px;
+  margin-right: -15px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.orbeon .nav-list > li > span > a {
+  padding: 3px 15px;
+}
+.orbeon .nav-list > .active > span > a,
+.orbeon .nav-list > .active > span > a:hover {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  background-color: #0088cc;
+}
+.orbeon .nav > .disabled > span > a {
+  color: #999999;
+}
+.orbeon .nav > .disabled > span > a:hover {
+  text-decoration: none;
+  background-color: transparent;
+  cursor: default;
+}
+.orbeon .dropdown-menu > li > span > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 20px;
+  color: #333333;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.orbeon .dropdown-menu > li > span > a:hover,
+.orbeon .dropdown-menu > li > span > a:focus,
+.orbeon .dropdown-submenu:hover > a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #0088cc;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+.orbeon .dropdown-menu > .active > span > a,
+.orbeon .dropdown-menu > .active > span > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #0088cc;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+.orbeon .dropdown-menu > .disabled > span > a,
+.orbeon .dropdown-menu > .disabled > span > a:hover {
+  color: #999999;
+}
+.orbeon .dropdown-menu > .disabled > span > a:hover {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  cursor: default;
+}

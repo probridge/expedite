@@ -1,0 +1,132 @@
+<!--
+  Copyright (C) 2010 Orbeon, Inc.
+
+  This program is free software; you can redistribute it and/or modify it under the terms of the
+  GNU Lesser General Public License as published by the Free Software Foundation; either version
+  2.1 of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+  -->
+<xbl:xbl xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:xbl="http://www.w3.org/ns/xbl"
+         xmlns:xxbl="http://orbeon.org/oxf/xml/xbl"
+         xmlns:oxf="http://www.orbeon.com/oxf/processors"
+         xmlns:exf="http://www.exforms.org/exf/1-0" >
+
+    <!--
+        In-place input field.
+     -->
+    <xbl:binding id="fr-inplace-input-binding" element="fr|inplace-input" xxbl:mode="binding lhha">
+
+        <!-- Orbeon Form Builder Component Metadata -->
+        <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="en">In-place Input</display-name>
+            <display-name lang="fi">Paikallissyöttö</display-name>
+            <display-name lang="fr">Entrée en place</display-name>
+            <display-name lang="ru">Редактируемый текст</display-name>
+            <display-name lang="de">In-place Input</display-name>
+            <display-name lang="it">In-place Input</display-name>
+            <icon lang="en">
+                <small-icon>/forms/orbeon/builder/images/input.png</small-icon>
+                <large-icon>/forms/orbeon/builder/images/input.png</large-icon>
+            </icon>
+            <template>
+                 <fr:inplace-input>
+                     <xf:label ref=""/>
+                     <xf:hint ref=""/>
+                     <xf:help ref=""/>
+                     <xf:alert ref=""/>
+                </fr:inplace-input>
+            </template>
+        </metadata>
+
+        <xbl:resources>
+            <xbl:style>
+                .xbl-fr-inplace-input { display: inline-block; *zoom: 1; *display: inline } /* IE 7 hacks */
+                .xbl-fr-inplace-input .fr-inplace-content:hover .xforms-output { background-color: #FFFF88 }
+                .xbl-fr-inplace-input .xforms-input input { background-color: #FFFF88; background-image: none; border: none }
+                .xbl-fr-inplace-input .fr-inplace-buttons { display: block; margin-top:0.5em }
+                .xbl-fr-inplace-input .fr-inplace-buttons .xforms-control { display: inline }
+                .xbl-fr-inplace-input .xforms-hint { display: none }
+            </xbl:style>
+        </xbl:resources>
+        <xbl:implementation>
+            <!-- Local model and instance -->
+            <xf:model id="model">
+                <xf:instance id="instance"><value/></xf:instance>
+            </xf:model>
+        </xbl:implementation>
+        <xbl:template>
+            <xf:switch class="fr-component-group">
+                <xf:var name="binding" value="xxf:binding('fr-inplace-input-binding')"/>
+
+                <xf:case id="fr-inplace-view">
+                    <!-- View mode -->
+                    <xh:span class="fr-inplace-content fr-inplace-view">
+                        <!--
+                          - if value if blank and not readonly and there is a hint value, use hint, otherwise value
+                          - add fr-inplace-hint class so we can distinguish between hint case and value case
+                        -->
+                        <xf:output
+                                ref="$binding"
+                                xbl:attr="navindex navindex=tabindex"
+                                class="xforms-activable{if (normalize-space(xxf:hint('fr-inplace-input-binding'))) then ' fr-inplace-hint' else ''}"
+                                value="if (normalize-space() = '' and not(exf:readonly()) and normalize-space(xxf:hint('fr-inplace-input-binding'))) then xxf:hint('fr-inplace-input-binding') else .">
+                        </xf:output>
+                    </xh:span>
+                    <!-- React to user click on value unless the bound node is readonly -->
+                    <xf:action ev:event="DOMActivate" if="not(exf:readonly($binding))">
+                        <!-- Read value in -->
+                        <xf:setvalue ref="instance()" value="$binding"/>
+                        <!-- Toggle and set focus -->
+                        <xf:toggle case="fr-inplace-edit"/>
+                        <xf:setfocus control="fr-inplace-edit"/>
+                    </xf:action>
+                </xf:case>
+                <xf:case id="fr-inplace-edit">
+                    <!-- Edit mode -->
+                    <!-- Show unless the bound node is readonly (2012-06-04: not sure if this is needed) -->
+                    <xf:group class="fr-inplace-content fr-inplace-edit" ref=".[not(exf:readonly($binding))]">
+                        <!-- Input points to internal instance -->
+                        <xf:input id="input" xbl:attr="navindex navindex=tabindex incremental" ref="instance()"/>
+                        <!-- TODO: i18n -->
+                        <xh:span class="fr-inplace-buttons">
+                            <xf:trigger id="apply">
+                                <xf:label>Apply</xf:label>
+                            </xf:trigger>
+                            or
+                            <xf:trigger appearance="minimal">
+                                <xf:label>Cancel</xf:label>
+                            </xf:trigger>
+                        </xh:span>
+
+                        <!-- Write value back -->
+                        <xf:setvalue
+                            ev:event="DOMActivate"
+                            ev:target="input apply"
+                            ref="$binding"
+                            value="context()"/>
+
+                        <!-- Clear local value and toggle back -->
+                        <xf:action ev:event="DOMActivate">
+                            <xf:setvalue ref="instance()"/>
+                            <xf:toggle case="fr-inplace-view"/>
+                        </xf:action>
+                    </xf:group>
+                </xf:case>
+            </xf:switch>
+        </xbl:template>
+    </xbl:binding>
+</xbl:xbl>
