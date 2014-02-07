@@ -38,7 +38,7 @@
 
     <xbl:binding id="fb-input-date" element="xf|input">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
-            <display-name lang="en">日期</display-name>
+            <display-name lang="cn">日期</display-name>
             <display-name lang="en">Date</display-name>
             <display-name lang="es">Fecha</display-name>
             <display-name lang="fi">Päivämäärä</display-name>

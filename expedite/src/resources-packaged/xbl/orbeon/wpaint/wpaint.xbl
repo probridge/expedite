@@ -38,6 +38,7 @@
         </xbl:resources>
 
         <fb:metadata>
+            <fb:display-name lang="cn">图片标注</fb:display-name>
             <fb:display-name lang="en">Image Annotation</fb:display-name>
             <fb:display-name lang="fi">Kuvakommentti</fb:display-name>
             <fb:display-name lang="fr">Annotation d'image</fb:display-name>

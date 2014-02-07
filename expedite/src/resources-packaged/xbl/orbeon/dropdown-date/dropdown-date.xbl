@@ -31,6 +31,7 @@
 
         <!-- Orbeon Form Builder Component Metadata -->
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">下拉日期选择</display-name>
             <display-name lang="en">Dropdown Date</display-name>
             <display-name lang="es">Calendario Desplegable</display-name>
             <display-name lang="fi">Päivämäärän pudotusvalikko</display-name>

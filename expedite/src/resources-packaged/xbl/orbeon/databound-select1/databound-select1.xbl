@@ -26,6 +26,7 @@
 
     <xbl:binding id="fr-databound-select1" element="fr|databound-select1" xxbl:mode="lhha binding value">
         <fb:metadata>
+            <fb:display-name lang="cn">动态数据下拉框</fb:display-name>
             <fb:display-name lang="en">Dynamic Data Dropdown</fb:display-name>
             <fb:display-name lang="fi">Dynaamisen datan pudotusvalikko</fb:display-name>
             <fb:display-name lang="fr">Menu données dynamique</fb:display-name>
