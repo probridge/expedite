@@ -34,9 +34,9 @@ object Version {
 
     private val PossibleEditions = Set("CE", "PE")
 
-    val VersionNumber = "@RELEASE@"
-    val Edition       = Option("@EDITION@") filter PossibleEditions getOrElse "CE"
-    val VersionString = "Orbeon Forms " + VersionNumber + ' ' + Edition
+    val VersionNumber = "4.4.1.20140206"
+    val Edition       = Option("PE") filter PossibleEditions getOrElse "CE"
+    val VersionString = "Expedite " + VersionNumber + ' ' + Edition + " © ProBridge, 2014"
 
     // For backward compatibility
     def getVersionString = VersionString

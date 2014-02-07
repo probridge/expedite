@@ -26,6 +26,7 @@
          xmlns:xbl="http://www.w3.org/ns/xbl">
 
     <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+        <display-name lang="cn">选择控件</display-name>
         <display-name lang="en">Selection Controls</display-name>
         <display-name lang="es">Controles de Selección</display-name>
         <display-name lang="fi">Valintakontrollit</display-name>
@@ -37,6 +38,7 @@
 
     <xbl:binding id="fb-input-select1-minimal" element="xf|select1">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">下拉菜单</display-name>
             <display-name lang="en">Dropdown Menu</display-name>
             <display-name lang="es">Menú Desplegable</display-name>
             <display-name lang="fi">Pudotusvalikko</display-name>
@@ -72,6 +74,7 @@
 
     <xbl:binding id="fb-input-select1-full" element="xf|select1">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">单选按钮</display-name>
             <display-name lang="en">Radio Buttons</display-name>
             <display-name lang="es">Botones de Opción</display-name>
             <display-name lang="fi">Radiopainikkeet</display-name>
@@ -103,6 +106,7 @@
 
     <xbl:binding id="fb-input-select-full" element="xf|select">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">复选按钮</display-name>
             <display-name lang="en">Checkboxes</display-name>
             <display-name lang="es">Casillas de Verificación</display-name>
             <display-name lang="fi">Valintaruudut</display-name>
@@ -134,6 +138,7 @@
 
     <xbl:binding id="fb-input-select1-compact" element="xf|select1">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">滚动列表</display-name>
             <display-name lang="en">Scrollable List</display-name>
             <display-name lang="es">Lista Desplegable</display-name>
             <display-name lang="fi">Vieritettävä lista</display-name>
@@ -165,6 +170,7 @@
 
     <xbl:binding id="fb-input-boolean" element="xf|input">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">布尔输入</display-name>
             <display-name lang="en">Boolean Input</display-name>
             <display-name lang="es">Entrada Booleana</display-name>
             <display-name lang="fi">Boolean-syöttäminen</display-name>

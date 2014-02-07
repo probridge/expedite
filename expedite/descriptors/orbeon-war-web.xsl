@@ -14,12 +14,12 @@
     <xsl:template match="/">
         <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-            <display-name>Orbeon Forms</display-name>
+            <display-name>Expedite</display-name>
             <description>
-        Orbeon Forms is an open source, standard-based web forms solution, which
+        Expedite is an open source, standard-based web forms solution, which
         includes Form Builder, a WYSIWYG browser-based authoring tool, and Form
         Runner, a runtime environment which facilitates the deployment and
-        integration of a large number of complex forms. Orbeon Forms implements
+        integration of a large number of complex forms. Expedite implements
         different technologies, such as XForms and Ajax, with no need for
         client-side software or plug-ins.
     </description>

@@ -151,5 +151,5 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/saxon-9-1-0-8_orbeon_20130503.jar"/>
 	<classpathentry kind="lib" path="lib/hsqldb-1_8_0_7.jar"/>
-	<classpathentry kind="output" path="build/orbeon-war/WEB-INF/classes"/>
+	<classpathentry kind="output" path="build/classes"/>
 </classpath>

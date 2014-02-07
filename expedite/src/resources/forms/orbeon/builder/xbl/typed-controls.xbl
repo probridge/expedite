@@ -26,6 +26,7 @@
          xmlns:xbl="http://www.w3.org/ns/xbl">
 
     <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+        <display-name lang="cn">类型输入</display-name>
         <display-name lang="en">Typed Controls</display-name>
         <display-name lang="es">Controles Tipados</display-name>
         <display-name lang="fi">Kirjoitetut kontrollit</display-name>
@@ -37,6 +38,7 @@
 
     <xbl:binding id="fb-input-email" element="xf|input">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">电子邮件</display-name>
             <display-name lang="en">Email Address</display-name>
             <display-name lang="es">Email</display-name>
             <display-name lang="fi">Sähköpostiosoite</display-name>

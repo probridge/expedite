@@ -26,6 +26,7 @@
          xmlns:xbl="http://www.w3.org/ns/xbl">
 
     <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+        <display-name lang="cn">日期和时间</display-name>
         <display-name lang="en">Date and Time</display-name>
         <display-name lang="es">Fecha y Hora</display-name>
         <display-name lang="fi">Päivämäärä ja kellonaika</display-name>
@@ -37,6 +38,7 @@
 
     <xbl:binding id="fb-input-date" element="xf|input">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="en">日期</display-name>
             <display-name lang="en">Date</display-name>
             <display-name lang="es">Fecha</display-name>
             <display-name lang="fi">Päivämäärä</display-name>
@@ -64,6 +66,7 @@
 
     <xbl:binding id="fb-input-time" element="xf|input">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">时间</display-name>
             <display-name lang="en">Time</display-name>
             <display-name lang="es">Hora</display-name>
             <display-name lang="fi">Kellonaika</display-name>
@@ -91,6 +94,7 @@
 
     <xbl:binding id="fb-input-dateTime" element="xf|input">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">日期和时间</display-name>
             <display-name lang="en">Date and Time</display-name>
             <display-name lang="es">Fecha y Hora</display-name>
             <display-name lang="fi">Päivämäärä ja kellonaika</display-name>

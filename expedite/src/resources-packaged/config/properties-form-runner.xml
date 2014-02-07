@@ -18,7 +18,9 @@
     <!-- === Persistence configuration === -->
 
     <!-- Default provider is "exist" -->
-    <property as="xs:string"  name="oxf.fr.persistence.provider.*.*.*"                          value="exist"/>
+    <!-- <property as="xs:string"  name="oxf.fr.persistence.provider.*.*.*"                          value="exist"/> -->
+    <!-- Default provider is "db2" -->
+    <property as="xs:string"  name="oxf.fr.persistence.provider.*.*.*"                          value="db2"/>
     <!-- Define resource, exist, oracle, and mysql providers with their parameters -->
     <property as="xs:anyURI"  name="oxf.fr.persistence.resource.uri"                            value="/fr/service/resource"/>
     <property as="xs:anyURI"  name="oxf.fr.persistence.exist.uri"                               value="/fr/service/exist"/>
@@ -248,7 +250,7 @@
     <!--<property as="xs:string"  name="oxf.fr.detail.submit.go.uri-xpath.*.*"                      value="/book/details/link"/>-->
 
     <!-- For global pages like the Form Runner Home page, restrict list of languages to those that have full support -->
-    <property as="xs:string"  name="oxf.fr.available-languages"                                 value="en fr it de"/>
+    <property as="xs:string"  name="oxf.fr.available-languages"                                 value="cn en fr it de"/>
     <!-- For forms, don't restrict the list of languages by default: https://github.com/orbeon/orbeon-forms/issues/1223 -->
     <property as="xs:string"  name="oxf.fr.available-languages.*.*"                             value="*"/>
 

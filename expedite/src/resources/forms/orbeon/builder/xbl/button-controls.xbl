@@ -26,6 +26,7 @@
          xmlns:xbl="http://www.w3.org/ns/xbl">
 
     <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+        <display-name lang="cn">按钮</display-name>
         <display-name lang="en">Buttons</display-name>
         <display-name lang="es">Botones</display-name>
         <display-name lang="fi">Painikkeet</display-name>
@@ -37,6 +38,7 @@
 
     <xbl:binding id="fb-trigger" element="xf|trigger">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">按钮</display-name>
             <display-name lang="en">Button</display-name>
             <display-name lang="es">Botón</display-name>
             <display-name lang="fi">Painike</display-name>
@@ -61,6 +63,7 @@
 
     <xbl:binding id="fb-trigger-minimal" element="xf|trigger[appearance='minimal']">
         <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="cn">链接按钮</display-name>
             <display-name lang="en">Link Button</display-name>
             <display-name lang="es">Botón Hipervínculo</display-name>
             <display-name lang="fi">Linkitä painike</display-name>
