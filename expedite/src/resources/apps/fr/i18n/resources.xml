@@ -12,6 +12,276 @@
   The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
   -->
 <resources>
+    <resource xml:lang="cn">
+        <common>
+            <formats>
+                <within-day>[h]:[m01] [P,*-2]</within-day>
+                <day-this-year>[MNn,*-3] [D]</day-this-year>
+                <short-date>[Y01]/[M01]/[D01]</short-date>
+            </formats>
+        </common>
+        <components>
+            <labels>
+                <open-section>显示区段</open-section>
+                <close-section>隐藏区段</close-section>
+                <section-name>区段名称</section-name>
+            </labels>
+        </components>
+        <untitled-form>未命名的表单</untitled-form>
+        <errors>
+            <summary-title>您的表单{1,choice,
+                0#不包含任何信息|
+                1#包含如下'{0,choice,0#错误|1#警告|2#信息|3#消息}'|
+                1&lt;包含如下'{0,choice,0#错误|1#警告|2#信息|3#消息}'}</summary-title>
+            <form-title>{1,choice,
+                0#|
+                1#{1,number,integer}个'{0,choice,0#错误|1#警告|2#信息|3#消息}' - |
+                1&lt;{1,number,integer}个'{0,choice,0#错误|1#警告|2#信息|3#消息}' - }{2}</form-title>
+            <none>表单中没有错误</none>
+            <unsaved>未保存的更改</unsaved>
+        </errors>
+        <email>
+            <subject>Expedite表单</subject>
+            <body>请查看附件中的PDF和XML格式的表单。</body>
+        </email>
+        <!-- Formats used for PDF template -->
+        <print>
+            <formats>
+                <date>[MNn] [D], [Y]</date>
+                <time>[H01]:[m01]:[s01]</time>
+                <dateTime>[MNn] [D], [Y] [H01]:[m01]:[s01]</dateTime>
+            </formats>
+        </print>
+        <summary>
+            <buttons>
+                <home>&lt;i class="icon-home"/&gt; 主界面</home>
+                <review>&lt;i class="icon-eye-open"/&gt; 复查</review>
+                <pdf>&lt;i class="icon-print"/&gt; PDF</pdf>
+                <delete>&lt;i class="icon-remove-sign"/&gt; 删除</delete>
+                <import>&lt;i class="icon-upload"/&gt; 导入</import>
+                <new>&lt;i class="icon-plus"/&gt; 新建</new>
+                <edit>&lt;i class="icon-pencil"/&gt; 编辑</edit><!-- unused as of 2013-04-05 -->
+            </buttons>
+            <titles>
+                <summary-title>概览</summary-title>
+                <delete-confirmation>确认删除</delete-confirmation>
+                <created>创建</created>
+                <last-modified>最后修改</last-modified>
+                <selected>选择</selected>
+                <refresh>该操作会刷新页面</refresh>
+                <toc>目录</toc>
+                <description>描述</description>
+                <help>帮助</help>
+                <error-count>表单中有错误</error-count>
+                <errors-count>表单中有错误</errors-count>
+            </titles>
+            <search>
+                <search>搜索</search>
+                <search-forms>&lt;i class="icon-search"/&gt; 搜索表单</search-forms>
+                <show-options>显示搜索选项</show-options>
+                <close-options>关闭搜索选项</close-options>
+                <returned>搜索返回了{1,number,integer}中的{0,number,integer}个文档。</returned>
+            </search>
+            <paging>
+                <to>to</to>
+                <of>of</of>
+            </paging>
+            <messages>
+                <no-form-found>没有表单数据</no-form-found>
+                <delete-confirmation>确认要删除表单吗？注意当删除一个保存的文档时，其所有的草稿也会被删除。</delete-confirmation>
+            </messages>
+            <labels>
+                <draft>草稿</draft>
+                <read-only>只读</read-only>
+                <language-choice>选择语言</language-choice>
+                <form-choice>选择表单</form-choice>
+                <free-search>自由搜索</free-search>
+                <any>[任意]</any>
+                <previous>返回</previous>
+                <next>下一个</next>
+                <script>完整版</script>
+                <noscript>易访问版</noscript>
+                <refresh>刷新</refresh>
+                <close-box>[关闭]</close-box>
+                <help-back>返回</help-back>
+                <goto-content>转至内容</goto-content>
+            </labels>
+            <formats>
+                <date>[MNn] [D], [Y]</date>
+                <time>[H01]:[m01]:[s01]</time>
+                <dateTime>[MNn] [D], [Y] [H01]:[m01]:[s01]</dateTime>
+                <save-datetime>[MNn] [D], [Y] [H01]:[m01]:[s01]</save-datetime>
+            </formats>
+        </summary>
+        <detail>
+            <buttons>
+                <!-- Standard process buttons -->
+                <save>&lt;i class="icon-hdd"/&gt; 保存</save>
+                <save-final>&lt;i class="icon-hdd"/&gt; 保存</save-final>
+                <save-draft>&lt;i class="icon-inbox"/&gt; 保存</save-draft>
+                <review>&lt;i class="icon-arrow-right"/&gt; 复查</review>
+                <edit>&lt;i class="icon-arrow-left"/&gt; 编辑</edit>
+                <send>&lt;i class="icon-arrow-right"/&gt; 发送</send>
+                <email>&lt;i class="icon-envelope"/&gt; 电子邮件</email>
+                <validate>&lt;i class="icon-ok"/&gt; 验证</validate>
+
+                <!-- Legacy buttons -->
+                <submit>&lt;i class="icon-arrow-right"/&gt; 提交</submit>
+                <workflow-review>&lt;i class="icon-arrow-right"/&gt; 复查</workflow-review>
+                <workflow-edit>&lt;i class="icon-arrow-left"/&gt; 编辑</workflow-edit>
+                <workflow-send>&lt;i class="icon-arrow-right"/&gt; 发送</workflow-send>
+
+                <!-- Other standard buttons -->
+                <home>&lt;i class="icon-home"/&gt; 主页面</home>
+                <summary>&lt;i class="icon-list"/&gt; 概览</summary>
+                <close>&lt;i class="icon-remove"/&gt; 关闭</close>
+                <pdf>&lt;i class="icon-print"/&gt; PDF</pdf>
+                <clear>&lt;i class="icon-remove-sign"/&gt; 清除</clear>
+                <cancel>取消</cancel>
+                <save-locally>保存在本地</save-locally>
+                <collapse-all>&lt;i class="icon-resize-small"/&gt;</collapse-all>
+                <expand-all>&lt;i class="icon-resize-full"/&gt;</expand-all>
+                <refresh>&lt;i class="icon-refresh"/&gt;</refresh>
+                <wizard-next>&lt;i class="icon-chevron-right"/&gt; Next</wizard-next>
+                <wizard-prev>&lt;i class="icon-chevron-left"/&gt; Prev</wizard-prev>
+
+                <!-- Submit dialog -->
+                <submit-dialog-clear>清除并关闭</submit-dialog-clear>
+                <submit-dialog-keep>保留并关闭</submit-dialog-keep>
+                <submit-dialog-go>OK</submit-dialog-go>
+                <submit-dialog-close-window>关闭窗口</submit-dialog-close-window>
+
+                <!-- Warning dialog -->
+                <validation-dialog-review>复查</validation-dialog-review>
+                <validation-dialog-continue>继续</validation-dialog-continue>
+            </buttons>
+            <messages>
+                <save-success>文档已成功保存！</save-success>
+                <save-draft-success>草稿已成功保存！</save-draft-success>
+                <email-success>电子邮件发送成功！</email-success>
+                <form-validation-error>发现验证错误，请确保所有字段已正确填写。</form-validation-error>
+                <database-error>数据库通讯失败，请联系应用管理员。</database-error>
+                <process-error>处理失败，请联系应用管理员。</process-error>
+                <clear-confirm-message>确认要清楚本页上的所有字段吗？未保存的数据将会丢失！</clear-confirm-message>
+                <error-dialog-title>无法完成操作</error-dialog-title>
+                <submit-dialog-title>表单已提交</submit-dialog-title>
+                <submit-dialog-message>您的信息已经提交，非常感谢！</submit-dialog-message>
+                <validation-dialog-title>复查表单验证信息</validation-dialog-title>
+                <validation-dialog-message>您的表单{1,choice,
+                    0#不含有任何信息|
+                    1#包含一个 '{0,choice,0#错误|1#警告|2#信息|3#消息}'|
+                    1&lt;包含{1,number,integer}个'{0,choice,0#错误|1#警告|2#信息|3#消息}'}. 你可以选择复查{1,choice,1#它|1&lt;它们}或者忽略{1,choice,1#它|1&lt;它们}并继续操作。</validation-dialog-message>
+                <buttons-message/>
+                <saved-locally-open>点击这里打开文档，您之前填写的信息会在工具里显示。</saved-locally-open>
+                <upload-in-progress>正在上传文件，请在文件上传完毕后重试。</upload-in-progress>
+                <upload-start>开始上传</upload-start>
+                <upload-cancel>上传被用户取消</upload-cancel>
+                <upload-done>上传完成</upload-done>
+                <upload-error>上传过程中发生错误，请重试。</upload-error>
+                <upload-error-size>上传的文件超过限制，最大文件为{0,number,integer}字节但是上传的文件为{1,number,integer}字节。</upload-error-size>
+            </messages>
+            <drafts>
+                <found-draft>找到草稿</found-draft>
+                <found-drafts>找到草稿</found-drafts>
+                <found-draft-for-document>在文档保存之后，系统自动保存了一个草稿，其中可能包含了之后的其他更改。你希望打开保存的版本还是自动保存的草稿？</found-draft-for-document>
+                <found-draft-for-never-saved>表单包含了一个自动保存的草稿，你希望从头开始还是打开草稿？</found-draft-for-never-saved>
+                <found-drafts-for-never-saved>表单包含了多个自动保存的草稿，你希望从头开始还是查看这些草稿并继续工作？</found-drafts-for-never-saved>
+                <open-saved>打开保存的文档</open-saved>
+                <open-draft>打开自动保存的草稿</open-draft>
+                <view-drafts>查看自动保存的草稿</view-drafts>
+                <start-new>从头开始</start-new>
+            </drafts>
+            <labels>
+                <language-choice>语言</language-choice>
+                <errors>错误概要</errors>
+                <check-errors-in-form>本表单包含错误</check-errors-in-form>
+                <error-details>查看错误详细信息</error-details>
+                <confirm>确认</confirm>
+                <alert>值缺少或者不正确</alert>
+
+                <captcha-label>验证码</captcha-label>
+                <captcha-alert>输入的信息和验证码不一致，请重试。</captcha-alert>
+            </labels>
+            <view>
+                <explanation>
+                    	这是一个您的数据的只读版本。
+                </explanation>
+            </view>
+        </detail>
+        <save-locally>
+            <dialog-title>本地保存</dialog-title>
+            <dialog-body>
+                <div>
+                    <p>
+                                              点击保存按钮将数据作为HTML文件保存在本地计算机上。
+                    </p>
+                    <p>
+                                              重新打开你的表单数据：
+                    </p>
+                    <ul>
+                        <li>在浏览器中打开HTML文件(通过双击文件或者将文件拖曳至浏览器窗口中)</li>
+                        <li>点击打开按钮并确认。</li>
+                    </ul>
+                    <p>
+                        <b>警告:</b> 数据并没有保存在服务器上，如果您删除了该文件，数据将会丢失！
+                    </p>
+                </div>
+            </dialog-body>
+        </save-locally>
+        <home>
+            <title>表单中心</title>
+            <buttons>
+                <unpublish>&lt;i class="icon-ban-circle"/&gt; 取消发布</unpublish>
+                <publish>&lt;i class="icon-globe"/&gt; 发布</publish>
+                <cancel>取消</cancel>
+                <connect>连接</connect>
+                <select>选择</select>
+                <operation>操作</operation>
+                <all>All</all>
+                <none>None</none>
+                <unpublished-local>未发布的本地表单</unpublished-local>
+                <published-local>发布的本地表单</published-local>
+                <unpublished-remote>未发布的远程表单</unpublished-remote>
+                <published-remote>发布的远程表单</published-remote>
+                <newer-local>比本地新的表单</newer-local>
+                <newer-remote>比远程新的表单</newer-remote>
+                <publish-local>发布本地表单</publish-local>
+                <unpublish-local>取消发布本地表单</unpublish-local>
+                <publish-remote>发布远程表单</publish-remote>
+                <unpublish-remote>取消发布远程表单</unpublish-remote>
+                <push-to-remote>推送至远程</push-to-remote>
+                <pull-from-remote>从远程获取</pull-from-remote>
+                <navigate-summary>跳转至概览</navigate-summary>
+                <navigate-new>跳转至新建</navigate-new>
+            </buttons>
+            <titles>
+                <publish-confirmation>确认表单发布/取消发布</publish-confirmation>
+                <credentials>远程服务器验证信息</credentials>
+                <status>状态</status>
+                <app>应用程序</app>
+                <form>表单</form>
+                <title>标题</title>
+                <view>查看</view>
+                <new>新</new>
+                <local>本地</local>
+                <remote>远程</remote>
+                <form-identification>表单标识</form-identification>
+                <last-modified>最后修改</last-modified>
+            </titles>
+            <messages>
+                <no-forms>您没有权限访问任何已部署的表单。</no-forms>
+                <publish-confirmation>您确认{0,choice,0#发布|1#取消发布}{1,choice,1#表单|1&lt;{1,number,integer}个表单}吗?</publish-confirmation>
+            </messages>
+            <labels>
+                <available>可用</available>
+                <unavailable>不可用</unavailable>
+                <library>图书馆</library>
+                <newer>更新</newer>
+                <username>用户名</username>
+                <password>密码</password>
+            </labels>
+        </home>
+    </resource>
     <resource xml:lang="en">
         <common>
             <formats>

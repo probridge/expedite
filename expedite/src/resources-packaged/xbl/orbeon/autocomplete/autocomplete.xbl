@@ -61,11 +61,13 @@
             </templates>
             <control-details>
                 <xf:input ref="@resource">
+                    <xf:label lang="cn">资源URI</xf:label>
                     <xf:label lang="en">Resource URI</xf:label>
                     <xf:label lang="fi">Resurssi URI</xf:label>
                     <xf:label lang="fr">URI de la ressource</xf:label>
                     <xf:label lang="it">URI della risorsa</xf:label>
                     <xf:label lang="de">URI der Ressource</xf:label>
+                    <xf:hint lang="cn">HTTP URI返回的数据用作提示</xf:hint>
                     <xf:hint lang="en">HTTP URI returning data used for the suggestions</xf:hint>
                     <xf:hint lang="fi">HTTP URI palauttaa ehdotuksiin käytettyä dataa</xf:hint>
                     <xf:hint lang="fr">URI HTTP auquel réside le service</xf:hint>

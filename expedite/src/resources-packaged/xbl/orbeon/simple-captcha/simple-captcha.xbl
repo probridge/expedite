@@ -48,6 +48,7 @@
                 <xf:bind ref="image" type="xs:base64Binary"/>
                 <xf:instance id="orbeon-resources" xxf:readonly="true">
                     <resources>
+                        <resource xml:lang="cn"><ask-to-type-word>请输入上面的文字:</ask-to-type-word></resource>
                         <resource xml:lang="en"><ask-to-type-word>Type the word above:</ask-to-type-word></resource>
                         <resource xml:lang="fi"><ask-to-type-word>Kirjoita yläpuolella oleva sana tähän:</ask-to-type-word></resource>
                         <resource xml:lang="fr"><ask-to-type-word>Veuillez entrer le mot ci-dessus:</ask-to-type-word></resource>

@@ -596,10 +596,10 @@
                                                             for $v in adjust-dateTime-to-timezone(xs:dateTime($document/@created[. castable as xs:dateTime]))
                                                                 return
                                                                     if (current-dateTime() - $v lt xs:dayTimeDuration('P1D'))
-                                                                    then format-dateTime($v, $fr-resources/common/formats/within-day, xxf:lang(), (), ())
+                                                                    then format-dateTime($v, $fr-resources/common/formats/within-day, 'en', (), ())
                                                                     else if (year-from-dateTime(current-dateTime()) = year-from-dateTime($v))
-                                                                    then format-dateTime($v, $fr-resources/common/formats/day-this-year, xxf:lang(), (), ())
-                                                                    else format-dateTime($v, $fr-resources/common/formats/short-date, xxf:lang(), (), ())"/>
+                                                                    then format-dateTime($v, $fr-resources/common/formats/day-this-year, 'en', (), ())
+                                                                    else format-dateTime($v, $fr-resources/common/formats/short-date, 'en', (), ())"/>
 
                                                     <xh:td class="fr-summary-created">
                                                         <xf:group ref=".[$edit-view != '']">
@@ -620,10 +620,10 @@
                                                             for $v in adjust-dateTime-to-timezone(xs:dateTime($document/@last-modified[. castable as xs:dateTime]))
                                                                 return
                                                                     if (current-dateTime() - $v lt xs:dayTimeDuration('P1D'))
-                                                                    then format-dateTime($v, $fr-resources/common/formats/within-day, xxf:lang(), (), ())
+                                                                    then format-dateTime($v, $fr-resources/common/formats/within-day, 'en', (), ())
                                                                     else if (year-from-dateTime(current-dateTime()) = year-from-dateTime($v))
-                                                                    then format-dateTime($v, $fr-resources/common/formats/day-this-year, xxf:lang(), (), ())
-                                                                    else format-dateTime($v, $fr-resources/common/formats/short-date, xxf:lang(), (), ())"/>
+                                                                    then format-dateTime($v, $fr-resources/common/formats/day-this-year, 'en', (), ())
+                                                                    else format-dateTime($v, $fr-resources/common/formats/short-date, 'en', (), ())"/>
 
                                                     <xh:td class="fr-summary-modified">
                                                         <xf:group ref=".[$edit-view != '']">
@@ -661,11 +661,11 @@
                                                                             else
                                                                                 for $type in substring-after($query/@type, ':') return
                                                                                     if ($type = 'date') then
-                                                                                        (if (. castable as xs:date) then format-date(xs:date(.), $fr-resources/summary/formats/date, xxf:lang(), (), ()) else .)
+                                                                                        (if (. castable as xs:date) then format-date(xs:date(.), $fr-resources/summary/formats/date, 'en', (), ()) else .)
                                                                                     else if ($type = 'time') then
-                                                                                        (if (. castable as xs:time) then format-time(xs:time(.), $fr-resources/summary/formats/time, xxf:lang(), (), ()) else .)
+                                                                                        (if (. castable as xs:time) then format-time(xs:time(.), $fr-resources/summary/formats/time, 'en', (), ()) else .)
                                                                                     else if ($type = 'dateTime') then
-                                                                                        (if (. castable as xs:dateTime) then format-dateTime(xs:dateTime(.), $fr-resources/summary/formats/dateTime, xxf:lang(), (), ()) else .)
+                                                                                        (if (. castable as xs:dateTime) then format-dateTime(xs:dateTime(.), $fr-resources/summary/formats/dateTime, 'en', (), ()) else .)
                                                                                     else if ($type = 'dayTimeDuration') then
                                                                                         (
                                                                                             if (. castable as xs:dayTimeDuration) then

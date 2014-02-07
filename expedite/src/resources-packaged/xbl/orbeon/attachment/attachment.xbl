@@ -61,6 +61,7 @@
             <xf:model>
                 <xf:instance id="orbeon-resources" xxf:readonly="true">
                     <resources>
+                        <resource xml:lang="cn"><download>下载</download></resource>
                         <resource xml:lang="en"><download>Download</download></resource>
                         <resource xml:lang="fi"><download>Lataa</download></resource>
                         <resource xml:lang="fr"><download>Télécharger</download></resource>

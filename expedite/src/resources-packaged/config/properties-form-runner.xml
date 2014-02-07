@@ -54,7 +54,7 @@
     <property as="xs:anyURI"  name="oxf.fr.persistence.mongo.uri"                               value="/fr/service/mongo"/>
 
     <property as="xs:anyURI"  name="oxf.fr.appserver.uri"                                       value=""/>
-    <property as="xs:string"  name="oxf.fr.default-language.*.*"                                value="en"/>
+    <property as="xs:string"  name="oxf.fr.default-language.*.*"                                value="cn"/>
     <property as="xs:anyURI"  name="oxf.fr.default-logo.uri.*.*"                                value="/apps/fr/style/orbeon-navbar-logo.png"/>
     <property as="xs:string"  name="oxf.fr.css.uri.*.*"                                         value="/apps/fr/style/bootstrap/css/bootstrap.css
                                                                                                        /apps/fr/style/form-runner-bootstrap-override.css
@@ -250,7 +250,7 @@
     <!--<property as="xs:string"  name="oxf.fr.detail.submit.go.uri-xpath.*.*"                      value="/book/details/link"/>-->
 
     <!-- For global pages like the Form Runner Home page, restrict list of languages to those that have full support -->
-    <property as="xs:string"  name="oxf.fr.available-languages"                                 value="cn en fr it de"/>
+    <property as="xs:string"  name="oxf.fr.available-languages"                                 value="cn en"/>
     <!-- For forms, don't restrict the list of languages by default: https://github.com/orbeon/orbeon-forms/issues/1223 -->
     <property as="xs:string"  name="oxf.fr.available-languages.*.*"                             value="*"/>
 

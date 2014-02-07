@@ -255,8 +255,10 @@
         <metadata>
             <application-name>orbeon</application-name>
             <form-name>builder</form-name>
+            <title xml:lang="cn">表单编辑器</title>
+            <description xml:lang="en">Expedite表单编辑器帮助您通过浏览器方便快捷的创建自定义的表单，而无需任何编码。</description>
             <title xml:lang="en">Form Builder</title>
-            <description xml:lang="en">Orbeon Form Builder allows you to easily build forms right from your web browser and without programming.</description>
+            <description xml:lang="en">Expedite Form Builder allows you to easily build forms right from your web browser and without programming.</description>
             <title xml:lang="fr">Form Builder</title>
             <description xml:lang="fr">Orbeon Form Builder vous permet d'éditer des formulaires directement depuis votre navigateur et sans programmation.</description>
             <title xml:lang="ru">Мастер форм</title>

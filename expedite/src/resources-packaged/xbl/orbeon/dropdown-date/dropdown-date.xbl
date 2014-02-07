@@ -96,6 +96,11 @@
 
                 <xf:instance id="orbeon-resources" xxf:readonly="true">
                     <resources>
+                        <resource xml:lang="cn">
+                            <year>年</year>
+                            <month>月</month>
+                            <day>日</day>
+                        </resource>
                         <resource xml:lang="en">
                             <year>Year</year>
                             <month>Month</month>

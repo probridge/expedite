@@ -53,12 +53,14 @@
             </fb:template>
             <fb:control-details>
                 <xf:input ref="@resource">
+                    <xf:label lang="cn">资源URL</xf:label>
                     <xf:label lang="en">Resource URL</xf:label>
                     <xf:label lang="fi">Resurssi URL</xf:label>
                     <xf:label lang="fr">URL de la ressource</xf:label>
                     <xf:label lang="ru">URL ресурса</xf:label>
                     <xf:label lang="it">URL della risorsa</xf:label>
                     <xf:label lang="de">URL der Ressource</xf:label>
+                    <xf:hint lang="cn">HTTP URL用来填充下拉框</xf:hint>
                     <xf:hint lang="en">HTTP URL returning data used to populate the dropdown</xf:hint>
                     <xf:hint lang="fi">HTTP URL palauttaa pudotusvalikon täyttämiseen käytettyä dataa</xf:hint>
                     <xf:hint lang="fr">URL HTTP auquel réside le service</xf:hint>
