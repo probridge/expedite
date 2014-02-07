@@ -51,8 +51,8 @@
                 <xh:div class="navbar navbar-inverse">
                     <xh:div class="navbar-inner">
                         <xh:div class="container">
-                            <xh:a href="http://www.orbeon.com/">
-                                <xh:img src="/apps/fr/style/orbeon-navbar-logo.png" alt="Orbeon Forms"/>
+                            <xh:a href="http://www.probridge.com.cn/">
+                                <xh:img src="/apps/fr/style/orbeon-navbar-logo.png" alt="Expedite"/>
                             </xh:a>
                             <xh:h1><xsl:value-of select="$title"/></xh:h1>
                         </xh:div>

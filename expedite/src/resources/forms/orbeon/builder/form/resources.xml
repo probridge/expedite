@@ -12,6 +12,863 @@
   The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
   -->
 <resources>
+    <resource xml:lang="cn">
+        <!-- Form metadata -->
+        <!-- NOTE: Summary page expects to find application-name and form-name for the summary page here -->
+        <application-name>
+            <label>应用名称</label>
+            <hint>用于标识一组表单的名字，例如用分类或者部门的名称。这部分名称会出现在网址中，因此我们建议使用小写字母。</hint>
+            <alert>请使用半角英文字母、数字、"-" 或者 "_"</alert>
+        </application-name>
+        <form-name>
+            <label>表单名称</label>
+            <hint>用来标识每一个具体的表单，例如“注册信息”，“人际关系调查”或者“计算机申领表”，这个名称也会出现在URL中，建议使用有意义的英文小写字母。</hint>
+            <alert>请使用半角英文字母、数字、"-" 或者 "_"</alert>
+        </form-name>
+        <title>
+            <label>表单标题</label>
+            <hint>可使用中文</hint>
+        </title>
+        <description>
+            <label>表单的描述信息</label>
+            <hint>可使用中文</hint>
+        </description>
+        <logo>
+            <label>图标</label>
+            <hint>显示在表单顶部的图标</hint>
+        </logo>
+        <!-- Toolbox -->
+        <cut>
+            <label>剪切</label>
+        </cut>
+        <copy>
+            <label>复制</label>
+        </copy>
+        <paste>
+            <label>粘贴</label>
+        </paste>
+        <form-structure>
+            <label>表单结构</label>
+        </form-structure>
+        <controls>
+            <label>控件</label>
+        </controls>
+        <i18n>
+            <label>国际化支持</label>
+        </i18n>
+        <language>
+            <label>当前语言</label>
+        </language>
+        <advanced>
+            <label>高级</label>
+        </advanced>
+        <services-actions>
+            <label>外部服务和操作</label>
+        </services-actions>
+        <http-services>
+            <label>HTTP服务</label>
+        </http-services>
+        <database-services>
+            <label>数据库服务</label>
+        </database-services>
+        <actions>
+            <label>操作</label>
+        </actions>
+        <new-section>
+            <label>新建区段</label>
+        </new-section>
+        <new-grid>
+            <label>新建表格</label>
+        </new-grid>
+        <new-repeat>
+            <label>新建重复区段</label>
+        </new-repeat>
+        <change-schema>
+            <label>修改XML模板</label>
+        </change-schema>
+        <upload-schema>
+            <label>附加XML模板</label>
+        </upload-schema>
+        <change-pdf>
+            <label>修改PDF</label>
+        </change-pdf>
+        <upload-pdf>
+            <label>附加PDF</label>
+        </upload-pdf>
+        <change-css>
+            <label>修改样式表</label>
+        </change-css>
+        <upload-css>
+            <label>附加样式表</label>
+        </upload-css>
+        <show-source>
+            <label>显示源文件</label>
+        </show-source>
+        <edit-source>
+            <label>修改源文件</label>
+        </edit-source>
+        <custom-xml>
+            <label>自定义XML</label>
+        </custom-xml>
+        <permissions>
+            <label>设置权限</label>
+        </permissions>
+        <reload-components>
+            <label>重新加载工具栏</label>
+        </reload-components>
+        <enter-section-title>
+            <label>点击输入区段标题</label>
+        </enter-section-title>
+        <type-section-title>
+            <label>输入区段标题</label>
+        </type-section-title>
+        <enter-label>
+            <label>点击输入标签</label>
+        </enter-label>
+        <type-label>
+            <label>输入标签</label>
+        </type-label>
+        <enter-hint>
+            <label>点击增加提示信息</label>
+        </enter-hint>
+        <type-hint>
+            <label>输入提示信息</label>
+        </type-hint>
+        <enter-text>
+            <label>点击输入文本</label>
+        </enter-text>
+        <click-cell>
+            <label>点击选择本单元</label>
+        </click-cell>
+        <insert-control>
+            <label>使用工具栏插入控件</label>
+        </insert-control>
+        <edit-items>
+            <label>编辑选项</label>
+        </edit-items>
+        <expand-icon>
+            <label>展开</label>
+        </expand-icon>
+        <shrink-icon>
+            <label>缩小</label>
+        </shrink-icon>
+        <delete-control-icon>
+            <label>删除控件</label>
+        </delete-control-icon>
+        <delete-grid-icon>
+            <label>删除表格</label>
+        </delete-grid-icon>
+        <delete-section-icon>
+            <label>删除区段</label>
+        </delete-section-icon>
+        <delete-row-icon>
+            <label>删除行</label>
+        </delete-row-icon>
+        <delete-column-icon>
+            <label>删除列</label>
+        </delete-column-icon>
+        <insert-column-left-icon>
+            <label>在左侧插入一列</label>
+        </insert-column-left-icon>
+        <insert-column-right-icon>
+            <label>在右侧插入一列</label>
+        </insert-column-right-icon>
+        <insert-row-above-icon>
+            <label>在上方插入一行</label>
+        </insert-row-above-icon>
+        <insert-row-below-icon>
+            <label>在下方插入一行</label>
+        </insert-row-below-icon>
+        <section-details-icon>
+            <label>区段设置</label>
+        </section-details-icon>
+        <grid-details-icon>
+            <label>表格设置</label>
+        </grid-details-icon>
+        <move-up-icon>
+            <label>上移</label>
+        </move-up-icon>
+        <move-down-icon>
+            <label>下移</label>
+        </move-down-icon>
+        <move-right-icon>
+            <label>右移</label>
+        </move-right-icon>
+        <move-left-icon>
+            <label>左移</label>
+        </move-left-icon>
+        <control-details-icon>
+            <label>控件设置</label>
+        </control-details-icon>
+        <switch-appearance-icon>
+            <label>切换外观</label>
+        </switch-appearance-icon>
+        <help-icon>
+            <label>编辑帮助</label>
+        </help-icon>
+        <new-button>
+            <label>&lt;i class="icon-plus"/&gt; 新建</label>
+        </new-button>
+        <test-button>
+            <label>&lt;i class="icon-cog"/&gt; 测试</label>
+        </test-button>
+        <publish-button>
+            <label>&lt;i class="icon-globe"/&gt; 发布</label>
+        </publish-button>
+        <save-as-button>
+            <label>另存为…</label>
+        </save-as-button>
+        <!-- Common -->
+        <add>
+            <label>新增</label>
+        </add>
+        <remove>
+            <label>删除</label>
+        </remove>
+        <edit>
+            <label>编辑</label>
+        </edit>
+        <!-- Dialogs -->
+        <continue>
+            <label>继续</label>
+        </continue>
+        <apply>
+            <label>应用</label>
+        </apply>
+        <cancel>
+            <label>取消</label>
+        </cancel>
+        <close>
+            <label>关闭</label>
+        </close>
+        <delete>
+            <label>删除</label>
+        </delete>
+        <or>
+            <label>或者</label>
+        </or>
+        <select>
+            <label>[选择...]</label>
+        </select>
+        <dialog-form-settings>
+            <label>表单设置</label>
+            <save-as>另存为…</save-as>
+            <open><label>表单设置</label></open>
+            <stats>表单信息</stats>
+            <sections>区段</sections>
+            <repeats>重复区段</repeats>
+            <grids>表格</grids>
+            <section-templates>区段模板</section-templates>
+            <controls>控件</controls>
+            <all>所有</all>
+        </dialog-form-settings>
+        <dialog-control-details>
+            <label>控件设置</label>
+            <tab-base><label>基本设置</label></tab-base>
+            <tab-validations><label>数据验证和提示</label></tab-validations>
+            <tab-formulas><label>公式</label></tab-formulas>
+            <tab-help><label>帮助信息</label></tab-help>
+            <control-name>
+                <label>控件名称</label>
+                <alert>名称已使用或者不正确</alert>
+                <hint>例如: "first-name"</hint>
+            </control-name>
+            <control-xpath>
+                <label>XPath</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>指向这个控件的值所保存的节点。</hint>
+            </control-xpath>
+            <classes>
+                <label>总览页</label>
+                <item>
+                    <label>在总览页中显示</label>
+                    <value>fr-summary</value>
+                </item>
+                <item>
+                    <label>在搜索中显示</label>
+                    <value>fr-search</value>
+                </item>
+                <item>
+                    <label>电子邮件的收件人</label>
+                    <value>fr-email-recipient</value>
+                </item>
+                <item>
+                    <label>在电子邮件的主题中显示</label>
+                    <value>fr-email-subject</value>
+                </item>
+            </classes>
+            <types>
+                <label>数据类型</label>
+            </types>
+            <builtin-type>
+                <label>内建类型</label>
+                <hint>内建的数据类型</hint>
+
+                <use-schema-type>使用Schema类型</use-schema-type>
+
+                <choices>
+                    <choices>
+                        <label>常用类型</label>
+                        <type label="文本">string</type>
+                        <type label="布尔类型">boolean</type>
+                        <type label="电子邮件">email</type>
+                    </choices>
+                    <choices>
+                        <label>数字类型</label>
+                        <type label="数字">decimal</type>
+
+                        <type label="整数">integer</type>
+                        <type label="正整数">positiveInteger</type>
+                        <type label="非正整数">nonPositiveInteger</type>
+                        <type label="负整数">negativeInteger</type>
+                        <type label="非负整数">nonNegativeInteger</type>
+
+                        <type label="单精度浮点数">float</type>
+                        <type label="双精度浮点数">double</type>
+
+                        <type label="">long</type>
+                        <type label="">int</type>
+                        <type label="">short</type>
+                        <type label="">byte</type>
+                        <type label="">unsignedLong</type>
+                        <type label="">unsignedInt</type>
+                        <type label="">unsignedShort</type>
+                        <type label="">unsignedByte</type>
+                    </choices>
+                    <choices>
+                        <label>日期和时间类型</label>
+                        <type label="日期">date</type>
+                        <type label="时间">time</type>
+                        <type label="日期和时间">dateTime</type>
+                        <type label="持续时间">duration</type>
+                        <type label="年和月">gYearMonth</type>
+                        <type label="月和日">gMonthDay</type>
+                        <type label="年">gYear</type>
+                        <type label="月">gMonth</type>
+                        <type label="日">gDay</type>
+                    </choices>
+                    <choices>
+                        <label>XML类型</label>
+                        <type label="">normalizedString</type>
+                        <type label="">token</type>
+                        <type label="">language</type>
+                        <type label="">Name</type>
+                        <type label="">NCName</type>
+                        <type label="">ID</type>
+                        <type label="">IDREF</type>
+                        <type label="">IDREFS</type>
+                        <type label="">ENTITY</type>
+                        <type label="">ENTITIES</type>
+                        <type label="">NMTOKEN</type>
+                        <type label="">NMTOKENS</type>
+                        <type label="XML qualified name">QName</type>
+                        <type label="">NOTATION</type>
+                    </choices>
+                    <choices>
+                        <label>其他类型</label>
+                        <!-- Not 100% sure if these two types allow empty content -->
+                        <type label="Base64-encoded binary">base64Binary</type>
+                        <type label="Hexadecimal-encoded binary">hexBinary</type>
+                        <type label="Any URI">anyURI</type>
+                    </choices>
+                </choices>
+            </builtin-type>
+            <schema-type>
+                <label>Schema类型</label>
+                <hint>从导入的Schema中选择类型</hint>
+            </schema-type>
+            <required>
+                <label>必须</label>
+                <hint>数据是否必须输入</hint>
+                <item>
+                    <label>是</label>
+                    <value>true</value>
+                </item>
+                <item>
+                    <label>否</label>
+                    <value>false</value>
+                </item>
+            </required>
+            <constraint>
+                <label>约束</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </constraint>
+            <visibility>
+                <label>可见</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </visibility>
+            <readonly>
+                <label>只读</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </readonly>
+            <default>
+                <label>初始值</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>XPath表达式</hint>
+            </default>
+            <calculate>
+                <label>计算值</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>XPath表达式</hint>
+            </calculate>
+            <help>
+                <label>帮助信息</label>
+                <hint>点击帮助图标时显示的信息</hint>
+            </help>
+            <alert>
+                <label>提示信息</label>
+                <hint>提示时显示的信息</hint>
+            </alert>
+            <default-alert>
+                <label>默认提示信息</label>
+                <hint>没有设置具体提示信息时的显示内容</hint>
+            </default-alert>
+            <use-global-alert>
+                <label>使用全局默认的提示信息</label>
+            </use-global-alert>
+            <use-default-alert>
+                <label>使用默认的提示信息</label>
+            </use-default-alert>
+            <validation-type><label>验证类型</label></validation-type>
+            <validation-details><label>验证详细信息</label></validation-details>
+            <level><label>级别</label></level>
+        </dialog-control-details>
+        <dialog-section-details>
+            <label>区段设置</label>
+            <control-name>
+                <label>区段名称</label>
+                <alert>该名称已经使用或者不正确</alert>
+                <hint>例如: "address"</hint>
+            </control-name>
+            <visibility>
+                <label>可见</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </visibility>
+            <readonly>
+                <label>只读</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </readonly>
+        </dialog-section-details>
+        <dialog-grid-details>
+            <label>表格设置</label>
+            <grid-name>
+                <label>表格名称</label>
+                <alert>该名称已经使用或者不正确</alert>
+                <hint>例如: "first-name"</hint>
+            </grid-name>
+            <visibility>
+                <label>可见</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </visibility>
+            <readonly>
+                <label>只读</label>
+                <alert>不正确的XPath表达式</alert>
+                <hint>布尔类型的XPath表达式</hint>
+            </readonly>
+            <min>
+                <label>最小重复次数</label>
+                <alert>不正确的输入</alert>
+                <hint>输入一个非负整数</hint>
+            </min>
+            <max>
+                <label>最大重复次数</label>
+                <alert>不正确的输入</alert>
+                <hint>输入一个正整数</hint>
+            </max>
+            <other>其他</other>
+            <one>重复一次</one>
+            <unlimited>无限</unlimited>
+            <no-minimum>不设最小值</no-minimum>
+        </dialog-grid-details>
+        <dialog-confirmation>
+            <label>确认</label>
+        </dialog-confirmation>
+        <dialog-help>
+            <label>帮助</label>
+            <help-message>
+                <label>帮助信息</label>
+            </help-message>
+        </dialog-help>
+        <dialog-publish>
+            <label>发布表单</label>
+            <publish>
+                <label>发布</label>
+            </publish>
+            <publish-and-open>
+                <label>发布并打开</label>
+            </publish-and-open>
+            <messages>
+                <open-summary>打开发布表单的概览页</open-summary>
+                <open-new>打开发布表单的新建页面</open-new>
+            </messages>
+        </dialog-publish>
+        <dialog-add-language>
+            <label>增加语言</label>
+            <new-language>
+                <label>增加下列语言</label>
+            </new-language>
+            <common>最常用的语言</common>
+            <all>其他语言</all>
+            <add-language>
+                <label>增加语言</label>
+            </add-language>
+            <remove-language>
+                <label>移除语言</label>
+            </remove-language>
+        </dialog-add-language>
+        <dialog-upload-schema>
+            <label>XML Schema上传</label>
+            <schema-type>
+                <label>可用的Schema类型</label>
+                <hint>The simple types available in the uploaded schema</hint>
+            </schema-type>
+            <namespace-uri>
+                <label>Schema命名空间URI</label>
+                <hint>This is the namespace URI of the uploaded schema</hint>
+            </namespace-uri>
+            <operations>
+                <label>操作</label>
+            </operations>
+            <delete-schema>
+                <label>删除现有的XML Schema</label>
+            </delete-schema>
+            <change-schema>
+                <label>修改XML Schema</label>
+            </change-schema>
+            <replace-schema>
+                <label>Replace XML Schema</label>
+            </replace-schema>
+            <upload-schema>
+                <label>Attach XML Schema</label>
+            </upload-schema>
+            <messages>
+                <no-simple-types>Your schema does not seem to contain simple types. You won't be able to select types from this schema for validation.</no-simple-types>
+                <has-includes>Your schema contains imports or includes. These will be disabled.</has-includes>
+                <not-a-schema>The uploaded file is not a valid schema.</not-a-schema>
+                <new-schema-information>New Schema Information</new-schema-information>
+                <existing-schema-information>Existing Schema Information</existing-schema-information>
+            </messages>
+        </dialog-upload-schema>
+        <dialog-edit-source>
+            <label>源文件</label>
+            <source>
+                <alert>请确保源文件内容为合法的well-formed XML</alert>
+            </source>
+        </dialog-edit-source>
+        <dialog-view-source>
+            <label>查看源文件</label>
+        </dialog-view-source>
+        <dialog-upload-pdf>
+            <label>附加一个PDF模板文件</label>
+            <upload-pdf>
+                <label>PDF文件</label>
+            </upload-pdf>
+        </dialog-upload-pdf>
+        <dialog-itemsets>
+            <label>编辑选项</label>
+            <resources-language>
+                <label>资源语言</label>
+            </resources-language>
+            <label>
+                <label>标签</label>
+            </label>
+            <value>
+                <label>值</label>
+            </value>
+        </dialog-itemsets>
+        <dialog-http-services>
+            <label>HTTP服务编辑器</label>
+            <service-name>
+                <label>Service Name</label>
+                <hint>Choose a unique name for this service</hint>
+            </service-name>
+            <resource>
+                <label>Resource URL</label>
+                <hint>HTTP URL at which the service reside</hint>
+            </resource>
+            <method>
+                <label>Method</label>
+            </method>
+            <serialization>
+                <label>Serialization</label>
+            </serialization>
+            <soap-submission>
+                <label>SOAP Service</label>
+                <hint>Whether this is a SOAP service</hint>
+            </soap-submission>
+            <soap-action>
+                <label>SOAP Action</label>
+                <hint>Optional SOAPAction header</hint>
+            </soap-action>
+            <http-authentication>
+                <label>HTTP Authentication</label>
+                <hint>HTTP Authentication</hint>
+            </http-authentication>
+            <username>
+                <label>Username</label>
+            </username>
+            <password>
+                <label>Password</label>
+            </password>
+            <request-body>
+                <label>Request Body</label>
+                <hint>XML data (can be a SOAP envelope)</hint>
+            </request-body>
+            <response>
+                <label>Response</label>
+            </response>
+            <error-type>
+                <label>Error Type</label>
+                <item>
+                    <label>Submission in progress</label>
+                    <value>submission-in-progress</value>
+                </item>
+                <item>
+                    <label>No data</label>
+                    <value>no-data</value>
+                </item>
+                <item>
+                    <label>Validation error</label>
+                    <value>validation-error</value>
+                </item>
+                <item>
+                    <label>Resource error</label>
+                    <value>resource-error</value>
+                </item>
+                <item>
+                    <label>Target error</label>
+                    <value>target-error</value>
+                </item>
+                <item>
+                    <label>Internal error</label>
+                    <value>xxforms-internal-error</value>
+                </item>
+            </error-type>
+            <resource-uri>
+                <label>Resource URL</label>
+            </resource-uri>
+            <status-code>
+                <label>Status Code</label>
+            </status-code>
+            <headers>
+                <label>Headers</label>
+            </headers>
+            <header-name>
+                <label>Name</label>
+            </header-name>
+            <header-value>
+                <label>Value(s)</label>
+            </header-value>
+            <response-body>
+                <label>Response Body</label>
+            </response-body>
+            <save>
+                <label>保存</label>
+            </save>
+            <test>
+                <label>测试</label>
+            </test>
+        </dialog-http-services>
+        <dialog-database-services>
+            <label>Database服务编辑器</label>
+            <service-name>
+                <label>Service Name</label>
+                <hint>Choose a unique name for this service</hint>
+            </service-name>
+            <datasource>
+                <label>Datasource</label>
+                <hint>JNDI datasource for this service</hint>
+            </datasource>
+            <query>
+                <label>SQL Query</label>
+                <hint>SQL query which can contain placeholders for parameters</hint>
+            </query>
+            <save>
+                <label>保存</label>
+            </save>
+            <test>
+                <label>测试</label>
+            </test>
+        </dialog-database-services>
+        <dialog-actions>
+            <label>动作编辑器</label>
+            <service-name>
+                <label>Action Name</label>
+                <hint>Choose a unique name for this action</hint>
+            </service-name>
+            <event-type>
+                <label>React to</label>
+                <hint>Event (on a control or global) to react to</hint>
+                <!-- Just a value change -->
+                <item>
+                    <label>Value Change</label>
+                    <value>xforms-value-changed</value>
+                </item>
+                <!-- Value change AND the first time the control shows -->
+                <item>
+                    <label>Value Change or Form Load</label>
+                    <value>xforms-value-changed xforms-enabled</value>
+                </item>
+                <!-- Control activation -->
+                <item>
+                    <label>Activation</label>
+                    <value>DOMActivate</value>
+                </item>
+                <!-- Form load -->
+                <item>
+                    <label>Form Load</label>
+                    <value>xforms-ready</value>
+                </item>
+            </event-type>
+            <event-condition>
+                <label>Condition</label>
+                <item>
+                    <label>Run always</label>
+                    <value>true()</value>
+                </item>
+                <item>
+                    <label>Run on creation only</label>
+                    <value>$fr-mode='new'</value>
+                </item>
+            </event-condition>
+            <event-control>
+                <label>Control</label>
+            </event-control>
+            <service-to-call>
+                <label>Service to Call</label>
+                <hint>Service to call when the event happens</hint>
+            </service-to-call>
+            <request-parameters>
+                <label>Set Service Request Values</label>
+            </request-parameters>
+            <source-control>
+                <label>Source Control</label>
+            </source-control>
+            <destination-xpath>
+                <label>Destination XPath Expression</label>
+            </destination-xpath>
+            <request-database-parameter>
+                <label>Set Database Service Parameters</label>
+            </request-database-parameter>
+            <parameter-number>
+                <label>Parameter number</label>
+            </parameter-number>
+            <response-values>
+                <label>Set Response Control Values</label>
+            </response-values>
+            <destination-control>
+                <label>Destination Control</label>
+            </destination-control>
+            <source-xpath>
+                <label>Source XPath expression</label>
+            </source-xpath>
+            <response-itemset>
+                <label>Set Response Selection Control Items</label>
+            </response-itemset>
+            <destination-selection-control>
+                <label>Destination Selection Control</label>
+            </destination-selection-control>
+            <itemset>
+                <label>Itemset</label>
+                <hint>XPath expressions to build a new itemset</hint>
+            </itemset>
+            <items>
+                <label>Items</label>
+                <hint>XPath expression returning one node for each item</hint>
+            </items>
+            <label>
+                <label>Label</label>
+                <hint>XPath expression relative to an item node</hint>
+            </label>
+            <value>
+                <label>Value</label>
+                <hint>XPath expression relative to an item node</hint>
+            </value>
+            <save>
+                <label>保存</label>
+            </save>
+            <test>
+                <label>测试</label>
+            </test>
+        </dialog-actions>
+        <dialog-test>
+            <label>表单预览</label>
+        </dialog-test>
+        <dialog-pe>
+            <label>Expedite高级版功能</label>
+            <message>
+                <div>
+                    <p>This feature is only available in Expedite PE.</p>
+                    <p>For more information, please visit the <a href="http://www.probridge.com/" target="_blank">ProBridge web site</a>.</p>
+                </div>
+            </message>
+        </dialog-pe>
+        <dialog-custom-xml>
+            <label>自定义XML</label>
+            <mode-label>这个表单的用户输入信息保存在XML文档:</mode-label>
+            <mode-automatic>自动生成XML</mode-automatic>
+            <mode-custom>我会提供自定义的XML文档</mode-custom>
+        </dialog-custom-xml>
+        <dialog-permissions>
+            <label>权限</label>
+            <enable-permissions>为此表单启用权限控制</enable-permissions>
+            <role>角色</role>
+            <permissions>权限</permissions>
+            <operations>操作</operations>
+            <anyone>所有人</anyone>
+            <owner>拥有者</owner>
+            <group-members>组成员</group-members>
+            <create>创建</create>
+            <read>读取</read>
+            <update>修改</update>
+            <delete>删除</delete>
+        </dialog-permissions>
+        <!-- Messages -->
+        <messages>
+            <delete-section>是否确认删除该区段？</delete-section>
+            <delete-grid>是否确认删除该表格？</delete-grid>
+            <delete-column>是否确认删除该列？</delete-column>
+            <delete-row>是否确认删除该行？</delete-row>
+            <expand-cell>是否确认扩展该单元格?对应的控件会被删除。</expand-cell>
+            <delete-resources>是否确认删除该语言的所有资源？</delete-resources>
+            <delete-service>是否确认删除该服务？</delete-service>
+            <delete-action>是否确认删除该操作？</delete-action>
+            <controls-will-be-deleted>{0,choice,0#没有控件|1#一个控件|1&lt;{0,number,integer}个控件}将会被删除.</controls-will-be-deleted>
+            <publish-form>您是否希望发布该表单？继续操作会覆盖现有如下属性的的表单：</publish-form>
+            <publish-success>表单发布成功！ {0,choice,0#没有附件|1#一个附件|1&lt;{0,number,integer}个附件}已经发布。</publish-success>
+            <publish-error>发布时发生错误</publish-error>
+            <metadata-edit-title>表单元数据</metadata-edit-title>
+            <new-metadata-output>请提供一个应用名称和表单名称用以标识您的表单(以后可以修改):</new-metadata-output>
+            <edit-metadata-output/>
+            <save-as-metadata-output>请输入一个新的应用名称和表单名称用以标识您的表单的副本:</save-as-metadata-output>
+            <xpath-errors>表单中发现 {0,choice,1#有一个XPath错误|1&lt;有{0,number,integer}个XPath错误}.</xpath-errors>
+            <lhha-checkbox>如果希望使用HTML标记请选中这个复选框</lhha-checkbox>
+        </messages>
+        <template>
+            <untitled-form>未命名的表单</untitled-form>
+            <untitled-section>未命名的区段</untitled-section>
+            <items>
+                <item>
+                    <label>选项一</label>
+                    <value>one</value>
+                </item>
+                <item>
+                    <label>选项二</label>
+                    <value>two</value>
+                </item>
+                <item>
+                    <label>选项三</label>
+                    <value>three</value>
+                </item>
+            </items>
+        </template>
+    </resource>
     <resource xml:lang="en">
         <!-- Form metadata -->
         <!-- NOTE: Summary page expects to find application-name and form-name for the summary page here -->
