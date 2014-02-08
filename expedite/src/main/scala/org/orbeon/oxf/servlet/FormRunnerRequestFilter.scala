@@ -36,7 +36,7 @@ class FormRunnerRequestFilter extends RequestFilter {
                 headers.keysIterator ++ super.getHeaderNames
             override def getHeader(name: String) =
                 headers.get(name) map (_.head) getOrElse super.getHeader(name)
-            override def getHeaders(name: String): JEnumeration[_] =
+            override def getHeaders(name: String): JEnumeration[String] =
                 headers.get(name) map (n ⇒ asJavaEnumeration(n.iterator)) getOrElse super.getHeaders(name)
         }
 
