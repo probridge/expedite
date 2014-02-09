@@ -131,6 +131,14 @@
     	
     	<!-- include db2 jar -->
     	<include name="db2jcc4.jar"/>
+    	
+    	<!-- include jaccount jar -->
+    	<include name="jaman.jar"/>
+    	
+    	<!-- include jstl jar -->
+    	<include name="javax.servlet.jsp.jstl-1.2.2.jar"/>
+    	<!-- don't include api jar -->
+    	<!-- <include name="jstl-1.2.jar"/> -->
 
         <include name="exist-1_4_1_dev_orbeon_20110104.jar"/>
         <include name="exist-optional-1_4_1_dev_orbeon_20110104.jar"/>
@@ -466,6 +474,9 @@
                 <exclude name="ops/**/*.html"/>
                 <exclude name="ops/**/*.htm"/>
                 <exclude name="ops/**/*.htc"/>
+                <exclude name="ops/**/*.ttf"/>
+                <exclude name="ops/**/*.woff"/>
+                <exclude name="ops/**/*.svg"/>
                 <include name="oxf/**"/>
                 <include name="config/**"/>
                 <exclude name="config/theme"/>
@@ -496,6 +507,9 @@
                 <include name="ops/**/*.html"/>
                 <include name="ops/**/*.htm"/>
                 <include name="ops/**/*.htc"/>
+                <include name="ops/**/*.ttf"/>
+                <include name="ops/**/*.woff"/>
+                <include name="ops/**/*.svg"/>
                 <include name="config/theme/**/*.*"/>
             </fileset>
             <zipfileset dir="${war.dir}/WEB-INF/resources">
@@ -551,13 +565,36 @@
             </fileset>
         </copy>
         <copy file="${cli.jar.file}" todir="${war.inf}"/>
-        <copy todir="${war.dir}/xforms-jsp">
+        <copy todir="${war.dir}/pages">
             <fileset dir="${src.dir}/examples-jsp">
                 <include name="**"/>
             </fileset>
         </copy>
-    </target>
+    	<mkdir dir="${war.inf}/tags"/>
+        <copy todir="${war.inf}/tags">
+            <fileset dir="${src.dir}/expedite-tags">
+                <include name="*.tag"/>
+            </fileset>
+        </copy>
 
+    	<copy todir="${war.inf}">
+            <fileset dir="${src.dir}/expedite-tags">
+                <include name="*.tld"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${war.dir}/pages">
+            <fileset dir="${src.dir}/expedite-jsp">
+                <include name="**"/>
+            </fileset>
+        </copy>
+
+    	<copy todir="${war.inf}/jakey">
+            <fileset dir="data/jakey">
+                <include name="*.key"/>
+            </fileset>
+        </copy>
+    </target>
 
     <target name="war-copy-descriptors" depends="prepare">
         <copy todir="${war.inf}">
