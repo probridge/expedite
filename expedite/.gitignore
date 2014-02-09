@@ -4,3 +4,4 @@ target/
 build-local.properties
 src/resources-local/
 tmp
+.cache
