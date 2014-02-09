@@ -17,18 +17,22 @@ import edu.sjtu.jaccount.JAccountManager;
  */
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 7982070678512891402L;
-	private static final Logger logger = LoggerFactory.getLogger(LogoutServlet.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(LogoutServlet.class);
 
 	public LogoutServlet() {
 		super();
 	}
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void service(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		logger.debug("trigger logout processing");
 		request.getSession().invalidate();
-		JAccountManager jam = new JAccountManager(Constant.jAccountSiteId, Constant.configPath);
-		String returnUrl = request.getRequestURI().substring(0, request.getRequestURI().lastIndexOf("/") + 1);
-		jam.logout(request, response, returnUrl);		
+		JAccountManager jam = new JAccountManager(Constant.jAccountSiteId,
+				Constant.configPath);
+		String returnUrl = request.getRequestURI().substring(0,
+				request.getRequestURI().lastIndexOf("/") + 1) + "pages/";
+		logger.debug("logging out with returnUrl=" + returnUrl);
+		jam.logout(request, response, returnUrl);
 	}
 }

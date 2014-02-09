@@ -19,70 +19,73 @@ import edu.sjtu.jaccount.JAccountManager;
  */
 public class jAccountAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 7982070678512891402L;
-	private static final Logger logger = LoggerFactory.getLogger(jAccountAuthServlet.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(jAccountAuthServlet.class);
 
 	public jAccountAuthServlet() {
 		super();
 	}
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-			IOException {
+	protected void service(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		logger.debug("trigger external auth processing");
-		JAccountManager jam = new JAccountManager(Constant.jAccountSiteId, Constant.configPath);
+		JAccountManager jam = new JAccountManager(Constant.jAccountSiteId,
+				Constant.configPath);
+		logger.debug("checking with " + request.getRequestURI());
 		@SuppressWarnings("rawtypes")
-		Hashtable ht = jam.checkLogin(request, response, request.getSession(), request.getRequestURI());
+		Hashtable ht = jam.checkLogin(request, response, request.getSession(),
+				request.getRequestURI());
 		if (ht != null && ht.get("uid") != null) {
 			HttpSession sess = request.getSession();
 
-			String uid = ht.get("uid").toString().toLowerCase() + Constant.jAccountSuffix;
+			String uid = ht.get("uid").toString().toLowerCase()
+					+ Constant.jAccountSuffix;
 			String userDesc = ht.get("dept") + " " + ht.get("chinesename");
-			
-			logger.debug("jaccount uid=" + uid );
-			logger.debug("jaccount userDesc=" + userDesc );
-			
+
+			logger.debug("jaccount uid=" + uid);
+			logger.debug("jaccount userDesc=" + userDesc);
+
 			sess.setAttribute(Constant.SESSION_AUTH_FLAG, "true");
 			sess.setAttribute(Constant.SESSION_USER_NAME, "abc@sjtu.edu.cn");
 			sess.setAttribute(Constant.SESSION_GROUP_NAME, "students");
-			sess.setAttribute(Constant.SESSION_ROLE_LIST, "user,admin");			
+			sess.setAttribute(Constant.SESSION_ROLE_LIST, "user,admin");
+
+			// TODO: check user db and insert user if not exist (with token as
+			// pwd)
+
+			// TODO: calculate token according to the uid (token as the
+			// password)
+			String token = "XXXXX" + uid;
+			// save token to session
+			sess.setAttribute(Constant.SESSION_AUTH_TOKEN, token);
+
+			// redirect to login.jsp (login.jsp check if token exists if yes
+			// auto submit else present login form)
+			response.sendRedirect("pages/login.jsp");
+
 			/*
-			// check user db - insert user
-			//
-			SqlSession session = VBoxConfig.sqlSessionFactory.openSession();
-			UsersMapper mapper = session.getMapper(UsersMapper.class);
-			Users thisUser = mapper.selectByPrimaryKey(uid);
-			String encodedPwd = new Sha512Hash(uid, "jaccount_salt").toHex().substring(0, 20);
-			if (thisUser == null) {
-				thisUser = new Users();
-				thisUser.setUserName(uid);
-				thisUser.setUserEnabled("1");
-				thisUser.setUserDescription(userDesc);
-				thisUser.setUserExpiration(null);
-				thisUser.setUserPassword(encodedPwd);
-				thisUser.setUserPwdExpire(null);
-				thisUser.setUserRole("ROLE_USER");
-				thisUser.setUserType("1");
-				thisUser.setUserVhdName(null);
-				thisUser.setUserVhdQuota(null);
-				thisUser.setUserHypervisorId(null);
-				mapper.insert(thisUser);
-				session.commit();
-			}
-			//
-			UsernamePasswordToken loginToken = new UsernamePasswordToken(uid, encodedPwd);
-			loginToken.setRememberMe(true);
-			Subject currentUser = SecurityUtils.getSubject();
-			try {
-				currentUser.login(loginToken);
-			} catch (Exception e) {
-				request.setAttribute("error", "登录发生错误，请联系我们。" + e.getMessage());
-				return ERROR;
-			}
-			// perform login
-			return SUCCEED;
-			*/
-		} else {
-			jam.logout(request, response, request.getRequestURI());
-			return;
+			 * // check user db - insert user // SqlSession session =
+			 * VBoxConfig.sqlSessionFactory.openSession(); UsersMapper mapper =
+			 * session.getMapper(UsersMapper.class); Users thisUser =
+			 * mapper.selectByPrimaryKey(uid); String encodedPwd = new
+			 * Sha512Hash(uid, "jaccount_salt").toHex().substring(0, 20); if
+			 * (thisUser == null) { thisUser = new Users();
+			 * thisUser.setUserName(uid); thisUser.setUserEnabled("1");
+			 * thisUser.setUserDescription(userDesc);
+			 * thisUser.setUserExpiration(null);
+			 * thisUser.setUserPassword(encodedPwd);
+			 * thisUser.setUserPwdExpire(null);
+			 * thisUser.setUserRole("ROLE_USER"); thisUser.setUserType("1");
+			 * thisUser.setUserVhdName(null); thisUser.setUserVhdQuota(null);
+			 * thisUser.setUserHypervisorId(null); mapper.insert(thisUser);
+			 * session.commit(); } // UsernamePasswordToken loginToken = new
+			 * UsernamePasswordToken(uid, encodedPwd);
+			 * loginToken.setRememberMe(true); Subject currentUser =
+			 * SecurityUtils.getSubject(); try { currentUser.login(loginToken);
+			 * } catch (Exception e) { request.setAttribute("error",
+			 * "登录发生错误，请联系我们。" + e.getMessage()); return ERROR; } // perform
+			 * login return SUCCEED;
+			 */
 		}
 	}
 }

@@ -37,6 +37,18 @@
         <body-content>scriptless</body-content>
     </tag>
     <tag>
+        <description>Displays body content only if the current user has external token</description>
+        <name>hasToken</name>
+        <tag-class>com.probridge.expedite.webapp.tags.HasTokenTag</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+    <tag>
+        <description>Displays body content only if the current user has not external token</description>
+        <name>noToken</name>
+        <tag-class>com.probridge.expedite.webapp.tags.NotHasTokenTag</tag-class>
+        <body-content>scriptless</body-content>
+    </tag>
+    <tag>
         <description>Generate image URI</description>
         <name>genImage</name>
         <tag-class>com.probridge.expedite.webapp.tags.ImageUrlTag</tag-class>

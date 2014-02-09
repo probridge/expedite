@@ -143,13 +143,9 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_40">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="lib/saxon-9-1-0-8_orbeon_20130503.jar"/>
 	<classpathentry kind="lib" path="lib/hsqldb-1_8_0_7.jar"/>
-	<classpathentry kind="lib" path="lib/jaman.jar"/>
+	<classpathentry kind="lib" path="lib/jaman.jar" sourcepath="C:/PennyGe/binary/java_jaccount_20131027/jaman.src.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

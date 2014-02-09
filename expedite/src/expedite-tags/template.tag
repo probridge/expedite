@@ -53,7 +53,7 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"><exp:getPrincipal /><b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="logout.do"><i class="icon-unlock"></i>&nbsp;安全退出</a></li>
+									<li><a href="/logout"><i class="icon-unlock"></i>&nbsp;安全退出</a></li>
 								</ul></li>
 						</ul>
 						</exp:isAuthenticated>
@@ -62,8 +62,8 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> 登录<b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="jaccount.do"><i class="icon-lock"></i>&nbsp;jAccount统一认证</a></li>
-									<li><a href="login.do?other=1"><i class="icon-lock"></i>&nbsp;其他用户</a></li>
+									<li><a href="/jaccount"><i class="icon-lock"></i>&nbsp;jAccount统一认证</a></li>
+									<li><a href="/pages/login.jsp?other=1"><i class="icon-lock"></i>&nbsp;其他用户</a></li>
 								</ul></li>
 						</ul>
 						</exp:isNotAuthenticated>

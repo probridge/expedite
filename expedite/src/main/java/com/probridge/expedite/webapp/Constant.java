@@ -16,12 +16,14 @@ public class Constant {
 	/**
 	 * "true(lowercase)" or NOT
 	 */
-	public static final String SESSION_AUTH_FLAG = "Exp-Auth";
-	public static final String SESSION_USER_NAME = "Exp-UserName";
-	public static final String SESSION_GROUP_NAME = "Exp-GroupName";
-	public static final String SESSION_ROLE_LIST = "Exp-RoleList";
+	public static final String SESSION_AUTH_FLAG = "Exp-Authenticated";
+	public static final String SESSION_USER_NAME = "Exp-User-Name";
+	public static final String SESSION_GROUP_NAME = "Exp-Group-Name";
+	public static final String SESSION_ROLE_LIST = "Exp-Role-List";
 
 	public static final String jAccountSuffix = "@sjtu.edu.cn";
+
+	public static final String SESSION_AUTH_TOKEN = "Exp-Auth-Token";
 
 	static {
 		String prefix = "WEB-INF/";
