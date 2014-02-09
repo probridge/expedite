@@ -38,6 +38,10 @@
     <category name="org.exist.storage.BrokerPool">
         <priority value="warn"/>
     </category>
+    
+    <category name="com.probridge">
+        <priority value="debug"/>
+    </category>
 
     <root>
         <priority value="info"/>
