@@ -1,6 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="exp" uri="http://www.probridge.com.cn/expedite-tags"%>
 <t:template>
 	<jsp:attribute name="header">
     </jsp:attribute>
@@ -31,44 +32,60 @@
 				<div class="row well" style="margin-top: 50px">
 					<form class="bs-example form-horizontal" method="post" action="">
 						<fieldset>
+							<exp:hasToken>
+							<ul class="nav nav-tabs" id="loginTab">
+								<li class="active"><a href="#jaccount" data-toggle="tab">统一认证用户</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="jaccount" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
+									<div class="form-group">
+										<div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3">
+											<a class="btn btn-success btn-sm" href="/jaccount" style="width: 180px;"><i class="icon-refresh icon-spin icon-large spacer-right"></i>正在登录……</a> 
+										</div>
+									</div>							
+								</div>
+							</div>
+							</exp:hasToken>
+							<exp:noToken>
 							<ul class="nav nav-tabs" id="loginTab">
 								<li class="active"><a href="#jaccount" data-toggle="tab">统一认证用户</a></li>
 								<li><a href="#other" data-toggle="tab">其他用户</a></li>
 							</ul>
 							<div class="tab-content">
-							<div class="tab-pane active" id="jaccount" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
-								<div class="form-group">
-									<div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3">
-										<a class="btn btn-success btn-sm" href="/jaccount" style="width: 180px;"><i class="icon-lock"></i>&nbsp;&nbsp;jAccount统一认证登录</a> 
+								<div class="tab-pane active" id="jaccount" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
+									<div class="form-group">
+										<div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3">
+											<a class="btn btn-success btn-sm" href="/jaccount" style="width: 180px;"><i class="icon-lock icon-large spacer-right"></i>jAccount统一认证登录</a> 
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="tab-pane" id="other" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
-								<div class="form-group">
-									<label for="inputEmail" class="col-lg-3 col-md-3 col-sm-3 control-label">Email</label>
-									<div class="col-lg-8 col-md-8 col-sm-8">
-									<div class="input-group" style="width: 100%">
-										<input type="email" class="form-control" id="inputEmail" name="inputEmail"
-											placeholder="您的邮箱地址" value="${requestScope.email}" maxlength="30"/>
-							         </div>
+								<div class="tab-pane" id="other" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
+									<div class="form-group">
+										<label for="inputEmail" class="col-lg-3 col-md-3 col-sm-3 control-label">Email</label>
+										<div class="col-lg-8 col-md-8 col-sm-8">
+										<div class="input-group" style="width: 100%">
+											<input type="email" class="form-control" id="inputEmail" name="inputEmail"
+												placeholder="您的邮箱地址" value="${requestScope.email}" maxlength="30"/>
+								         </div>
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputPassword" class="col-lg-3 col-md-3 col-sm-3 control-label">密码</label>
-									<div class="col-lg-8 col-md-8 col-sm-8">
-									<div class="input-group" style="width: 100%">
-										<input type="password" class="form-control" id="inputPassword" name="inputPassword" maxlength="30"/>
-							         </div>
+									<div class="form-group">
+										<label for="inputPassword" class="col-lg-3 col-md-3 col-sm-3 control-label">密码</label>
+										<div class="col-lg-8 col-md-8 col-sm-8">
+										<div class="input-group" style="width: 100%">
+											<input type="password" class="form-control" id="inputPassword" name="inputPassword" maxlength="30"/>
+								         </div>
+										</div>
 									</div>
-								</div>
-								<div class="form-group"> 
-									<div class="col-lg-4 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3">
-										<button type="submit" class="btn btn-primary btn-sm" style="width: 80px;"><i class="icon-lock"></i>&nbsp;&nbsp;登录</button>
+									<div class="form-group"> 
+										<div class="col-lg-4 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3">
+											<button type="submit" class="btn btn-primary btn-sm" style="width: 80px;"><i class="icon-lock icon-large spacer-right"></i>登录</button>
+										</div>
 									</div>
+									<a href="register.do" class="pull-right">没有统一认证帐号？请点击这里注册。</a>
 								</div>
-								<a href="register.do" class="pull-right">没有统一认证帐号？请点击这里注册。</a>
-							</div>
-							</div>
+							</div>							
+							</exp:noToken>
 						</fieldset>
 						<input type="hidden" name="rememberMe" value="true"/>
 					</form>
