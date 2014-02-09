@@ -21,12 +21,6 @@ Expedite is written mainly using the following languages and technologies:
 - CoffeeScript
 - XForms, XSLT, and other XML technologies
 
-Credits
--------
-
-We would like to thank [YourKit, LLC](http://www.yourkit.com/) for kindly supporting open source projects like Orbeon
-Forms with the full-featured [YourKit Java Profiler](http://www.yourkit.com/java/profiler/index.jsp).
-
 ---
 
-Copyright 1999-2013 (C) Orbeon, Inc. All rights reserved.
+Copyright 2013,2014 (C) ProBridge. All rights reserved.
