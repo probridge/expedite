@@ -179,7 +179,7 @@
                 </init-param>
                 <init-param>
                     <param-name>expedite.unprotected</param-name>
-                    <param-value>/pages/index.jsp,/pages/login.jsp,/pages/logout.jsp,/jaccount,/xforms-renderer,/ops/,/config/theme/,/apps/fr/style/,/fr/style/</param-value>
+                    <param-value>/pages/index.jsp,/pages/login.jsp,/pages/logout.jsp,/jaccount,/logout,/xforms-renderer,/ops/,/config/theme/,/apps/fr/style/,/fr/style/</param-value>
                 </init-param>
             </filter>
             <filter-mapping>
@@ -427,6 +427,16 @@
                 <servlet-class>com.probridge.expedite.webapp.jAccountAuthServlet</servlet-class>
             </servlet>
 
+            <servlet>
+                <servlet-name>login-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.LoginServlet</servlet-class>
+            </servlet>
+
+            <servlet>
+                <servlet-name>logout-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.LogoutServlet</servlet-class>
+            </servlet>
+
             <servlet-mapping>
                 <servlet-name>orbeon-main-servlet</servlet-name>
                 <url-pattern>/</url-pattern>
@@ -447,6 +457,16 @@
                 <url-pattern>/exist/rest/*</url-pattern>
             </servlet-mapping>
 
+            <servlet-mapping>
+                <servlet-name>login-servlet</servlet-name>
+                <url-pattern>/login</url-pattern>
+            </servlet-mapping>
+            
+            <servlet-mapping>
+                <servlet-name>logout-servlet</servlet-name>
+                <url-pattern>/logout</url-pattern>
+            </servlet-mapping>
+            
             <servlet-mapping>
                 <servlet-name>jaccount-auth-servlet</servlet-name>
                 <url-pattern>/jaccount</url-pattern>
