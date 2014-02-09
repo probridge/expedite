@@ -40,7 +40,7 @@
                     </context-param>
                     <context-param>
                         <param-name>oxf.resources.priority.0.oxf.resources.filesystem.sandbox-directory</param-name>
-                        <param-value><xsl:value-of select="$build-root"/>/src/resources-local</param-value>
+                        <param-value><xsl:value-of select="$build-root"/>\src\resources-local</param-value>
                     </context-param>
                     <context-param>
                         <param-name>oxf.resources.priority.1</param-name>
@@ -48,7 +48,7 @@
                     </context-param>
                     <context-param>
                         <param-name>oxf.resources.priority.1.oxf.resources.filesystem.sandbox-directory</param-name>
-                        <param-value><xsl:value-of select="$build-root"/>/src/test/resources</param-value>
+                        <param-value><xsl:value-of select="$build-root"/>\src\test\resources</param-value>
                     </context-param>
                     <context-param>
                         <param-name>oxf.resources.priority.2</param-name>
@@ -56,7 +56,7 @@
                     </context-param>
                     <context-param>
                         <param-name>oxf.resources.priority.2.oxf.resources.filesystem.sandbox-directory</param-name>
-                        <param-value><xsl:value-of select="$build-root"/>/src/resources</param-value>
+                        <param-value><xsl:value-of select="$build-root"/>\src\resources</param-value>
                     </context-param>
                 </xsl:with-param>
             </xsl:call-template>
@@ -80,7 +80,7 @@
                     </context-param>
                     <context-param>
                         <param-name>oxf.resources.priority.4.oxf.resources.filesystem.sandbox-directory</param-name>
-                        <param-value><xsl:value-of select="$build-root"/>/src/resources-packaged</param-value>
+                        <param-value><xsl:value-of select="$build-root"/>\src\resources-packaged</param-value>
                     </context-param>
                 </xsl:with-param>
             </xsl:call-template>
@@ -161,7 +161,36 @@
                 </xsl:with-param>
             </xsl:call-template>
 
-            <xsl:comment>All JSP files under /xforms-jsp go through the XForms filter</xsl:comment>
+            <xsl:comment>All files under / go through the Expedite filter</xsl:comment>
+            <filter>
+                <filter-name>expedite-filter</filter-name>
+                <filter-class>com.probridge.expedite.webapp.AuthFilter</filter-class>
+                <init-param>
+                    <param-name>oxf.fr.authentication.header.username</param-name>
+                    <param-value>My-Username-Header</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>oxf.fr.authentication.header.group</param-name>
+                    <param-value>My-Group-Header</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>oxf.fr.authentication.header.roles</param-name>
+                    <param-value>My-Roles-Header</param-value>
+                </init-param>
+                <init-param>
+                    <param-name>expedite.unprotected</param-name>
+                    <param-value>/pages/index.jsp,/pages/login.jsp,/pages/logout.jsp,/jaccount,/xforms-renderer,/ops/,/config/theme/,/apps/fr/style/,/fr/style/</param-value>
+                </init-param>
+            </filter>
+            <filter-mapping>
+                <filter-name>expedite-filter</filter-name>
+                <url-pattern>/*</url-pattern>
+                <xsl:comment>Servlet 2.4 configuration allowing the filter to run upon forward in addition to request</xsl:comment>
+                <dispatcher>REQUEST</dispatcher>
+                <dispatcher>FORWARD</dispatcher>
+            </filter-mapping>
+
+            <xsl:comment>All JSP files under /pages go through the XForms filter</xsl:comment>
             <filter>
                 <filter-name>orbeon-xforms-filter</filter-name>
                 <filter-class>org.orbeon.oxf.servlet.OrbeonXFormsFilter</filter-class>
@@ -178,7 +207,7 @@
             </filter>
             <filter-mapping>
                 <filter-name>orbeon-xforms-filter</filter-name>
-                <url-pattern>/xforms-jsp/*</url-pattern>
+                <url-pattern>/pages/*</url-pattern>
                 <xsl:comment>Servlet 2.4 configuration allowing the filter to run upon forward in addition to request</xsl:comment>
                 <dispatcher>REQUEST</dispatcher>
                 <dispatcher>FORWARD</dispatcher>
@@ -393,6 +422,11 @@
                 </xsl:with-param>
             </xsl:call-template>
 
+            <servlet>
+                <servlet-name>jaccount-auth-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.jAccountAuthServlet</servlet-class>
+            </servlet>
+
             <servlet-mapping>
                 <servlet-name>orbeon-main-servlet</servlet-name>
                 <url-pattern>/</url-pattern>
@@ -412,6 +446,17 @@
                 <servlet-name>exist-rest-servlet</servlet-name>
                 <url-pattern>/exist/rest/*</url-pattern>
             </servlet-mapping>
+
+            <servlet-mapping>
+                <servlet-name>jaccount-auth-servlet</servlet-name>
+                <url-pattern>/jaccount</url-pattern>
+            </servlet-mapping>
+            
+            <servlet-mapping>
+                <servlet-name>jaccount-auth-servlet</servlet-name>
+                <url-pattern>/jaccount/*</url-pattern>
+            </servlet-mapping>
+
 
             <xsl:call-template name="comment">
                 <xsl:with-param name="caption" select="'Experimental MongoDB Form Runner persistence implementation'"/>
