@@ -132,13 +132,20 @@
     	<!-- include db2 jar -->
     	<include name="db2jcc4.jar"/>
     	
+    	<!-- include mybatis jar -->
+    	<include name="mybatis-3.2.2.jar"/>    	
+    	
     	<!-- include jaccount jar -->
     	<include name="jaman.jar"/>
     	
     	<!-- include jstl jar -->
     	<include name="javax.servlet.jsp.jstl-1.2.2.jar"/>
+
     	<!-- don't include api jar -->
     	<!-- <include name="jstl-1.2.jar"/> -->
+    	
+    	<!-- include shiro jar -->
+    	<include name="shiro-core-1.2.2.jar"/>   	
 
         <include name="exist-1_4_1_dev_orbeon_20110104.jar"/>
         <include name="exist-optional-1_4_1_dev_orbeon_20110104.jar"/>
@@ -419,6 +426,7 @@
             <fileset dir="${build.classes.dir}">
                 <include name="**/*.class"/>
                 <include name="**/*.xsd"/>
+                <include name="**/*.xml"/>
                 <!-- This goes into a separate JAR -->
                 <exclude name="org/orbeon/oxf/servlet/OrbeonXFormsFilter*.class"/>
                 <exclude name="org/orbeon/oxf/portlet/OrbeonPortletXFormsFilter*.class"/>

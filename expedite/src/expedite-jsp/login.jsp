@@ -16,7 +16,9 @@
 	<exp:hasToken>
 	<script type="text/javascript">
 		$('document').ready(function() {
-			$('#formLogin').submit();
+			setTimeout(function() {
+				$('#formLogin').submit();
+		    }, 1000);
 		});
 	</script>
 	</exp:hasToken>
@@ -27,11 +29,12 @@
 	            <img src="/ops/exp_res/imgs/login.png"/>
 			</div>
 			<div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12"> 
-<c:if test="${ not empty requestScope.loginFailure }">
+<c:if test="${ not empty sessionScope.loginError }">
 			<div class="alert alert-dismissable alert-warning">
 			<button type="button" class="close" data-dismiss="alert">×</button>
-			<p>登录失败，如有问题请<a href="#" class="alert-link">联系我们</a>。</p>
+			<p>${ sessionScope.loginError }，如有问题请<a href="#" class="alert-link">联系我们</a>。</p>
 			</div>
+<c:set var="loginError" value="" scope="session"/>
 </c:if>
 				<div class="row well" style="margin-top: 50px">
 					<form class="bs-example form-horizontal" method="post" action="/login" id="formLogin">

@@ -147,5 +147,11 @@
 	<classpathentry kind="lib" path="lib/hsqldb-1_8_0_7.jar"/>
 	<classpathentry kind="lib" path="lib/jaman.jar" sourcepath="C:/PennyGe/binary/java_jaccount_20131027/jaman.src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/mybatis-3.2.2.jar" sourcepath="C:/Users/PennyGe/.m2/repository/org/mybatis/mybatis/3.2.2/mybatis-3.2.2-sources.jar">
+		<attributes>
+			<attribute name="source_encoding" value="UTF-8"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/shiro-core-1.2.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
