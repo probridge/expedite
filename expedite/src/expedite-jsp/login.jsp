@@ -6,16 +6,20 @@
 	<jsp:attribute name="header">
     </jsp:attribute>
 	<jsp:attribute name="jscode">
+	<c:if test="${'1'==param.other}">
+		<script type="text/javascript">	
+		$(function () {
+			$('#loginTab a[href="#other"]').tab('show'); 
+		});
+		</script>
+	</c:if>
+	<exp:hasToken>
 	<script type="text/javascript">
-	<c:choose>
-	<c:when test="${'1'==param.other}">
-	$(function () {
-		$('#loginTab a[href="#other"]').tab('show'); 
-	});
-	</c:when>
-	<c:otherwise></c:otherwise>
-	</c:choose>
+		$('document').ready(function() {
+			$('#formLogin').submit();
+		});
 	</script>
+	</exp:hasToken>
     </jsp:attribute>
 	<jsp:body>
 		<div class="row">
@@ -24,13 +28,13 @@
 			</div>
 			<div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12"> 
 <c:if test="${ not empty requestScope.loginFailure }">
-<div class="alert alert-dismissable alert-warning">
-<button type="button" class="close" data-dismiss="alert">×</button>
-<p>登录失败，如有问题请<a href="#" class="alert-link">联系我们</a>。</p>
-</div>
+			<div class="alert alert-dismissable alert-warning">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<p>登录失败，如有问题请<a href="#" class="alert-link">联系我们</a>。</p>
+			</div>
 </c:if>
 				<div class="row well" style="margin-top: 50px">
-					<form class="bs-example form-horizontal" method="post" action="">
+					<form class="bs-example form-horizontal" method="post" action="/login" id="formLogin">
 						<fieldset>
 							<exp:hasToken>
 							<ul class="nav nav-tabs" id="loginTab">
@@ -40,11 +44,12 @@
 								<div class="tab-pane active" id="jaccount" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
 									<div class="form-group">
 										<div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3">
-											<a class="btn btn-success btn-sm" href="/jaccount" style="width: 180px;"><i class="icon-refresh icon-spin icon-large spacer-right"></i>正在登录……</a> 
+											<a class="btn btn-success btn-sm" href="#" style="width: 180px;"><i class="icon-refresh icon-spin icon-large spacer-right"></i>正在登录……</a> 
 										</div>
 									</div>							
 								</div>
 							</div>
+							<input type="hidden" name="loginToken" value="true"/>							
 							</exp:hasToken>
 							<exp:noToken>
 							<ul class="nav nav-tabs" id="loginTab">
@@ -85,6 +90,7 @@
 									<a href="register.do" class="pull-right">没有统一认证帐号？请点击这里注册。</a>
 								</div>
 							</div>							
+							<input type="hidden" name="loginToken" value="false"/>							
 							</exp:noToken>
 						</fieldset>
 						<input type="hidden" name="rememberMe" value="true"/>
