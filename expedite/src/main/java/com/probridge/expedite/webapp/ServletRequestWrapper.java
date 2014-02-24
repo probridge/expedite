@@ -10,10 +10,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ServletRequestWrapper extends
 		javax.servlet.http.HttpServletRequestWrapper {
-
+	private static final Logger logger = LoggerFactory
+			.getLogger(ServletRequestWrapper.class);
 	private Map headerMap;
 
 	public ServletRequestWrapper(HttpServletRequest request) {
@@ -22,6 +26,7 @@ public class ServletRequestWrapper extends
 	}
 
 	public void addHeader(String name, String value) {
+		logger.debug("Adding header " + name + " ==> " + value);
 		headerMap.put(name, new String(value));
 	}
 
