@@ -41,5 +41,8 @@
         <role name="orbeon-user" app="acme" form="*"/>
 
     -->
-    <role name="*" app="*" form="*"/>
+    <role name="system-admin" app="*" form="*"/>
+    <role name="survey-editors" app="survey" form="*"/>
+    <role name="acme-form-editors" app="acme" form="*"/>
+    <role name="user-db-editors" app="database" form="*"/>
 </roles>
