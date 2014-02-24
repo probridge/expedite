@@ -1,51 +1,57 @@
-<!--
-  Copyright (C) 2013 Orbeon, Inc.
+<!-- Copyright (C) 2013 Orbeon, Inc. This program is free software; you can 
+	redistribute it and/or modify it under the terms of the GNU Lesser General 
+	Public License as published by the Free Software Foundation; either version 
+	2.1 of the License, or (at your option) any later version. This program is 
+	distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the GNU Lesser General Public License for more details. The 
+	full text of the license is available at http://www.gnu.org/copyleft/lesser.html -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	xmlns="http://jakarta.apache.org/log4j/">
 
-  This program is free software; you can redistribute it and/or modify it under the terms of the
-  GNU Lesser General Public License as published by the Free Software Foundation; either version
-  2.1 of the License, or (at your option) any later version.
+	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.err" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %c{1} %x - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="debug" />
+		</filter>
+	</appender>
 
-  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the GNU Lesser General Public License for more details.
+	<appender name="SingleFileAppender" class="org.apache.log4j.FileAppender">
+		<param name="File" value="C:/orbeon.log" />
+		<param name="Append" value="false" />
+		<param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %-5p %c{1} %x - %m%n" />
+		</layout>
+	</appender>
 
-  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
-  -->
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" xmlns="http://jakarta.apache.org/log4j/">
+	<category name="org.orbeon.oxf.xforms.processor.XFormsServer">
+		<priority value="debug" />
+	</category>
 
-    <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
-        <param name="Target" value="System.err"/>
-        <param name="Encoding" value="UTF-8"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{ISO8601} %-5p %c{1} %x - %m%n"/>
-        </layout>
-        <filter class="org.apache.log4j.varia.LevelRangeFilter">
-            <param name="LevelMin" value="debug"/>
-        </filter>
-    </appender>
+	<!-- Prevent extra display of eXist paging activity -->
+	<category name="org.exist.storage.btree.Paged">
+		<priority value="warn" />
+	</category>
+	<category name="org.exist.storage.DBBroker">
+		<priority value="warn" />
+	</category>
+	<category name="org.exist.storage.BrokerPool">
+		<priority value="warn" />
+	</category>
 
-    <category name="org.orbeon.oxf.xforms.processor.XFormsServer">
-        <priority value="debug"/>
-    </category>
+	<category name="com.probridge">
+		<priority value="debug" />
+	</category>
 
-    <!-- Prevent extra display of eXist paging activity -->
-    <category name="org.exist.storage.btree.Paged">
-        <priority value="warn"/>
-    </category>
-    <category name="org.exist.storage.DBBroker">
-        <priority value="warn"/>
-    </category>
-    <category name="org.exist.storage.BrokerPool">
-        <priority value="warn"/>
-    </category>
-    
-    <category name="com.probridge">
-        <priority value="debug"/>
-    </category>
-
-    <root>
-        <priority value="info"/>
-        <appender-ref ref="ConsoleAppender"/>
-    </root>
+	<root>
+		<priority value="info" />
+		<appender-ref ref="ConsoleAppender" />
+		<appender-ref ref="SingleFileAppender" />
+	</root>
 
 </log4j:configuration>
