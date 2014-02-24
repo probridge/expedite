@@ -167,15 +167,15 @@
                 <filter-class>com.probridge.expedite.webapp.AuthFilter</filter-class>
                 <init-param>
                     <param-name>oxf.fr.authentication.header.username</param-name>
-                    <param-value>My-Username-Header</param-value>
+                    <param-value>exp-username-header</param-value>
                 </init-param>
                 <init-param>
                     <param-name>oxf.fr.authentication.header.group</param-name>
-                    <param-value>My-Group-Header</param-value>
+                    <param-value>exp-group-header</param-value>
                 </init-param>
                 <init-param>
                     <param-name>oxf.fr.authentication.header.roles</param-name>
-                    <param-value>My-Roles-Header</param-value>
+                    <param-value>exp-roles-header</param-value>
                 </init-param>
                 <init-param>
                     <param-name>expedite.unprotected</param-name>
