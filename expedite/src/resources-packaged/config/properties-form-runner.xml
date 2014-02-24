@@ -65,9 +65,9 @@
     <property as="xs:string"  name="oxf.fr.js.uri.*.*"                                          value="/apps/fr/script/form-runner.js"/>
     <property as="xs:string"  name="oxf.fr.js.custom.uri.*.*"                                   value=""/>
     <property as="xs:string"  name="oxf.fr.authentication.method"                               value="header"/>                      <!-- "container" or "header" or empty -->
-    <property as="xs:string"  name="oxf.fr.authentication.header.username"                      value="My-Username-Header"/>    <!-- with Liferay: Orbeon-Liferay-User-Email or Orbeon-Liferay-User-Full-Name are also possible -->
-    <property as="xs:string"  name="oxf.fr.authentication.header.group"                         value="My-Group-Header"/>
-    <property as="xs:string"  name="oxf.fr.authentication.header.roles"                         value="My-Roles-Header"/>
+    <property as="xs:string"  name="oxf.fr.authentication.header.username"                      value="exp-username-header"/>    <!-- with Liferay: Orbeon-Liferay-User-Email or Orbeon-Liferay-User-Full-Name are also possible -->
+    <property as="xs:string"  name="oxf.fr.authentication.header.group"                         value="exp-group-header"/>
+    <property as="xs:string"  name="oxf.fr.authentication.header.roles"                         value="exp-roles-header"/>
     <property as="xs:string"  name="oxf.fr.authentication.header.roles.property-name"           value=""/>
     <property as="xs:string"  name="oxf.fr.authentication.container.roles"                      value=""/>                      <!-- E.g. "orbeon admin user" -->
 
