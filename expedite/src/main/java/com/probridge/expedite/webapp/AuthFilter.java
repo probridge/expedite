@@ -37,39 +37,40 @@ public class AuthFilter implements Filter {
 		String uri = httpRequest.getServletPath().toLowerCase();
 		logger.debug("filtering " + uri);
 		//
+		HttpSession sess = httpRequest.getSession();
 		if (!isUnprotected(uri)) {
 			// protect
 			logger.debug("protected resource: " + uri);
-
-			HttpSession sess = httpRequest.getSession();
-			if ("true".equals(sess.getAttribute(Constant.SESSION_AUTH_FLAG))) {
+			if (!"true".equals(sess.getAttribute(Constant.SESSION_AUTH_FLAG))) {
+				httpResponse.sendRedirect("login.jsp");
+				return;
+			}
+		}
+		// Process header
+		if (httpRequest.getHeader(userNameHeader) == null) {
+			if (sess.getAttribute(Constant.SESSION_USER_NAME) != null)
 				httpRequest.addHeader(userNameHeader,
 						Utility.getStringVal(sess.getAttribute(Constant.SESSION_USER_NAME)));
-				if (sess.getAttribute(Constant.SESSION_GROUP_NAME) != null)
-					httpRequest.addHeader(groupNameHeader,
-							Utility.getStringVal(sess.getAttribute(Constant.SESSION_GROUP_NAME)));
-				else
-					httpRequest.addHeader(groupNameHeader, "Default");
-				//
-				if (sess.getAttribute(Constant.SESSION_ROLE_LIST) != null)
-					httpRequest.addHeader(rolesHeader,
-							Utility.getStringVal(sess.getAttribute(Constant.SESSION_ROLE_LIST)));
-				else
-					httpRequest.addHeader(rolesHeader, "User");
-				//
-				filterChain.doFilter(httpRequest, httpResponse);
-			} else {
-				httpRequest.addHeader(userNameHeader, Constant.ANONYMOUS);
-				httpRequest.addHeader(groupNameHeader, Constant.ANONYMOUS);
-				httpRequest.addHeader(rolesHeader, Constant.ANONYMOUS);
-				// Stop here
-				httpResponse.sendRedirect("login.jsp");
-			}
-		} else {
-			// pass through
-			logger.debug("unprotected resource: " + uri);
-			filterChain.doFilter(httpRequest, httpResponse);
+			else
+				httpRequest.addHeader(userNameHeader, "Anonymous");
 		}
+
+		if (httpRequest.getHeader(groupNameHeader) == null) {
+			if (sess.getAttribute(Constant.SESSION_GROUP_NAME) != null)
+				httpRequest.addHeader(groupNameHeader,
+						Utility.getStringVal(sess.getAttribute(Constant.SESSION_GROUP_NAME)));
+			else
+				httpRequest.addHeader(groupNameHeader, "Anonymous");
+		}
+		//
+		if (httpRequest.getHeader(rolesHeader) == null) {
+			if (sess.getAttribute(Constant.SESSION_ROLE_LIST) != null)
+				httpRequest.addHeader(rolesHeader, Utility.getStringVal(sess.getAttribute(Constant.SESSION_ROLE_LIST)));
+			else
+				httpRequest.addHeader(rolesHeader, "Anonymous");
+		}//
+		filterChain.doFilter(httpRequest, httpResponse);
+
 	}
 
 	@Override
