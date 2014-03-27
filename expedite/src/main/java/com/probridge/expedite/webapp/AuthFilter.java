@@ -53,24 +53,27 @@ public class AuthFilter implements Filter {
 						Utility.getStringVal(sess.getAttribute(Constant.SESSION_USER_NAME)));
 			else
 				httpRequest.addHeader(userNameHeader, "Anonymous");
-		}
-
+		} else
+			logger.debug("Got existing header " + userNameHeader + " = " + httpRequest.getHeader(userNameHeader));
+		//
 		if (httpRequest.getHeader(groupNameHeader) == null) {
 			if (sess.getAttribute(Constant.SESSION_GROUP_NAME) != null)
 				httpRequest.addHeader(groupNameHeader,
 						Utility.getStringVal(sess.getAttribute(Constant.SESSION_GROUP_NAME)));
 			else
 				httpRequest.addHeader(groupNameHeader, "Anonymous");
-		}
+		} else
+			logger.debug("Got existing header " + groupNameHeader + " = " + httpRequest.getHeader(groupNameHeader));
 		//
 		if (httpRequest.getHeader(rolesHeader) == null) {
 			if (sess.getAttribute(Constant.SESSION_ROLE_LIST) != null)
 				httpRequest.addHeader(rolesHeader, Utility.getStringVal(sess.getAttribute(Constant.SESSION_ROLE_LIST)));
 			else
 				httpRequest.addHeader(rolesHeader, "Anonymous");
-		}//
+		} else
+			logger.debug("Got existing header " + rolesHeader + " = " + httpRequest.getHeader(rolesHeader));
+		//
 		filterChain.doFilter(httpRequest, httpResponse);
-
 	}
 
 	@Override
