@@ -13,12 +13,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import scala.collection.mutable.StringBuilder;
-
-import com.probridge.expedite.dao.expdb.RolesMapper;
+import com.probridge.expedite.dao.expdb.UserRolesMapper;
 import com.probridge.expedite.dao.expdb.UsersMapper;
-import com.probridge.expedite.model.expdb.RolesExample;
-import com.probridge.expedite.model.expdb.RolesKey;
+import com.probridge.expedite.model.expdb.UserRolesExample;
+import com.probridge.expedite.model.expdb.UserRolesKey;
 import com.probridge.expedite.model.expdb.Users;
 
 /**
@@ -26,6 +24,9 @@ import com.probridge.expedite.model.expdb.Users;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 7982070678512891402L;
+	private static final String TRYAGAIN = "pages/login.jsp?other=1";
+	private static final String SUCCEED = "pages/home.jsp";
+	private static final String RESETPWD = "pages/reset_pwd.jsp";
 	private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 
 	public LoginServlet() {
@@ -53,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			sess.removeAttribute(Constant.SESSION_AUTH_TOKEN);
 			sess.removeAttribute(Constant.SESSION_AUTH_FLAG);
 			sess.setAttribute("loginError", "登录发生错误，请联系我们。");
-			response.sendRedirect("pages/login.jsp");
+			response.sendRedirect(TRYAGAIN);
 			errorOccurred = true;
 		}
 		// save email if login failed.
@@ -69,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 				sess.removeAttribute(Constant.SESSION_AUTH_TOKEN);
 				sess.removeAttribute(Constant.SESSION_AUTH_FLAG);
 				sess.setAttribute("loginError", "登录失败");
-				response.sendRedirect("pages/login.jsp");
+				response.sendRedirect(TRYAGAIN);
 				errorOccurred = true;
 			}
 		}
@@ -79,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 			sess.removeAttribute(Constant.SESSION_AUTH_TOKEN);
 			sess.removeAttribute(Constant.SESSION_AUTH_FLAG);
 			sess.setAttribute("loginError", "您的帐户暂时不可用");
-			response.sendRedirect("pages/login.jsp");
+			response.sendRedirect(TRYAGAIN);
 			errorOccurred = true;
 		}
 		//
@@ -89,30 +90,28 @@ public class LoginServlet extends HttpServlet {
 			sess.removeAttribute(Constant.SESSION_AUTH_TOKEN);
 			sess.removeAttribute(Constant.SESSION_AUTH_FLAG);
 			sess.setAttribute("loginError", "您的帐户已经过期");
-			response.sendRedirect("pages/login.jsp");
+			response.sendRedirect(TRYAGAIN);
 			errorOccurred = true;
 		}
 		//
+		boolean pwdExpired = false;
 		if (!errorOccurred
-				&& (loginUser.getUserPwdExpiration() != null && loginUser.getUserPwdExpiration().before(new Date()))) {
+				&& (loginUser.getUserPwdExpiration() != null && loginUser.getUserPwdExpiration().before(new Date()))
+				&& "0".equals(loginUser.getUserType())) {
 			// user pwd expired - force changing password
 			logger.debug("User password expired: " + userName);
-			sess.removeAttribute(Constant.SESSION_AUTH_TOKEN);
-			sess.removeAttribute(Constant.SESSION_AUTH_FLAG);
-			sess.setAttribute("loginError", "您的密码已经过期");
-			response.sendRedirect("pages/reset_pwd.jsp");
-			errorOccurred = true;
+			pwdExpired = true;
 		}
 		//
 		if (!errorOccurred) {
 			logger.debug("Login successful: " + userName);
-			RolesMapper rMapper = sqlSess.getMapper(RolesMapper.class);
-			RolesExample exp = new RolesExample();
+			UserRolesMapper rMapper = sqlSess.getMapper(UserRolesMapper.class);
+			UserRolesExample exp = new UserRolesExample();
 			exp.createCriteria().andUserNameEqualTo(loginUser.getUserName());
-			List<RolesKey> roleList = rMapper.selectByExample(exp);
+			List<UserRolesKey> roleList = rMapper.selectByExample(exp);
 			StringBuilder sb = new StringBuilder();
 			if (roleList != null)
-				for (RolesKey role : roleList)
+				for (UserRolesKey role : roleList)
 					sb.append(role.getUserRoles()).append(",");
 			if (sb.length() > 0)
 				sb.deleteCharAt(sb.length() - 1);
@@ -121,7 +120,11 @@ public class LoginServlet extends HttpServlet {
 			sess.setAttribute(Constant.SESSION_USER_NAME, loginUser.getUserName());
 			sess.setAttribute(Constant.SESSION_GROUP_NAME, loginUser.getUserGroup());
 			sess.setAttribute(Constant.SESSION_ROLE_LIST, sb.toString());
-			response.sendRedirect("pages/home.jsp");
+			//
+			if (pwdExpired)
+				response.sendRedirect(RESETPWD);
+			else
+				response.sendRedirect(SUCCEED);
 		}
 		sqlSess.close();
 		//

@@ -7,7 +7,7 @@
 			href="/ops/exp_res/css/theme-style.css"/>
 <style type="text/css">
 .jumbotron {
-	background-image: url("../ops/exp_res/imgs/jumbotron_bg.jpg"); 
+	background-image: url("../ops/exp_res/imgs/cloud-10.fw.png"); 
 	background-position: right;
 	color: #333333; 
 }
@@ -23,38 +23,38 @@
 		<!-- Jumbotron -->
 		<div class="jumbotron" style="height: 320px">
 			<h1>你好！</h1>
-			<p class="lead">欢迎使用Expedite，在这里你可以随时随地连接到自己专有的科研桌面进行学习和工作。</p>
+			<p class="lead">欢迎使用Expedite表单平台，设计、发布和管理交互式表单问卷。</p>
 			<p><a class="btn btn-success" href="/jaccount">开始使用 &raquo;</a></p>
-			<h5><i class="icon-lock"></i>&nbsp;<em>vBox使用上海交大jAccount统一认证体系</em></h5>
+			<h5><i class="icon-lock"></i>&nbsp;<em>Expedite使用上海交大jAccount统一认证体系</em></h5>
 		</div>
 		<div class="block features">
       <h2 class="title-divider">
-				<span>平台特点</span><small>领先的虚拟实验室云计算桌面</small>
+				<span>平台特点</span><small>领先的企业问卷表单引擎</small>
 			</h2>
       <div class="row">
         <div class="feature col-sm-6 col-md-3"> <a href="#"
 						style="cursor: default;"><img src="/ops/exp_res/imgs/feature-4.png"
-						alt="专属的云计算平台" class="img-responsive"/></a>
-          <h3 class="title">专属的云计算平台</h3>
-          <p>只需几秒种就可以为您建立私人的计算空间，开箱即用预先安装好的软件，不再为繁琐的安装和配置烦恼。</p>
+						alt="基于Web的交互式表单设计" class="img-responsive"/></a>
+          <h3 class="title">交互式表单设计</h3>
+          <p>使用浏览器就可以以可视化方式构建前所未有的强大的交互式、支持多语种的动态表单。</p>
         </div>
         <div class="feature col-sm-6 col-md-3"> <a href="#"
 						style="cursor: default;"><img src="/ops/exp_res/imgs/feature-2.png"
-						alt="随时随地访问" class="img-responsive"/></a>
-          <h3 class="title">随时访问</h3>
-          <p>计算平台24/7可供使用，平台智能分配资源，每次连接都可以直接恢复到上次退出的状态继续工作。</p> 
+						alt="符合业界标准" class="img-responsive"/></a>
+          <h3 class="title">符合业界标准</h3>
+          <p>符合业界W3C XForm标准的表单引擎，基于开放的XML和先进PureXML数据库格式存储结构化信息数据。</p> 
         </div>
         <div class="feature col-sm-6 col-md-3"> <a href="#"
 						style="cursor: default;"><img src="/ops/exp_res/imgs/feature-3.png"
 						alt="数据安全" class="img-responsive"/></a>
-          <h3 class="title">数据安全</h3>
-          <p>提供海量的数据存储空间保存个人的数据，内置防病毒保护并且使用多重机制备份和冗余保证您的数据安全。</p>
+          <h3 class="title">权限控制和数据安全</h3>
+          <p>基于角色的权限控制，确保表单作为重要资产不会泄漏，样本据不会被意外流失。</p>
         </div>
         <div class="feature col-sm-6 col-md-3"> <a href="#"
 						style="cursor: default;"><img src="/ops/exp_res/imgs/feature-1.png"
 						alt="易于使用" class="img-responsive"/></a>
           <h3 class="title">易于使用</h3>
-          <p>使用简洁现代的界面设计风格，支持移动终端如iPad等设备的访问，更加方便实现移动计算。</p>
+          <p>使用简洁现代的界面设计风格，表单支持移动终端如手机、平板等设备的访问。</p>
         </div>
       </div>
     </div>

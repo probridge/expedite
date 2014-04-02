@@ -48,3 +48,9 @@ body.modal-open,.modal-open .navbar-fixed-top,.modal-open .navbar-fixed-bottom
 .spacer-right {
 	margin-right: 10px;
 }
+
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

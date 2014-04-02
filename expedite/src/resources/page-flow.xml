@@ -19,18 +19,21 @@
 
     <!-- ==== Files ================================================================================================ -->
 
-    <files path="(?!/([^/]+)/service/).+\.(gif|css|pdf|json|js|coffee|map|png|jpg|xsd|htc|ico|swf|html|htm|txt|woff|ttf|svg)"/>
+    <files path="(?!/([^/]+)/service/).+\.(gif|css|pdf|json|js|coffee|map|png|jpg|xsd|htc|ico|swf|html|htm|txt|eot|woff|ttf|svg)"/>
 
     <!-- ==== Pages ================================================================================================ -->
 
-    <!-- Redirect to the Home application -->
+    <!-- Redirect to the Home application  
     <page path="/(welcome/?)?">
-        <action><result page="home"/></action>
+        <action><result page="redirect"/></action>
     </page>
+    -->
+    
+    <page id="redirect" path="/(welcome/?)?" view="/config/redirect.xhtml"/>
 
     <!-- Welcome application -->
     <page id="home" path="/home/" model="apps/home/page-flow.xml"/>
-
+    
     <!-- Dispatch request to a specific application -->
     <page path="/([^/]+)/.*" model="apps/${1}/page-flow.xml" public-methods="#all"/>
 

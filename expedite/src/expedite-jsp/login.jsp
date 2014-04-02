@@ -36,6 +36,13 @@
 			</div>
 <c:set var="loginError" value="" scope="session"/>
 </c:if>
+<c:if test="${ not empty sessionScope.loginInfo }">
+			<div class="alert alert-dismissable alert-info">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<p>${ sessionScope.loginInfo }</p>
+			</div>
+<c:set var="loginInfo" value="" scope="session"/>
+</c:if>
 				<div class="row well" style="margin-top: 50px">
 					<form class="bs-example form-horizontal" method="post" action="/login" id="formLogin">
 						<fieldset>
@@ -90,7 +97,7 @@
 											<button type="submit" class="btn btn-primary btn-sm" style="width: 80px;"><i class="icon-lock icon-large spacer-right"></i>登录</button>
 										</div>
 									</div>
-									<a href="register.do" class="pull-right">没有统一认证帐号？请点击这里注册。</a>
+									<a href="register.jsp" class="pull-right">没有统一认证帐号？请点击这里注册。</a>
 								</div>
 							</div>							
 							<input type="hidden" name="loginToken" value="false"/>							

@@ -65,6 +65,7 @@ public class jAccountAuthServlet extends HttpServlet {
 				loginUser.setUserPassword(token);
 				loginUser.setUserEnabled("1");
 				loginUser.setUserType("1");
+				loginUser.setUserGroup(Constant.GROUP_USER);
 				loginUser.setUserDescription(userDesc);
 				umapper.insert(loginUser);
 				sqlSess.commit();

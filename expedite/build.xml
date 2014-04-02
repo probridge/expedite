@@ -129,6 +129,9 @@
         <include name="metadata-extractor-dependency-xmpcore-5.1.2.jar"/>
         <include name="castor-0_9_4_3-xml.jar"/>
     	
+    	<!-- include Excel jar -->
+    	<include name="jxl.jar"/>
+    	
     	<!-- include db2 jar -->
     	<include name="db2jcc4.jar"/>
     	

@@ -1,12 +1,18 @@
 package com.probridge.expedite.webapp;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.probridge.expedite.dao.expdb.RoleInfoMapper;
+import com.probridge.expedite.model.expdb.RoleInfo;
+import com.probridge.expedite.model.expdb.RoleInfoExample;
 
 public class Constant {
 	private static final Logger logger = LoggerFactory.getLogger(Constant.class);
@@ -37,14 +43,47 @@ public class Constant {
 
 	public static final String SESSION_AUTH_TOKEN = "Exp-Auth-Token";
 
+	public static final String USERINFO_APP = "survey";
+	public static final String USERINFO_FORM = "userinfo";
+	public static final String USERINFO_EMAIL_CONTROL = "email";
+	public static final String USERINFO_EMAIL_PATH = "section-basic-info/" + USERINFO_EMAIL_CONTROL;
+
+	public static final String GROUP_USER = "GroupUser";
+	public static final String GROUP_EDITOR = "GroupEditor";
+	public static final String GROUP_ADMIN = "GroupAdmin";
+
+	public static final String ROLE_EDITOR_SUFFIX = "-editor";
+	public static final String ROLE_PARTICIPANT_SUFFIX = "-participant";
+
+	public static String permissionFilePath = null;
+
 	static {
 		String prefix = "WEB-INF/";
 		String path = Constant.class.getResource("/").getPath();
 		configPath = path.substring(0, path.indexOf(prefix) + prefix.length());
+		permissionFilePath = configPath + "resources/config/form-builder-permissions.xml";
 		//
 		try {
-			sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources
-					.getResourceAsStream("../mybatis.xml"));
+			logger.info("Expedite Initializing...");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("../mybatis.xml"));
+			//
+			SqlSession sqlSess = null;
+			try {
+				sqlSess = Constant.sqlSessionFactory.openSession();
+				logger.info("Loading role information...");
+				RoleInfoMapper rmapper = sqlSess.getMapper(RoleInfoMapper.class);
+				RoleInfoExample exp = new RoleInfoExample();
+				exp.createCriteria().andFormNameIsNull();
+				List<RoleInfo> roles = rmapper.selectByExample(exp);
+				logger.info("Writing role configuraion file: " + permissionFilePath);
+				Utility.updatePermissionFile(roles);
+			} catch (Exception e) {
+				logger.error("Error while initializing..", e);
+				e.printStackTrace();
+			} finally {
+				if (sqlSess != null)
+					sqlSess.close();
+			}
 		} catch (IOException e) {
 			logger.error("Error getting DB connection information.", e);
 			throw new RuntimeException(e);

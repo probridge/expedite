@@ -12,7 +12,8 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="com/probridge/expedite/sqlmap/xml/expdb/RolesMapper.xml" />
+		<mapper resource="com/probridge/expedite/sqlmap/xml/expdb/UserRolesMapper.xml" />
 		<mapper resource="com/probridge/expedite/sqlmap/xml/expdb/UsersMapper.xml" />
+		<mapper resource="com/probridge/expedite/sqlmap/xml/expdb/RoleInfoMapper.xml" />
 	</mappers>
 </configuration>

@@ -49,20 +49,20 @@
         <body-content>scriptless</body-content>
     </tag>
     <tag>
-        <description>Generate image URI</description>
-        <name>genImage</name>
-        <tag-class>com.probridge.expedite.webapp.tags.ImageUrlTag</tag-class>
-        <body-content>empty</body-content>
+        <description>Displays body content for current user roles list</description>
+        <name>roleIterator</name>
+        <tag-class>com.probridge.expedite.webapp.tags.RoleIteratorTag</tag-class>
+        <body-content>scriptless</body-content>
         <attribute>
-            <name>relPath</name>
+            <name>mode</name>
             <required>true</required>
-            <rtexprvalue>false</rtexprvalue>
         </attribute>
-        <attribute>
-            <name>attr</name>
-            <required>false</required>
-            <rtexprvalue>false</rtexprvalue>
-        </attribute>
+    </tag>
+    <tag>
+        <description>Displays body content for forms of which current user is editor or admin</description>
+        <name>formIterator</name>
+        <tag-class>com.probridge.expedite.webapp.tags.FormIteratorTag</tag-class>
+        <body-content>scriptless</body-content>
     </tag>
     <tag>
         <description>Output current user principal or Anonymous if not authenticated</description>

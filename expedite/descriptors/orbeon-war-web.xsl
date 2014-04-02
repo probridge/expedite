@@ -179,7 +179,7 @@
                 </init-param>
                 <init-param>
                     <param-name>expedite.unprotected</param-name>
-                    <param-value>/pages/index.jsp, /pages/login.jsp, /pages/logout.jsp, /jaccount, /logout, /login, /xforms-renderer, /ops/, /config/theme/, /apps/fr/style/, /fr/style/</param-value>
+                    <param-value>/, /pages/index.jsp, /pages/login.jsp, /pages/logout.jsp, /pages/register.jsp, /pages/about.jsp, /jaccount, /logout, /login, /register, /xforms-renderer, /ops/, /config/theme/, /apps/fr/style/, /fr/style/</param-value>
                 </init-param>
             </filter>
             <filter-mapping>
@@ -423,6 +423,31 @@
             </xsl:call-template>
 
             <servlet>
+                <servlet-name>user-management-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.UserManagementServlet</servlet-class>
+            </servlet>
+
+            <servlet>
+                <servlet-name>role-management-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.RolesManagementServlet</servlet-class>
+            </servlet>
+            
+            <servlet>
+                <servlet-name>assign-management-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.UserRoleManagementServlet</servlet-class>
+            </servlet>
+            
+            <servlet>
+                <servlet-name>export-excel-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.ExportServlet</servlet-class>
+            </servlet>
+            
+            <servlet>
+                <servlet-name>xquery-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.XQueryServlet</servlet-class>
+            </servlet>
+            
+            <servlet>
                 <servlet-name>jaccount-auth-servlet</servlet-name>
                 <servlet-class>com.probridge.expedite.webapp.jAccountAuthServlet</servlet-class>
             </servlet>
@@ -435,6 +460,16 @@
             <servlet>
                 <servlet-name>logout-servlet</servlet-name>
                 <servlet-class>com.probridge.expedite.webapp.LogoutServlet</servlet-class>
+            </servlet>
+
+            <servlet>
+                <servlet-name>password-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.PasswordServlet</servlet-class>
+            </servlet>
+
+            <servlet>
+                <servlet-name>register-servlet</servlet-name>
+                <servlet-class>com.probridge.expedite.webapp.RegistrationServlet</servlet-class>
             </servlet>
 
             <servlet-mapping>
@@ -463,6 +498,11 @@
             </servlet-mapping>
             
             <servlet-mapping>
+                <servlet-name>password-servlet</servlet-name>
+                <url-pattern>/password</url-pattern>
+            </servlet-mapping>
+            
+            <servlet-mapping>
                 <servlet-name>logout-servlet</servlet-name>
                 <url-pattern>/logout</url-pattern>
             </servlet-mapping>
@@ -477,6 +517,35 @@
                 <url-pattern>/jaccount/*</url-pattern>
             </servlet-mapping>
 
+            <servlet-mapping>
+                <servlet-name>user-management-servlet</servlet-name>
+                <url-pattern>/users</url-pattern>
+            </servlet-mapping>
+
+            <servlet-mapping>
+                <servlet-name>role-management-servlet</servlet-name>
+                <url-pattern>/roles</url-pattern>
+            </servlet-mapping>
+
+            <servlet-mapping>
+                <servlet-name>assign-management-servlet</servlet-name>
+                <url-pattern>/assign</url-pattern>
+            </servlet-mapping>
+
+            <servlet-mapping>
+                <servlet-name>export-excel-servlet</servlet-name>
+                <url-pattern>/export</url-pattern>
+            </servlet-mapping>
+
+            <servlet-mapping>
+                <servlet-name>xquery-servlet</servlet-name>
+                <url-pattern>/xquery</url-pattern>
+            </servlet-mapping>
+
+            <servlet-mapping>
+                <servlet-name>register-servlet</servlet-name>
+                <url-pattern>/register</url-pattern>
+            </servlet-mapping>
 
             <xsl:call-template name="comment">
                 <xsl:with-param name="caption" select="'Experimental MongoDB Form Runner persistence implementation'"/>

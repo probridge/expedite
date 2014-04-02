@@ -44,4 +44,8 @@
     <role name="survey-editors" app="survey" form="*"/>
     <role name="acme-form-editors" app="acme" form="*"/>
     <role name="user-db-editors" app="database" form="*"/>
+    <role name="dddd-editor" app="dddd" form="*"/>
+<role name="eeee-editor" app="eeee" form="*"/>
+<role name="ppppp-editor" app="ppppp" form="*"/>
+<role name="zzz-editor" app="zzz" form="*"/>
 </roles>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forms>
+	<form>
+		<application-name>survey</application-name>
+		<form-name>invitation</form-name>
+		<title xml:lang="cn">调查邀请</title>
+		<description xml:lang="cn" />
+		<last-modified-time>2014-03-23T06:34:28.484Z</last-modified-time>
+	</form>
+	<form>
+		<application-name>database</application-name>
+		<form-name>form1</form-name>
+		<title xml:lang="cn">database数据库中的表单form1</title>
+		<description xml:lang="cn" />
+		<permissions>
+			<permission operations="read update">
+				<owner />
+			</permission>
+			<permission operations="create" />
+		</permissions>
+		<last-modified-time>2014-03-24T10:00:51.456Z</last-modified-time>
+	</form>
+	<form>
+		<application-name>survey</application-name>
+		<form-name>userinfo</form-name>
+		<title xml:lang="cn">用户信息表单</title>
+		<description xml:lang="cn" />
+		<last-modified-time>2014-03-26T00:04:32.838Z</last-modified-time>
+	</form>
+	<form>
+		<application-name>database</application-name>
+		<form-name>test</form-name>
+		<title xml:lang="cn">未命名的表单</title>
+		<description xml:lang="cn" />
+		<last-modified-time>2014-03-26T16:09:05.118Z</last-modified-time>
+	</form>
+	<form>
+		<application-name>eeee</application-name>
+		<form-name>ppppp</form-name>
+		<title xml:lang="cn">未命名的表单</title>
+		<description xml:lang="cn" />
+		<last-modified-time>2014-03-28T15:02:17.569Z</last-modified-time>
+	</form>
+</forms>

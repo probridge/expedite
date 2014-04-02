@@ -24,7 +24,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="icon" href="/ops/exp_res/favicon.ico" />
+<link rel="icon" href="/ops/exp_res/imgs/favicon.ico" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- Bootstrap -->
 <link href="/ops/exp_res/css/bootstrap.min.css" rel="stylesheet"
@@ -56,22 +56,22 @@
 					</button>
 					<a class="navbar-brand" href="./"
 						style="padding-top: 5px; padding-bottom: 0px"><img
-						src="/ops/exp_res/imgs/vbox_logo.png"
+						src="/ops/exp_res/imgs/Expedite_logo.png"
 						title="${ requestScope.version }" /></a>
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="home.do">工作空间</a></li>
+						<li><a href="/pages/home.jsp">表单中心</a></li>
 						<li><a href="#">使用方法</a></li>
 						<li><a href="#">联系我们</a></li>
-						<li><a href="#">关于</a></li>
+						<li><a href="/pages/about.jsp">关于</a></li>
 					</ul>
 					<exp:isAuthenticated>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"><exp:getPrincipal /><b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="/logout"><i class="icon-unlock"></i>&nbsp;安全退出</a></li>
+									<li><a href="/logout"><i class="icon-unlock spacer-right"></i>&nbsp;安全退出</a></li>
 								</ul></li>
 						</ul>
 					</exp:isAuthenticated>
@@ -80,9 +80,9 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> 登录<b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="/jaccount"><i class="icon-lock"></i>&nbsp;jAccount统一认证</a></li>
+									<li><a href="/jaccount"><i class="icon-lock spacer-right"></i>jAccount统一认证</a></li>
 									<li><a href="/pages/login.jsp?other=1"><i
-											class="icon-lock"></i>&nbsp;其他用户</a></li>
+											class="icon-lock spacer-right"></i>其他用户</a></li>
 								</ul></li>
 						</ul>
 					</exp:isNotAuthenticated>

@@ -46,6 +46,15 @@ public class AuthFilter implements Filter {
 				return;
 			}
 		}
+		//
+		String strGroupName = Utility.getStringVal(sess.getAttribute(Constant.SESSION_GROUP_NAME));
+		servletRequest.setAttribute("group", "user");
+		//
+		if (Constant.GROUP_EDITOR.equals(strGroupName))
+			servletRequest.setAttribute("group", "editor");
+		else if (Constant.GROUP_ADMIN.equals(strGroupName))
+			servletRequest.setAttribute("group", "admin");
+
 		// Process header
 		if (httpRequest.getHeader(userNameHeader) == null) {
 			if (sess.getAttribute(Constant.SESSION_USER_NAME) != null)
@@ -89,7 +98,7 @@ public class AuthFilter implements Filter {
 
 	private boolean isUnprotected(String uri) {
 		for (String eachUri : unProtectedResources) {
-			if (uri.startsWith(eachUri))
+			if ((!"/".equals(eachUri) && uri.startsWith(eachUri)) || ("/".equals(eachUri) && uri.equals(eachUri)))
 				return true;
 		}
 		return false;

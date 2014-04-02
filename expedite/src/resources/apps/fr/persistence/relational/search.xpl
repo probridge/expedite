@@ -128,14 +128,14 @@
             <xf:submission xsl:version="2.0" method="get" replace="instance"
                                resource="/fr/service/persistence/form/{encode-for-uri(/search/app)}/{encode-for-uri(/search/form)}"/>
         </p:input>
-        <p:output name="response" id="form"/>
+        <p:output name="response" id="form" debug="yes"/>
     </p:processor>
 
     <!-- Run query -->
     <p:processor name="oxf:unsafe-xslt">
         <p:input name="form" href="#form"/>
-        <p:input name="data" href="#search"/>
-        <p:input name="request" href="#request"/>
+        <p:input name="data" href="#search" debug="yes"/>
+        <p:input name="request" href="#request" debug="yes"/>
         <p:input name="config">
             <xsl:stylesheet version="2.0">
 
@@ -377,10 +377,22 @@
                             </xsl:when>
                         </xsl:choose>
                     </xsl:if>
+                    <!-- Condition for Expedite DB2 xquery search -->
+                    <xsl:for-each select="$search/search/db2xquery[normalize-space() != '']">
+                        <xsl:choose>
+                            <xsl:when test="$search/search/provider = 'mysql'">
+                            </xsl:when>
+                            <xsl:when test="$search/search/provider = 'oracle'">
+                            </xsl:when>
+                            <xsl:when test="$search/search/provider = 'db2'">
+                                and xmlexists('<xsl:value-of select="."/>')
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:for-each>
                 </xsl:function>
             </xsl:stylesheet>
         </p:input>
-        <p:output name="data" id="sql-config"/>
+        <p:output name="data" id="sql-config" debug="yes"/>
     </p:processor>
     <p:processor name="oxf:sql">
         <p:input name="data" href="#search"/>
@@ -421,7 +433,7 @@
 
             </xsl:stylesheet>
         </p:input>
-        <p:output name="data" ref="data"/>
+        <p:output name="data" ref="data" debug="yes"/>
     </p:processor>
 
 

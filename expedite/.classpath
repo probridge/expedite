@@ -153,5 +153,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/shiro-core-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/jxl.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
