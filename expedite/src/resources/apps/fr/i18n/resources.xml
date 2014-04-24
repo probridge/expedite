@@ -54,7 +54,7 @@
         </print>
         <summary>
             <buttons>
-                <home>&lt;i class="icon-home"/&gt; 主界面</home>
+                <home>&lt;i class="icon-home"/&gt; 表单中心</home>
                 <review>&lt;i class="icon-eye-open"/&gt; 复查</review>
                 <pdf>&lt;i class="icon-print"/&gt; PDF</pdf>
                 <delete>&lt;i class="icon-remove-sign"/&gt; 删除</delete>
@@ -133,7 +133,7 @@
 
                 <!-- Other standard buttons -->
                 <home>&lt;i class="icon-home"/&gt; 主页面</home>
-                <summary>&lt;i class="icon-list"/&gt; 概览</summary>
+                <summary>&lt;i class="icon-list"/&gt; 返回</summary>
                 <close>&lt;i class="icon-remove"/&gt; 关闭</close>
                 <pdf>&lt;i class="icon-print"/&gt; PDF</pdf>
                 <clear>&lt;i class="icon-remove-sign"/&gt; 清除</clear>
@@ -275,7 +275,7 @@
             <labels>
                 <available>可用</available>
                 <unavailable>不可用</unavailable>
-                <library>图书馆</library>
+                <library>库</library>
                 <newer>更新</newer>
                 <username>用户名</username>
                 <password>密码</password>
