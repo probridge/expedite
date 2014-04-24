@@ -54,6 +54,8 @@ public class Constant {
 
 	public static final String ROLE_EDITOR_SUFFIX = "-editor";
 	public static final String ROLE_PARTICIPANT_SUFFIX = "-participant";
+	
+	public static final String SANDBOX_DB_NAME = "sandbox";
 
 	public static String permissionFilePath = null;
 
