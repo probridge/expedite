@@ -48,6 +48,7 @@ public class Utility {
 		Writer out = null;
 		try {
 			File permissionFile = new File(Constant.permissionFilePath);
+			permissionFile.getParentFile().mkdirs();
 			permissionFile.createNewFile();
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(permissionFile), "UTF-8"));
 			out.write("<roles>\n");
