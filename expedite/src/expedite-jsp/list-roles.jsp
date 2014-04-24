@@ -13,21 +13,78 @@
 	<script language="JavaScript">
 	function updateVal() {
 		if ($('#roleTypeEditor').prop('checked')){
-			if ($('#appName').val()) {
-				$('#formName').attr('disabled','disabled').val('');			
-				$('#roleName').val($('#appName').val() + $('input[type="radio"][name="roleType"]:checked').val());			
-			} else {
-				$('#roleName').val('');
-			}
+			$('#formName').attr('disabled','disabled').val('');
+			$('#customRoleName').attr('disabled','disabled').val('');
 		}
 		if ($('#roleTypeParticipant').prop('checked')) {
-			$('#formName').removeAttr('disabled');			
-			if ( $('#appName').val()) 
-				if ($('#formName').val()) {
-					$('#roleName').val($('#appName').val() + '-' + $('#formName').val() + $('input[type="radio"][name="roleType"]:checked').val());
-					return;
+			$('#formName').removeAttr('disabled');
+			$('#customRoleName').attr('disabled','disabled').val('');
+		}
+		if ($('#roleTypeCustom').prop('checked')) {
+			$('#formName').removeAttr('disabled');
+			$('#customRoleName').removeAttr('disabled');
+		}
+		//
+		error = false;
+		//
+		if (!$('#appName').val().match(/^[a-z0-9]+$/i)) {
+			$('#appName').parent().parent().addClass("has-error");
+			error = true;
+		} else {
+			$('#appName').parent().parent().removeClass("has-error");
+		}
+		//
+		if (!$('#formName').attr('disabled')) {
+			if (!$('#formName').val().match(/^[a-z0-9]+$/i)) {
+				$('#formName').parent().parent().addClass("has-error");
+				error = true;
+			} else {
+				$('#formName').parent().parent().removeClass("has-error");
+			}
+		} else {
+			$('#formName').parent().parent().removeClass("has-error");
+		}
+		//
+		if (!$('#customRoleName').attr('disabled')) {
+			if (!$('#customRoleName').val().match(/^[a-z0-9]+$/i)) {
+				$('#customRoleName').parent().parent().addClass("has-error");
+				error = true;
+			} else {
+				$('#customRoleName').parent().parent().removeClass("has-error");
+			}
+		} else {
+			$('#customRoleName').parent().parent().removeClass("has-error");
+		}
+		//
+		if (!error) {
+			$('input[type="submit"]').removeAttr('disabled');
+			//
+			if ($('#roleTypeEditor').prop('checked')){
+				if ($('#appName').val()) {
+					$('#roleName').val($('#appName').val() + $('input[type="radio"][name="roleType"]:checked').val());			
+				} else {
+					$('#roleName').val('');
 				}
-			$('#roleName').val('');
+			}
+			if ($('#roleTypeParticipant').prop('checked')) {
+				if ( $('#appName').val()) 
+					if ($('#formName').val()) {
+						$('#roleName').val($('#appName').val() + '-' + $('#formName').val() + $('input[type="radio"][name="roleType"]:checked').val());
+						return;
+					}
+				$('#roleName').val('');
+			}
+			if ($('#roleTypeCustom').prop('checked')) {
+				if ( $('#appName').val()) 
+					if ($('#formName').val())
+					 	if ($('#roleTypeCustom').val()) {
+							$('#roleName').val($('#appName').val() + '-' + $('#formName').val() + '-' + $('#customRoleName').val());
+							return;
+						}
+				$('#roleName').val('');
+			}
+		} else {
+			$('input[type="submit"]').attr('disabled','disabled');
 		}
 	}
 	</script>
@@ -68,9 +125,16 @@
             <td><c:out value="${(empty role.formName)?'*':role.formName}" /></td>
             <td><c:out value="${role.roleName}" /></td>
             <td><c:out value="${role.description}" /></td>
-            <td><a href="<c:out value="${'roles?action=edit&roleName='}${role.roleName}"/>">修改</a></td>
-            <td><a href="<c:out value="${'roles?action=delete&roleName='}${role.roleName}"/>">删除</a></td>
+        <c:if test="${ role.appName eq sandboxApp }">
+            <td>-</td>
+            <td>-</td>
             <td><a href="<c:out value="${'assign?listRole='}${role.roleName}"/>">成员</a></td>
+        </c:if>
+        <c:if test="${ role.appName ne sandboxApp }">
+            <td><a href="<c:out value="${'roles?action=edit&roleName='}${role.roleName}"/>">修改</a></td>
+            <td><a href="<c:out value="${'roles?action=delete&roleName='}${role.roleName}"/>" onclick="return confirm('确认删除吗？');">删除</a></td>
+            <td><a href="<c:out value="${'assign?listRole='}${role.roleName}"/>">成员</a></td>
+        </c:if>
           </tr>
 </c:forEach>
         </tbody>
@@ -80,21 +144,6 @@
 	<form method="POST" action='roles' name="frmRole" class="form-horizontal">
 	<fieldset>
     <legend>角色</legend>
-    <div class="form-group">
-      <label for="appName" class="col-lg-2 control-label">数据库</label>
-      <div class="col-lg-6">
-<c:if test="${ isAdmin }">
-        <input type="text" class="form-control" id="appName"  name="appName"  value="<c:out value="${role.appName}"/>" onchange="updateVal();" placeholder="数据库名"/>
-</c:if>
-<c:if test="${ isEditor }">
-        <select class="form-control" id="appName" name="appName" onchange="updateVal();">
-        <exp:roleIterator mode="editor">
-          <option value="${pageScope.tagAppName}">${pageScope.tagAppName}</option>
-        </exp:roleIterator>
-        </select>
-</c:if>
-      </div>
-    </div>
     <div class="form-group">
       <label class="col-lg-2 control-label">角色类型</label>
       <div class="col-lg-6">
@@ -110,12 +159,39 @@
             	表单样本角色
           </label>
         </div>
+        <div class="radio">
+          <label>
+			<input type="radio" id="roleTypeCustom" name="roleType" onchange="updateVal();" value="others" ${(!fn:endsWith(role.roleName , editorSuffix) and !fn:endsWith(role.roleName , participantSuffix)) ?'checked="checked"':''}/>
+            	自定义角色
+          </label>
+        </div>
       </div>
     </div>
     <div class="form-group">
-      <label for="formName" class="col-lg-2 control-label">表单</label>
+      <label for="appName" class="col-lg-2 control-label">数据库名</label>
+      <div class="col-lg-6">
+<c:if test="${ isAdmin }">
+        <input type="text" class="form-control" id="appName"  name="appName"  value="<c:out value="${role.appName}"/>" onchange="updateVal();" placeholder="数据库名" required="required"/>
+</c:if>
+<c:if test="${ isEditor }">
+        <select class="form-control" id="appName" name="appName" onchange="updateVal();">
+        <exp:roleIterator mode="editor">
+          <option value="${pageScope.tagAppName}">${pageScope.tagAppName}</option>
+        </exp:roleIterator>
+        </select>
+</c:if>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formName" class="col-lg-2 control-label">表单名</label>
       <div class="col-lg-6">
         <input type="text" class="form-control" id="formName" name="formName" value="<c:out value="${role.formName}"/>" onchange="updateVal();" placeholder="表单名"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formName" class="col-lg-2 control-label">角色名</label>
+      <div class="col-lg-6">
+        <input type="text" class="form-control" id="customRoleName" name="customRoleName" value="<c:out value="${fn:split(role.roleName,'-')[2]}"/>" onchange="updateVal();" placeholder="角色名"/>
       </div>
     </div>
     <div class="form-group">

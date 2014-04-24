@@ -16,7 +16,7 @@
           <tr>
             <th><c:out value="${ listBy eq 'user' ? '角色' : '用户'}"/></th>
             <th>
-            <a href="assign?action=removeall&amp;roleName=${param.listRole}&amp;listUser=${param.listUser}&amp;listRole=${param.listRole}">
+            <a href="assign?action=removeall&amp;roleName=${param.listRole}&amp;listUser=${param.listUser}&amp;listRole=${param.listRole}" onclick="return confirm('确认操作吗？');">
             <c:out value="${ listBy eq 'user' ? '' : '移除所有'}"/>
             </a>
             </th>
@@ -31,7 +31,11 @@
           <c:if test="${ listBy eq 'role' }">
           <td><a href="assign?listUser=${assignment.userName}"><c:out value="${assignment.userName}" /></a></td>        
           </c:if>
-          <td><a href="assign?action=remove&amp;roleName=${assignment.userRoles}&amp;userName=${assignment.userName}&amp;listUser=${param.listUser}&amp;listRole=${param.listRole}">移除</a></td>
+          <td>
+          <c:if test="${ assignment.userRoles ne sandboxEditor }">
+          <a href="assign?action=remove&amp;roleName=${assignment.userRoles}&amp;userName=${assignment.userName}&amp;listUser=${param.listUser}&amp;listRole=${param.listRole}" onclick="return confirm('确认操作吗？');">移除</a>
+          </c:if>
+          </td>
           </tr>
 </c:forEach>
         </tbody>

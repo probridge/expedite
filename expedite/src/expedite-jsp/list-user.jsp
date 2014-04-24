@@ -35,7 +35,7 @@
             <td><c:out value="${user.userEnabled==1?'活动':'禁用'}" /></td>
             <td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.userExpiration}" /></td>
             <td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.userPwdExpiration}" /></td>
-            <td><a href="<c:out value="${'users?action=delete&userName='}${user.userName}"/>">删除</a></td>
+            <td><a href="<c:out value="${'users?action=delete&userName='}${user.userName}"/>" onclick="return confirm('确认删除吗？');">删除</a></td>
             <td><a href="<c:out value="${'users?action=edit&userName='}${user.userName}"/>">修改</a></td>
             <td><a href="<c:out value="${'assign?listUser='}${user.userName}"/>">角色</a></td>
           </tr>
