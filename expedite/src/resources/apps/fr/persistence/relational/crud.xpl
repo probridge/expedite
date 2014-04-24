@@ -84,7 +84,7 @@
                 <xsl:copy-of select="$request/body"/>
             </request>
         </p:input>
-        <p:output name="data" id="request-description"/>
+        <p:output name="data" id="request-description" debug="req-des"/>
     </p:processor>
 
     <p:processor name="oxf:null-serializer">
@@ -161,7 +161,7 @@
                         </sql-out>
                     </sql:config>
                 </p:input>
-                <p:output name="data" id="sql-config"/>
+                <p:output name="data" id="sql-config" debug="sql-config"/>
             </p:processor>
 
             <p:processor name="oxf:sql">
@@ -182,9 +182,9 @@
 
             <p:processor name="oxf:unsafe-xslt">
                 <p:input name="data"><dummy/></p:input>
-                <p:input name="form" href="#form"/>
-                <p:input name="sql-out" href="#sql-out"/>
-                <p:input name="request-description" href="#request-description"/>
+                <p:input name="form" href="#form" debug="form"/>
+                <p:input name="sql-out" href="#sql-out" debug="sql-out"/>
+                <p:input name="request-description" href="#request-description" debug="req-desc"/>
                 <p:input name="config">
                     <operations xsl:version="2.0">
                         <xsl:variable name="permissions" select="doc('input:form')/forms/form/permissions"/>
@@ -192,7 +192,7 @@
                         <xsl:value-of select="form-runner:setAllAuthorizedOperationsHeader($permissions, $sql-out/username/string(), $sql-out/groupname/string())"/>
                     </operations>
                 </p:input>
-                <p:output name="data" id="send-operations"/>
+                <p:output name="data" id="send-operations" debug="snd-op"/>
             </p:processor>
 
             <p:processor name="oxf:null-serializer">
