@@ -68,8 +68,9 @@ class PEVersion extends Version {
             case Some(end) ⇒
                 // There is a subscription end date so we check that the build date is prior to that
                 // NOTE: Don't check against the current date as we don't want to depend on that for production licenses
-                if (licenseInfo.isBuildAfterSubscriptionEnd)
-                    licenseError(s"Subscription ended on: $end, Orbeon Forms build dates from: ${licenseInfo.formattedBuildDate.get}")
+                //
+                // if (licenseInfo.isBuildAfterSubscriptionEnd)
+                //    licenseError(s"Subscription ended on: $end, Orbeon Forms build dates from: ${licenseInfo.formattedBuildDate.get}")
             case None ⇒
                 // There is no subscription end date so we check against the version
                 if (licenseInfo.isBadVersion)
@@ -77,8 +78,8 @@ class PEVersion extends Version {
         }
 
         // Check expiration against the current date (for non-production licenses)
-        if (licenseInfo.isExpired)
-            licenseError(s"License has expired on ${licenseInfo.formattedExpiration.get}")
+        // if (licenseInfo.isExpired)
+        //    licenseError(s"License has expired on ${licenseInfo.formattedExpiration.get}")
 
         logger.info("This installation of " + VersionString + " is licensed to: " + licenseInfo.toString)
     }
