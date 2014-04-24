@@ -542,10 +542,10 @@
                 <label>修改XML Schema</label>
             </change-schema>
             <replace-schema>
-                <label>Replace XML Schema</label>
+                <label>替换XML Schema</label>
             </replace-schema>
             <upload-schema>
-                <label>Attach XML Schema</label>
+                <label>附加XML Schema</label>
             </upload-schema>
             <messages>
                 <no-simple-types>Your schema does not seem to contain simple types. You won't be able to select types from this schema for validation.</no-simple-types>
@@ -585,88 +585,88 @@
         <dialog-http-services>
             <label>HTTP服务编辑器</label>
             <service-name>
-                <label>Service Name</label>
-                <hint>Choose a unique name for this service</hint>
+                <label>服务名称</label>
+                <hint>请为服务设置唯一的标识名称</hint>
             </service-name>
             <resource>
-                <label>Resource URL</label>
-                <hint>HTTP URL at which the service reside</hint>
+                <label>资源URL</label>
+                <hint>服务所在的HTTP URL</hint>
             </resource>
             <method>
-                <label>Method</label>
+                <label>方法</label>
             </method>
             <serialization>
-                <label>Serialization</label>
+                <label>序列化</label>
             </serialization>
             <soap-submission>
-                <label>SOAP Service</label>
-                <hint>Whether this is a SOAP service</hint>
+                <label>SOAP服务</label>
+                <hint>是否是一个SOAP服务</hint>
             </soap-submission>
             <soap-action>
-                <label>SOAP Action</label>
-                <hint>Optional SOAPAction header</hint>
+                <label>SOAP动作</label>
+                <hint>可选的SOAPAction header</hint>
             </soap-action>
             <http-authentication>
-                <label>HTTP Authentication</label>
-                <hint>HTTP Authentication</hint>
+                <label>HTTP 认证</label>
+                <hint>HTTP 认证</hint>
             </http-authentication>
             <username>
-                <label>Username</label>
+                <label>用户名</label>
             </username>
             <password>
-                <label>Password</label>
+                <label>密码</label>
             </password>
             <request-body>
-                <label>Request Body</label>
-                <hint>XML data (can be a SOAP envelope)</hint>
+                <label>请求体</label>
+                <hint>XML报文 (可以是一个SOAP envelope)</hint>
             </request-body>
             <response>
-                <label>Response</label>
+                <label>响应</label>
             </response>
             <error-type>
-                <label>Error Type</label>
+                <label>错误类型</label>
                 <item>
-                    <label>Submission in progress</label>
+                    <label>正在提交</label>
                     <value>submission-in-progress</value>
                 </item>
                 <item>
-                    <label>No data</label>
+                    <label>无数据</label>
                     <value>no-data</value>
                 </item>
                 <item>
-                    <label>Validation error</label>
+                    <label>验证失败</label>
                     <value>validation-error</value>
                 </item>
                 <item>
-                    <label>Resource error</label>
+                    <label>资源错误</label>
                     <value>resource-error</value>
                 </item>
                 <item>
-                    <label>Target error</label>
+                    <label>目标错误</label>
                     <value>target-error</value>
                 </item>
                 <item>
-                    <label>Internal error</label>
+                    <label>内部错误</label>
                     <value>xxforms-internal-error</value>
                 </item>
             </error-type>
             <resource-uri>
-                <label>Resource URL</label>
+                <label>资源 URL</label>
             </resource-uri>
             <status-code>
-                <label>Status Code</label>
+                <label>状态码</label>
             </status-code>
             <headers>
-                <label>Headers</label>
+                <label>头数据</label>
             </headers>
             <header-name>
-                <label>Name</label>
+                <label>名称</label>
             </header-name>
             <header-value>
-                <label>Value(s)</label>
+                <label>值</label>
             </header-value>
             <response-body>
-                <label>Response Body</label>
+                <label>响应体</label>
             </response-body>
             <save>
                 <label>保存</label>
@@ -676,18 +676,18 @@
             </test>
         </dialog-http-services>
         <dialog-database-services>
-            <label>Database服务编辑器</label>
+            <label>数据库服务编辑器</label>
             <service-name>
-                <label>Service Name</label>
-                <hint>Choose a unique name for this service</hint>
+                <label>服务名称</label>
+                <hint>设置一个唯一的服务名称</hint>
             </service-name>
             <datasource>
-                <label>Datasource</label>
-                <hint>JNDI datasource for this service</hint>
+                <label>数据源</label>
+                <hint>服务使用的JNDI数据源</hint>
             </datasource>
             <query>
-                <label>SQL Query</label>
-                <hint>SQL query which can contain placeholders for parameters</hint>
+                <label>SQL查询语句</label>
+                <hint>SQL查询中的参数使用占位符</hint>
             </query>
             <save>
                 <label>保存</label>
@@ -699,80 +699,80 @@
         <dialog-actions>
             <label>动作编辑器</label>
             <service-name>
-                <label>Action Name</label>
-                <hint>Choose a unique name for this action</hint>
+                <label>动作名称</label>
+                <hint>为这个动作选择唯一的名称</hint>
             </service-name>
             <event-type>
-                <label>React to</label>
+                <label>触发</label>
                 <hint>Event (on a control or global) to react to</hint>
                 <!-- Just a value change -->
                 <item>
-                    <label>Value Change</label>
+                    <label>值变化</label>
                     <value>xforms-value-changed</value>
                 </item>
                 <!-- Value change AND the first time the control shows -->
                 <item>
-                    <label>Value Change or Form Load</label>
+                    <label>值变化或者表单加载</label>
                     <value>xforms-value-changed xforms-enabled</value>
                 </item>
                 <!-- Control activation -->
                 <item>
-                    <label>Activation</label>
+                    <label>控件触发</label>
                     <value>DOMActivate</value>
                 </item>
                 <!-- Form load -->
                 <item>
-                    <label>Form Load</label>
+                    <label>表单加载</label>
                     <value>xforms-ready</value>
                 </item>
             </event-type>
             <event-condition>
-                <label>Condition</label>
+                <label>条件</label>
                 <item>
-                    <label>Run always</label>
+                    <label>始终运行</label>
                     <value>true()</value>
                 </item>
                 <item>
-                    <label>Run on creation only</label>
+                    <label>创建时运行</label>
                     <value>$fr-mode='new'</value>
                 </item>
             </event-condition>
             <event-control>
-                <label>Control</label>
+                <label>控件</label>
             </event-control>
             <service-to-call>
-                <label>Service to Call</label>
-                <hint>Service to call when the event happens</hint>
+                <label>调用的服务</label>
+                <hint>事件发生时调用的服务</hint>
             </service-to-call>
             <request-parameters>
-                <label>Set Service Request Values</label>
+                <label>设置服务请求值</label>
             </request-parameters>
             <source-control>
-                <label>Source Control</label>
+                <label>源控件</label>
             </source-control>
             <destination-xpath>
-                <label>Destination XPath Expression</label>
+                <label>目标XPath表达式</label>
             </destination-xpath>
             <request-database-parameter>
-                <label>Set Database Service Parameters</label>
+                <label>设置数据库服务参数</label>
             </request-database-parameter>
             <parameter-number>
-                <label>Parameter number</label>
+                <label>参数数值</label>
             </parameter-number>
             <response-values>
-                <label>Set Response Control Values</label>
+                <label>设置响应控件值</label>
             </response-values>
             <destination-control>
-                <label>Destination Control</label>
+                <label>目标控件</label>
             </destination-control>
             <source-xpath>
-                <label>Source XPath expression</label>
+                <label>源XPath表达式</label>
             </source-xpath>
             <response-itemset>
-                <label>Set Response Selection Control Items</label>
+                <label>设置响应Selection控件元素</label>
             </response-itemset>
             <destination-selection-control>
-                <label>Destination Selection Control</label>
+                <label>目标Selection控件</label>
             </destination-selection-control>
             <itemset>
                 <label>Itemset</label>
