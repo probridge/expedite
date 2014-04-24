@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import com.probridge.expedite.dao.expdb.UserRolesMapper;
 import com.probridge.expedite.dao.expdb.UsersMapper;
 import com.probridge.expedite.model.expdb.UserRolesExample;
+import com.probridge.expedite.model.expdb.UserRolesKey;
 import com.probridge.expedite.model.expdb.Users;
 import com.probridge.expedite.model.expdb.UsersExample;
 
@@ -145,7 +146,18 @@ public class UserManagementServlet extends HttpServlet {
 			if (affected == 0) {
 				um.insert(user);
 			}
+			//
+			if (Constant.GROUP_EDITOR.equals(user.getUserGroup())) {
+				// add sandbox editor role
+				UserRolesMapper urm = sqlSess.getMapper(UserRolesMapper.class);
+				UserRolesKey assignment = new UserRolesKey();
+				assignment.setUserName(user.getUserName());
+				assignment.setUserRoles(Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX);
+				urm.deleteByPrimaryKey(assignment);
+				urm.insert(assignment);
+			}
 			sqlSess.commit();
+			//
 			resp.sendRedirect("users");
 		} catch (Exception e) {
 			logger.error("error processing user management post.", e);

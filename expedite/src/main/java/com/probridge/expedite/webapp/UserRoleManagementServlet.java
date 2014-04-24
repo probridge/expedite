@@ -69,6 +69,11 @@ public class UserRoleManagementServlet extends HttpServlet {
 					resp.sendError(401, "无访问权限");
 					return;
 				}
+				if ((Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX).equals(roleName)) {
+					resp.sendError(500, "不允许删除系统角色");
+					return;
+				}
+				//
 				UserRolesMapper um = sqlSess.getMapper(UserRolesMapper.class);
 				UserRolesKey toDelete = new UserRolesKey();
 				toDelete.setUserName(userName);
@@ -82,6 +87,11 @@ public class UserRoleManagementServlet extends HttpServlet {
 					resp.sendError(401, "无访问权限");
 					return;
 				}
+				if ((Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX).equals(roleName)) {
+					resp.sendError(500, "不允许删除系统角色");
+					return;
+				}
+				//			
 				UserRolesMapper um = sqlSess.getMapper(UserRolesMapper.class);
 				UserRolesExample exp = new UserRolesExample();
 				exp.createCriteria().andUserRolesEqualTo(roleName);
@@ -115,6 +125,7 @@ public class UserRoleManagementServlet extends HttpServlet {
 			}
 			List<UserRolesKey> assignment = urm.selectByExample(exp);
 			req.setAttribute("assignments", assignment);
+			req.setAttribute("sandboxEditor", Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX);
 			forward = LIST_ASSIGNMENT;
 		} catch (Exception e) {
 			logger.error("error processing assignment management action " + action, e);

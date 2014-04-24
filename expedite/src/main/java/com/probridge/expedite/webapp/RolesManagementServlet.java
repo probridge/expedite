@@ -58,6 +58,10 @@ public class RolesManagementServlet extends HttpServlet {
 					resp.sendError(401, "无访问权限");
 					return;
 				}
+				if ((Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX).equals(roleName)) {
+					resp.sendError(500, "不允许删除系统角色");
+					return;
+				}
 				RoleInfoMapper rmapper = sqlSess.getMapper(RoleInfoMapper.class);
 				rmapper.deleteByPrimaryKey(roleName);
 				// also delete all user role assignment
@@ -101,6 +105,7 @@ public class RolesManagementServlet extends HttpServlet {
 			req.setAttribute("roles", roles);
 			req.setAttribute("editorSuffix", Constant.ROLE_EDITOR_SUFFIX);
 			req.setAttribute("participantSuffix", Constant.ROLE_PARTICIPANT_SUFFIX);
+			req.setAttribute("sandboxApp", Constant.SANDBOX_DB_NAME);
 			req.setAttribute("isAdmin", Constant.GROUP_ADMIN.equals(strGroup));
 			req.setAttribute("isEditor", Constant.GROUP_EDITOR.equals(strGroup));
 			forward = LIST_ROLES;
@@ -135,6 +140,11 @@ public class RolesManagementServlet extends HttpServlet {
 		// allow only participant role of the managing app for editors
 		if (!Utility.gotPermissionForRole(strGroup, roleList, role.getRoleName())) {
 			resp.sendError(401, "无访问权限");
+			return;
+		}
+		//
+		if ((Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX).equals(role.getRoleName())) {
+			resp.sendError(500, "不允许修改系统角色");
 			return;
 		}
 		//
