@@ -24,7 +24,7 @@
 				resource="/fr/service/persistence/search/survey/userinfo"
 				replace="instance" instance="my-info">
             </xf:submission>
-<exp:roleIterator mode="sample">
+<exp:roleIterator mode="participant">
 			<xf:instance id="instance-${pageScope.tagRoleName}">
 				<documents />
 			</xf:instance>
@@ -75,7 +75,7 @@
 			</a>
 			<h3>我收到的问卷邀请</h3>
 			<hr />
-			<exp:roleIterator mode="sample">
+			<exp:roleIterator mode="participant">
 				${pageScope.tagDescription}
 				<xf:repeat ref="instance('instance-${pageScope.tagRoleName}')/document">
 					<xf:var name="link" value="concat('/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/view/', @name)" />
