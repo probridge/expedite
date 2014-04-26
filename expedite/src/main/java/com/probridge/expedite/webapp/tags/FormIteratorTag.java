@@ -18,16 +18,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.orbeon.oxf.util.SecureUtils;
 import org.orbeon.oxf.xml.dom4j.Dom4jUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.probridge.expedite.webapp.Constant;
+import com.probridge.expedite.webapp.ExpediteContextListener;
 import com.probridge.expedite.webapp.Utility;
 
 public class FormIteratorTag extends SimpleTagSupport {
 
 	private static final Logger logger = LoggerFactory.getLogger(FormIteratorTag.class);
+	private String appName = null;
+	private String mode = null;
 
 	@Override
 	public void doTag() throws JspException, IOException {
@@ -42,8 +46,18 @@ public class FormIteratorTag extends SimpleTagSupport {
 		//
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
-			HttpGet httpGetRequest1 = new HttpGet("http://localhost:8080/expedite/fr/service/persistence/form");
+			String uri = "http://localhost:8080/expedite/fr/service/persistence/form";
+			//
+			if (appName != null)
+				uri += "/" + appName;
+			HttpGet httpGetRequest1 = new HttpGet(uri);
 			httpGetRequest1.setHeader("Cookie", "JSESSIONID=" + sess.getId());
+			httpGetRequest1.setHeader("Orbeon-Client", "servlet");
+			//
+			String token = SecureUtils.randomHexId();
+			ExpediteContextListener.getContext().setAttribute("orbeon-token", token);
+			httpGetRequest1.setHeader("orbeon-token", token);
+			//
 			HttpResponse httpResponse1 = httpClient.execute(httpGetRequest1);
 			HttpEntity entity1 = httpResponse1.getEntity();
 			Document formListDocument = null;
@@ -62,10 +76,19 @@ public class FormIteratorTag extends SimpleTagSupport {
 					String formName = ((Element) eachForm).elementText("form-name");
 					String formTitle = ((Element) eachForm).elementText("title");
 					String formDescription = ((Element) eachForm).elementText("description");
-					if (roleList.contains(appName + Constant.ROLE_EDITOR_SUFFIX)) {
+					String available = ((Element) eachForm).elementText("available");
+					if ("editor".equals(mode) && roleList.contains(appName + Constant.ROLE_EDITOR_SUFFIX)
+							&& Utility.isEmptyOrNull(available)) {
 						context.setAttribute("tagAppName", appName);
 						context.setAttribute("tagFormName", formName);
-						context.setAttribute("tagFormTitle", Utility.isEmptyOrNull(formTitle) ? "开始" : formTitle);
+						context.setAttribute("tagFormTitle", Utility.isEmptyOrNull(formTitle) ? "未命名" : formTitle);
+						context.setAttribute("tagDescription", formDescription);
+						getJspBody().invoke(null);
+					}
+					if (!"editor".equals(mode) && Utility.isEmptyOrNull(available)) {
+						context.setAttribute("tagAppName", appName);
+						context.setAttribute("tagFormName", formName);
+						context.setAttribute("tagFormTitle", Utility.isEmptyOrNull(formTitle) ? "未命名" : formTitle);
 						context.setAttribute("tagDescription", formDescription);
 						getJspBody().invoke(null);
 					}
@@ -76,5 +99,21 @@ public class FormIteratorTag extends SimpleTagSupport {
 		} finally {
 			httpClient.getConnectionManager().shutdown();
 		}
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 }
