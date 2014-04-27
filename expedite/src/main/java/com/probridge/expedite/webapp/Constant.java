@@ -47,6 +47,9 @@ public class Constant {
 	public static final String USERINFO_FORM = "userinfo";
 	public static final String USERINFO_EMAIL_CONTROL = "email";
 	public static final String USERINFO_EMAIL_PATH = "section-basic-info/" + USERINFO_EMAIL_CONTROL;
+	
+	public static final String NEWS_TITLE_CONTROL = "title";
+	public static final String NEWS_TITLE_PATH = "main-section/" + NEWS_TITLE_CONTROL;
 
 	public static final String GROUP_USER = "GroupUser";
 	public static final String GROUP_EDITOR = "GroupEditor";

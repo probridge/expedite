@@ -71,7 +71,7 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"><exp:getPrincipal /><b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="/logout"><i class="icon-unlock spacer-right"></i>&nbsp;安全退出</a></li>
+								<li><a href="/logout"><i class="icon-unlock spacer-right"></i>&nbsp;安全退出</a></li>
 								</ul></li>
 						</ul>
 					</exp:isAuthenticated>
@@ -117,6 +117,7 @@
 	<script type="text/javascript"
 		src="/ops/exp_res/js/jquery.pnotify.min.js"></script>
 	<script type="text/javascript">
+		//
 		$.pnotify.defaults.history = false;
 		//
 		if (!Modernizr.canvas)

@@ -20,6 +20,10 @@
     <xi:include href="oxf:/config/properties-form-runner.xml"/>
     <xi:include href="oxf:/config/properties-form-builder.xml"/>
 
+    <property as="xs:boolean" name="oxf.xforms.minimal-resources"                            value="false"/>
+    <property as="xs:boolean" name="oxf.xforms.combine-resources"                            value="false"/>
+    <property as="xs:boolean" name="oxf.xforms.resources.encode-version"                     value="false"/>
+
     <xi:include href="oxf:/config/properties-local.xml"/>
     <xi:include href="oxf:/config/properties-local-prod.xml"/>
 

@@ -142,11 +142,9 @@
     	<include name="jaman.jar"/>
     	
     	<!-- include jstl jar -->
+    	<include name="javax.servlet.jsp.jstl-api-1.2.1.jar"/>
     	<include name="javax.servlet.jsp.jstl-1.2.2.jar"/>
 
-    	<!-- don't include api jar -->
-    	<!-- <include name="jstl-1.2.jar"/> -->
-    	
     	<!-- include shiro jar -->
     	<include name="shiro-core-1.2.2.jar"/>   	
 
@@ -611,8 +609,18 @@
         <copy todir="${war.inf}">
             <fileset dir="descriptors/orbeon-war"/>
         </copy>
-    	<copy file="descriptors/context.xml" todir="${war.meta}"/>
         <echo message="Target: ${target}"/>
+    	<if>
+    	 <equals arg1="${target}" arg2="devel" />
+    	 <then>
+    	 	<echo message="Copying development context.xml"/>
+        	<copy file="descriptors/context.xml" tofile="${war.meta}/context.xml" overwrite="true"/>
+    	 </then>
+    	 <else>
+    	 	<echo message="Copying production context.xml"/>
+        	<copy file="descriptors/context_prod.xml" tofile="${war.meta}/context.xml" overwrite="true"/>
+    	 </else>
+    	</if>
         <xslt in="build.xml" style="descriptors/orbeon-war-web.xsl" out="${war.inf}/web.xml" force="true">
             <param name="target" expression="${target}"/>
             <param name="build-root" expression="${build.root}"/>

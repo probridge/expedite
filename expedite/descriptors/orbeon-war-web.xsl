@@ -231,6 +231,11 @@
                 </xsl:with-param>
             </xsl:call-template>
 
+            <xsl:comment>Expedite context listener</xsl:comment>
+			<listener>
+				<listener-class>com.probridge.expedite.webapp.ExpediteContextListener</listener-class>
+			</listener>
+
             <xsl:comment>Orbeon context listener</xsl:comment>
             <listener>
                 <listener-class>org.orbeon.oxf.webapp.OrbeonServletContextListener</listener-class>

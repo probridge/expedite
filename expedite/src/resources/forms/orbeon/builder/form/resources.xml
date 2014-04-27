@@ -18,12 +18,12 @@
         <application-name>
             <label>应用名称</label>
             <hint>用于标识一组表单的名字，例如用分类或者部门的名称。这部分名称会出现在网址中，因此我们建议使用小写字母。</hint>
-            <alert>请使用半角英文字母、数字、"-" 或者 "_"</alert>
+            <alert>请使用半角英文字母、数字，避免使用"-"，"_"或其他符号</alert>
         </application-name>
         <form-name>
             <label>表单名称</label>
             <hint>用来标识每一个具体的表单，例如“注册信息”，“人际关系调查”或者“计算机申领表”，这个名称也会出现在URL中，建议使用有意义的英文小写字母。</hint>
-            <alert>请使用半角英文字母、数字、"-" 或者 "_"</alert>
+            <alert>请使用半角英文字母、数字，避免使用"-"，"_"或其他符号</alert>
         </form-name>
         <title>
             <label>表单标题</label>

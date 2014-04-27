@@ -63,6 +63,14 @@
         <name>formIterator</name>
         <tag-class>com.probridge.expedite.webapp.tags.FormIteratorTag</tag-class>
         <body-content>scriptless</body-content>
+        <attribute>
+            <name>appName</name>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>mode</name>
+            <required>true</required>
+        </attribute>
     </tag>
     <tag>
         <description>Output current user principal or Anonymous if not authenticated</description>

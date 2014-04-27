@@ -77,7 +77,7 @@
     <property as="xs:integer" name="oxf.fr.summary.page-size.*.*"                               value="10"/>
     <property as="xs:boolean" name="oxf.fr.summary.show-created.*.*"                            value="true"/>
     <property as="xs:boolean" name="oxf.fr.summary.show-last-modified.*.*"                      value="true"/>
-    <property as="xs:string"  name="oxf.fr.summary.buttons.*.*"                                 value="home review pdf delete new"/>
+    <property as="xs:string"  name="oxf.fr.summary.buttons.*.*"                                 value="home review delete new"/>
 
     <property as="xs:boolean" name="oxf.fr.detail.noscript.table.*.*"                           value="true"/>
     <property as="xs:boolean" name="oxf.fr.detail.noscript.section.collapse.*.*"                value="true"/>
@@ -89,8 +89,8 @@
     <property as="xs:boolean" name="oxf.fr.detail.new.service.enable.*.*"                       value="false"/>
     <property as="xs:string"  name="oxf.fr.detail.new.service.uri.*.*"                          value="/fr/service/custom/my-app/new"/>
     <property as="xs:string"  name="oxf.fr.detail.new.service.passing-request-parameters.*.*"   value=""/>
-    <property as="xs:string"  name="oxf.fr.detail.buttons.*.*"                                  value="refresh collapse-all expand-all summary clear pdf save-final review"/>
-    <property as="xs:string"  name="oxf.fr.detail.buttons.view.*.*"                             value="edit pdf"/>
+    <property as="xs:string"  name="oxf.fr.detail.buttons.*.*"                                  value="refresh collapse-all expand-all summary save-final review"/>
+    <property as="xs:string"  name="oxf.fr.detail.buttons.view.*.*"                             value="edit"/>
     <property as="xs:string"  name="oxf.fr.detail.captcha.*.*"                                  value=""/> <!-- Empty (no captcha), 'reCAPTCHA', or 'SimpleCaptcha'-->
     <property as="xs:boolean" name="oxf.fr.detail.pdf.barcode.*.*"                              value="false"/>
     <property as="xs:boolean" name="oxf.fr.detail.pdf.disable-if-invalid.*.*"                   value="false"/>
@@ -166,11 +166,11 @@
 
     <property as="xs:boolean" name="oxf.fr.noscript-link.orbeon.contact"                        value="true"/>
 
-    <property as="xs:string"  name="oxf.fr.detail.buttons.orbeon.controls"                      value="refresh pdf wizard-prev wizard-next review"/>
+    <property as="xs:string"  name="oxf.fr.detail.buttons.orbeon.controls"                      value="refresh wizard-prev wizard-next review"/>
     <property as="xs:string"  name="oxf.fr.detail.view.appearance.orbeon.controls"              value="wizard"/>
     <property as="xs:integer" name="oxf.fr.detail.toc.orbeon.controls"                          value="-1"/>
 
-    <property as="xs:string"  name="oxf.fr.detail.buttons.orbeon.dmv-14"                        value="refresh summary clear pdf save-final review"/>
+    <property as="xs:string"  name="oxf.fr.detail.buttons.orbeon.dmv-14"                        value="refresh summary clear save-final review"/>
     <property as="xs:string"  name="oxf.fr.resource.orbeon.dmv-14.*.print.formats.date"         value="[Y0001]-[M01]-[D01]"/>
     <property as="xs:string"  name="oxf.fr.pdf.map.orbeon.dmv-14.fr-us-state"                   value="select-value"/>
     <property as="xs:string"  name="oxf.fr.detail.view.appearance.orbeon.dmv-14"                value="wizard"/>

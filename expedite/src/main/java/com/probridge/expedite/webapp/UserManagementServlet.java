@@ -147,7 +147,7 @@ public class UserManagementServlet extends HttpServlet {
 				um.insert(user);
 			}
 			//
-			if (Constant.GROUP_EDITOR.equals(user.getUserGroup())) {
+			if (Constant.GROUP_EDITOR.equals(user.getUserGroup()) || Constant.GROUP_ADMIN.equals(user.getUserGroup())) {
 				// add sandbox editor role
 				UserRolesMapper urm = sqlSess.getMapper(UserRolesMapper.class);
 				UserRolesKey assignment = new UserRolesKey();

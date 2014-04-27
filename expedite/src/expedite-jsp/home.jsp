@@ -10,7 +10,19 @@
 			<xf:instance id="my-info">
 				<documents />
 			</xf:instance>
+			<xf:instance id="news">
+				<documents />
+			</xf:instance>
 			<xf:instance id="search-instance">
+                <search xmlns="">
+                    <query/>
+                    <query name="title" path="main-section/title" summary-field="true"/>
+                    <page-size>10</page-size>
+                    <page-number>1</page-number>
+                    <lang />
+                </search>
+            </xf:instance>	
+			<xf:instance id="news-search-instance">
                 <search xmlns="">
                     <query />
                     <page-size>10</page-size>
@@ -23,6 +35,12 @@
 				method="post"
 				resource="/fr/service/persistence/search/survey/userinfo"
 				replace="instance" instance="my-info">
+            </xf:submission>
+            <xf:submission id="read-news"
+				ref="instance('search-instance')" validate="false"
+				method="post"
+				resource="/fr/service/persistence/search/expedite/news"
+				replace="instance" instance="news">
             </xf:submission>
 <exp:roleIterator mode="participant">
 			<xf:instance id="instance-${pageScope.tagRoleName}">
@@ -38,6 +56,7 @@
 </exp:roleIterator>
 			<xf:action ev:event="xforms-ready">
 				<xf:send submission="read-my-info"/>
+				<xf:send submission="read-news"/>
 			</xf:action>
 		</xf:model>	
     </jsp:attribute>
@@ -55,26 +74,13 @@
 	</div>
 	<div class="row">
 <c:if test="${ group eq 'user' or group eq 'editor' or group eq 'admin'}">
-	<c:if test="${ group eq 'user' }"><c:set var="columnWidth" value="12" /></c:if>
-	<c:if test="${ group eq 'editor' }"><c:set var="columnWidth" value="8" /></c:if>
-	<c:if test="${ group eq 'admin' }"><c:set var="columnWidth" value="4" /></c:if>
-	<div class="col-lg-${columnWidth} col-md-${columnWidth} col-sm-12 col-xs-12">
-		<div class="panel panel-default panel-success">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="panel panel-success">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">用户</h3>
+		    <h3 class="panel-title">调研问卷 Survey</h3>
 		  </div>
 		  <div class="panel-body">
-			<h3>我的个人信息</h3>
-			<hr />
-			<xf:repeat ref="instance('my-info')/document[contains(@operations,'update')]">
-				<xf:var name="link" value="concat('/fr/survey/userinfo/view/', @name)" />
-				<a href="{$link}" onclick="return openWin(this.href,'formrunner');">维护我的信息</a>
-			</xf:repeat>
-			<a href="/fr/survey/userinfo/new" onclick="return openWin(this.href,'formrunner');">
-			<xf:output value="if (count(instance('my-info')/document) = 0) then '新建个人信息' else ''"/>
-			</a>
-			<h3>我收到的问卷邀请</h3>
-			<hr />
+			<h4>我收到的问卷邀请</h4>
 			<exp:roleIterator mode="participant">
 				${pageScope.tagDescription}
 				<xf:repeat ref="instance('instance-${pageScope.tagRoleName}')/document">
@@ -86,56 +92,161 @@
 				</a>
 				<br/>
 			</exp:roleIterator>
-			<hr />
-			<h3>公共问卷调研</h3>
-			暂无
-			<hr />
-			<h3>实验中心日常表单</h3>
-			暂无
-			<hr />
+			<hr/>
+			<a href="#" onclick="show_personal_info_dialog();">
+			<xf:output value="if (count(instance('my-info')/document) = 0) then '报名参加调研' else '调研报名信息'"/>
+			</a>
 		  </div>
 		</div>	
 	</div>
-</c:if>
-<c:if test="${ group eq 'admin' or group eq 'editor'}">
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<div class="panel panel-default panel-info">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="panel panel-info">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">表单管理员</h3>
+		    <h3 class="panel-title">公务平台 Workplace</h3>
 		  </div>
 		  <div class="panel-body">
-			<h3>准备表单和权限</h3><br/>
-			<a href="/roles">开始配置</a><br/>
-			<h3>设计、管理和发布问卷</h3><br/>
-			<a href="/fr/orbeon/builder/summary" onclick="return openWin(this.href,'formbuilder');">表单编辑器</a><br/>
-			<h3>目标用户高级筛选</h3><br/>
-			<a href="/xquery">开始使用xQuery</a><br/>
-			<h3>问卷数据下载</h3><br/>
-<exp:formIterator>
-			<a href="/export?appName=${pageScope.tagAppName}&amp;formName=${pageScope.tagFormName}">${pageScope.tagFormTitle}</a><br/>
+		  	<h4>公务平台表单</h4>
+			<hr/>
+<exp:formIterator mode="participant" appName="gongwu">
+			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
 </exp:formIterator>
 		  </div>
 		</div>	
 	</div>
-</c:if>
-<c:if test="${ group eq 'admin'}">
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<div class="panel panel-default panel-warning">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="panel panel-info">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">系统管理员</h3>
+		    <h3 class="panel-title">安泰实验中心 ACEM Lab</h3>
 		  </div>
 		  <div class="panel-body">
-			<h3>用户管理</h3><br/>
-			<a href="/users">开始</a><br/>
-			<h3>建库和权限管理</h3><br/>
-			<a href="/roles">开始</a><br/>
-			<h3>系统设置</h3><br/>
-			<a href="#">开始</a><br/>
+		  	<h4>资源申请表单</h4>
+			<hr/>
+<exp:formIterator mode="participant" appName="acem">
+			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+</exp:formIterator>
+		  </div>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="panel panel-warning">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">公告和新闻 News</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+			<xf:repeat ref="instance('news')/document">
+			<li>
+				<xf:var name="link" value="concat('/fr/expedite/news/view/', @name)" />
+				<a href="{$link}" onclick="return openWin(this.href,'formrunner');">
+				<xf:output value="details/detail[1]/text()"/>
+				</a>
+			</li>
+			</xf:repeat>
+			</ul>
 		  </div>
 		</div>	
 	</div>
 </c:if>
+</div>
+<c:if test="${ group eq 'admin' or group eq 'editor'}">
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-danger">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">表单管理</h3>
+		  </div>
+		  <div class="panel-body">
+			<h3>
+			<a href="/roles">准备权限</a>
+			<a href="/fr/orbeon/builder/summary" onclick="return openWin(this.href,'formbuilder');">设计问卷</a>
+			<a href="/xquery">样本筛选</a>
+			<a href="#" onclick="show_export_dialog();">问卷数据</a>
+			</h3>
+		  </div>
+		</div>	
 	</div>
+</div>
+<div class="modal fade" id="exportFormDataDialog" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">
+				表单数据导出
+				</h3>
+			</div>
+			<div class="modal-body">
+			<h4>可以将选择的表单所有样本数据以Excel形式导出</h4>
+			<hr style="margin: 2px 0"/>
+			<p>
+			<select onchange="openWin(this.value,'_self');">
+			<option>请选择要导出的表单</option>
+<exp:formIterator mode="editor">
+			<option value="../export?appName=${pageScope.tagAppName}&amp;formName=${pageScope.tagFormName}">
+			${pageScope.tagFormTitle}
+			</option>
+</exp:formIterator>
+			</select>
+			</p>
+			<a href="/fr/survey/userinfo/new" onclick="return openWin(this.href,'formrunner');">
+			<xf:output value="if (count(instance('my-info')/document) = 0) then '点击报名参加调研' else ''"/>
+			</a>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</c:if>
+<div class="row">
+<c:if test="${ group eq 'admin'}">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-danger">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">系统管理员</h3>
+		  </div>
+		  <div class="panel-body">
+			<h3>
+			<a href="/users">用户管理</a>
+			<a href="/roles">角色定义</a>
+			<a href="/fr/expedite/news/summary" onclick="return openWin(this.href,'formrunner');">通告管理</a>
+			<a href="#" onclick="alert('公务平台数据库为gongwu, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">系统信息</a>
+			</h3>
+		  </div>
+		</div>	
+	</div>
+</c:if>
+</div>
+<div class="modal fade" id="personalInfoDialog" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">
+				您的调研报名信息
+				</h3>
+			</div>
+			<div class="modal-body">
+			<h4>提供准确的个人信息将有助于老师根据调研样本的准确筛选，提高调研结果的准确性。</h4>
+			<hr style="margin: 2px 0"/>
+			<p>
+			<xf:repeat ref="instance('my-info')/document[contains(@operations,'update')]">
+				<xf:var name="link" value="concat('/fr/survey/userinfo/view/', @name)" />
+				<a href="{$link}" onclick="return openWin(this.href,'formrunner');">维护我的信息</a>
+			</xf:repeat>
+			</p>
+			<a href="/fr/survey/userinfo/new" onclick="return openWin(this.href,'formrunner');">
+			<xf:output value="if (count(instance('my-info')/document) = 0) then '点击报名参加调研' else ''"/>
+			</a>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <c:if test="${ group eq 'admin'}">
  	<fr:xforms-inspector/>
 </c:if>
