@@ -66,7 +66,7 @@
 	<jsp:body>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h2 style="margin-top: 0px">欢迎使用Expedite!</h2>
+			<h2 style="margin-top: 0px">欢迎使用安泰实验中心数据平台!</h2>
 			<h5>
 			今天您想从哪儿开始？
 			</h5>

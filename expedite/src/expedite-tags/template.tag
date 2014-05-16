@@ -20,7 +20,7 @@
 	xmlns:ev="http://www.w3.org/2001/xml-events"
 	xmlns:sql="http://orbeon.org/oxf/xml/sql">
 <head>
-<title>Expedite</title>
+<title>安泰实验中心数据平台</title>
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 					</button>
 					<a class="navbar-brand" href="./"
 						style="padding-top: 5px; padding-bottom: 0px"><img
-						src="/ops/exp_res/imgs/Expedite_logo.png"
+						src="/ops/exp_res/imgs/expedite_icon.png"
 						title="${ requestScope.version }" /></a>
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
