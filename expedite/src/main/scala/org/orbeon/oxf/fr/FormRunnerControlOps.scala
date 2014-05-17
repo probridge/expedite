@@ -80,4 +80,8 @@ trait FormRunnerControlOps extends FormRunnerBaseOps {
 
     def hasHTMLMediatype(nodes: Seq[NodeInfo]) =
         nodes exists (element ⇒ (element attValue "mediatype") == "text/html")
+
+    def hasHorizontal(nodes: Seq[NodeInfo]) =
+        nodes exists (element ⇒ (element attValue "style") == "display: inline-block")
+
 }

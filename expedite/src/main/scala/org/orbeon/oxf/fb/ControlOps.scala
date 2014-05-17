@@ -533,6 +533,19 @@ trait ControlOps extends SchemaOps with ResourcesOps {
                 delete(lhhaElement \@ "mediatype")
         }
 
+    // For a given control, set the mediatype on the itemset labels to be aligned horizontally.
+    def setItemSetHorizontal(inDoc: NodeInfo, controlName: String, isHorizontal: Boolean): Unit =
+            findControlByName(inDoc, controlName).toList child "itemset" foreach { itemSetElement ⇒
+            if (isHorizontal)
+                insert(into = itemSetElement, origin = attributeInfo("style", "display: inline-block"))
+            else
+                delete(itemSetElement \@ "style")
+    }
+    
+    // For a given control, whether the itemset is aligned horizontally
+    def isItemsetHorizontal(inDoc: NodeInfo, controlName: String) =
+        hasHorizontal(findControlByName(inDoc, controlName).toList child "itemset")
+    
     def ensureCleanLHHAElements(inDoc: NodeInfo, controlName: String, lhha: String, count: Int = 1, replace: Boolean = true): Seq[NodeInfo] = {
         val control  = findControlByName(inDoc, controlName).get
         val existing = getControlLHHA(inDoc, controlName, lhha)

@@ -849,6 +849,7 @@
             <save-as-metadata-output>请输入一个新的应用名称和表单名称用以标识您的表单的副本:</save-as-metadata-output>
             <xpath-errors>表单中发现 {0,choice,1#有一个XPath错误|1&lt;有{0,number,integer}个XPath错误}.</xpath-errors>
             <lhha-checkbox>如果希望使用HTML标记请选中这个复选框</lhha-checkbox>
+            <horizontal-checkbox>是否横向排列</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>未命名的表单</untitled-form>
@@ -1706,6 +1707,7 @@
             <save-as-metadata-output>Enter a new application name and form name to be used for the copy of this form:</save-as-metadata-output>
             <xpath-errors>There {0,choice,1#is one XPath error|1&lt;are {0,number,integer} XPath errors} in your form.</xpath-errors>
             <lhha-checkbox>Mark this checkbox if you'd like to type HTML tags</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>            
         </messages>
         <template>
             <untitled-form>Untitled Form</untitled-form>
@@ -2557,6 +2559,7 @@
             <save-as-metadata-output>Veuillez fournir un nom d'application et un nom de formulaire qui sera utilisé pour la copie de ce formulaire:</save-as-metadata-output>
             <xpath-errors>Il y a {0,choice,1#une erreur|1&lt;{0,number,integer} erreurs} XPath dans votre formulaire.</xpath-errors>
             <lhha-checkbox>Cochez cette case si vous souhaitez saisir des balises HTML</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>Formulaire sans titre</untitled-form>
@@ -3411,6 +3414,7 @@
             <save-as-metadata-output>[Enter a new application name and form name to be used for the copy of this form:]</save-as-metadata-output>
             <xpath-errors>[There {0,choice,1#is one XPath error|1&lt;are {0,number,integer} errors} in your form.]</xpath-errors>
             <lhha-checkbox>[Mark this checkbox if you'd like to type HTML tags]</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>Uten tittel</untitled-form>
@@ -4263,6 +4267,7 @@
             <save-as-metadata-output>Задайте название приложения и название формы, куда необходимо сохранить данную форму:</save-as-metadata-output>
             <xpath-errors>[There {0,choice,1#is one XPath error|1&lt;are {0,number,integer} errors} in your form.]</xpath-errors>
             <lhha-checkbox>[Mark this checkbox if you'd like to type HTML tags]</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>Новая форма</untitled-form>
@@ -5120,6 +5125,7 @@
             <save-as-metadata-output>Inserisci un nuovo nome per l'applicazione e per il modulo che sarà usato per copiare il modulo:</save-as-metadata-output>
             <xpath-errors>{0,choice,1# errore XPath è stato trovato |1&lt; {0,number,integer} errori sono stati trovati} nel tuo modulo.</xpath-errors>
             <lhha-checkbox>Contrassegna questa casella di controllo se vuoi usare HTML tags</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>Modulo senza nome</untitled-form>
@@ -5981,6 +5987,7 @@
             </save-as-metadata-output>
             <xpath-errors>{0,choice,1#Ein XPath Fehler|1&lt;{0,number,integer} XPath Fehler} im Formular.</xpath-errors>
             <lhha-checkbox>Hier ein Häkchen setzen, falls Sie HTML-Tags verwenden wollen</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>Unbenanntes Formular</untitled-form>
@@ -6838,6 +6845,7 @@
             <save-as-metadata-output>Syötä uusi nimi sekä sovellukselle että lomakkeelle. Näitä käytetään tämän lomakkeen kopiota varten:</save-as-metadata-output>
             <xpath-errors>Lomakkeestasi löytyi {0,choice,1#yksi XPath virhe|1&lt; {0,number,integer} XPath virhettä}.</xpath-errors>
             <lhha-checkbox>Merkkaa tämä valintaruutu jos haluat kirjoittaa HTML-tageja</lhha-checkbox>
+            <horizontal-checkbox>To align the options horizontally</horizontal-checkbox>
         </messages>
         <template>
             <untitled-form>Nimetön lomake</untitled-form>

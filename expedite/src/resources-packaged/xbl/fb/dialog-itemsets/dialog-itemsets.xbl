@@ -39,6 +39,7 @@
                 <xf:setvalue ref="control-type" value="event('control-element')/local-name()"/>
                 <xf:setvalue ref="appearance"   value="event('control-element')/@appearance"/>
                 <xf:setvalue ref="html"         value="fbf:isItemsetHTMLMediatype(fbf:getFormDoc(), $control-name)"/>
+                <xf:setvalue ref="horizontal"   value="fbf:isItemsetHorizontal(fbf:getFormDoc(), $control-name)"/>
                 <xxf:show dialog="dialog"/>
             </xbl:handler>
         </xbl:handlers>
@@ -50,6 +51,7 @@
                         <control-type/>             <!-- Either 'select' or 'select1' -->
                         <appearance/>
                         <html/>                     <!-- Whether labels can contain HTML markup -->
+                        <horizontal/>               <!-- Whether itemset are aligned horizontal -->
                         <items/>                    <!-- Contains item elements in the current language -->
                         <template>
                             <item>                  <!-- Template when adding items -->
@@ -64,6 +66,7 @@
                     </instance>
                 </xf:instance>
                 <xf:bind ref="html" type="xs:boolean"/>
+                <xf:bind ref="horizontal" type="xs:boolean"/>
                 <xf:bind ref="items/item">                                                                                      <!-- Constraints on items' value and label -->
                     <xf:bind ref="label, value">
                         <xf:bind ref="." calculate="normalize-space(.)" readonly="false()"/>                                    <!-- Additional spaces are most likely there by error -->
@@ -98,7 +101,8 @@
                 <xxf:hide ev:event="DOMActivate" ev:observer="save-trigger cancel-trigger" dialog="dialog"/>                        <!-- Close dialog upon click on save/cancel -->
                 <xf:action ev:event="DOMActivate" ev:observer="save-trigger" type="xpath">                                          <!-- Save on click on save -->
                     fbf:setControlItems(fbf:controlId($local/control-name), $local/items),
-                    fbf:setItemsetHTMLMediatype(fbf:getFormDoc(), $local/control-name, $local/html)
+                    fbf:setItemsetHTMLMediatype(fbf:getFormDoc(), $local/control-name, $local/html),
+                    fbf:setItemSetHorizontal(fbf:getFormDoc(), $local/control-name, $local/horizontal)
                 </xf:action>
 
                 <xf:action ev:event="DOMActivate" ev:observer="fb-itemset-label-input fb-itemset-value-input">                      <!-- Add line when users press enter -->
@@ -114,6 +118,9 @@
                         <!-- Only allow HTML for full appearance -->
                         <xf:input ref="$local/html[../appearance = 'full']">
                             <xf:label ref="$resources/messages/lhha-checkbox"/>
+                        </xf:input>
+                        <xf:input ref="$local/horizontal">
+                            <xf:label ref="$resources/messages/horizontal-checkbox"/>
                         </xf:input>
                         <xf:group ref="$local/items">
                             <fr:grid repeat="true" ref="item" id="fb-itemset-repeat" origin="$local/template/item" columns="2">
