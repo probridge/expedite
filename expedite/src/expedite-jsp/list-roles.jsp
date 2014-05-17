@@ -186,12 +186,14 @@
       <label for="formName" class="col-lg-2 control-label">表单名</label>
       <div class="col-lg-6">
         <input type="text" class="form-control" id="formName" name="formName" value="<c:out value="${role.formName}"/>" onchange="updateVal();" placeholder="表单名"/>
+        <span class="help-block">首页显示请输入homepage</span>
       </div>
     </div>
     <div class="form-group">
       <label for="formName" class="col-lg-2 control-label">角色名</label>
       <div class="col-lg-6">
         <input type="text" class="form-control" id="customRoleName" name="customRoleName" value="<c:out value="${fn:split(role.roleName,'-')[2]}"/>" onchange="updateVal();" placeholder="角色名"/>
+        <span class="help-block">首页显示角色为visible</span>
       </div>
     </div>
     <div class="form-group">

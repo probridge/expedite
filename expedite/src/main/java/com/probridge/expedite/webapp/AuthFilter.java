@@ -1,6 +1,8 @@
 package com.probridge.expedite.webapp;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -49,12 +51,10 @@ public class AuthFilter implements Filter {
 		//
 		String strGroupName = Utility.getStringVal(sess.getAttribute(Constant.SESSION_GROUP_NAME));
 		servletRequest.setAttribute("group", "user");
-		//
 		if (Constant.GROUP_EDITOR.equals(strGroupName))
 			servletRequest.setAttribute("group", "editor");
 		else if (Constant.GROUP_ADMIN.equals(strGroupName))
 			servletRequest.setAttribute("group", "admin");
-
 		// Process header
 		if (httpRequest.getHeader(userNameHeader) == null) {
 			if (sess.getAttribute(Constant.SESSION_USER_NAME) != null)

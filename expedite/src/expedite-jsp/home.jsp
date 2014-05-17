@@ -74,6 +74,7 @@
 	</div>
 	<div class="row">
 <c:if test="${ group eq 'user' or group eq 'editor' or group eq 'admin'}">
+<exp:sectionVisible requiredRole="survey-homepage-visible">
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="panel panel-success">
 		  <div class="panel-heading">
@@ -99,6 +100,8 @@
 		  </div>
 		</div>	
 	</div>
+</exp:sectionVisible>
+<exp:sectionVisible requiredRole="gongwu-homepage-visible">
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="panel panel-info">
 		  <div class="panel-heading">
@@ -113,6 +116,8 @@
 		  </div>
 		</div>	
 	</div>
+</exp:sectionVisible>
+<exp:sectionVisible requiredRole="acem-homepage-visible">
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="panel panel-info">
 		  <div class="panel-heading">
@@ -127,6 +132,8 @@
 		  </div>
 		</div>
 	</div>
+</exp:sectionVisible>
+<exp:sectionVisible requiredRole="*">
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="panel panel-warning">
 		  <div class="panel-heading">
@@ -144,13 +151,14 @@
 			</xf:repeat>
 			</ul>
 		  </div>
-		</div>	
+		</div>
 	</div>
+</exp:sectionVisible>
 </c:if>
 </div>
-<c:if test="${ group eq 'admin' or group eq 'editor'}">
 <div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<c:if test="${ group eq 'admin' or group eq 'editor'}">
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="panel panel-danger">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">表单管理</h3>
@@ -165,6 +173,24 @@
 		  </div>
 		</div>	
 	</div>
+</c:if>
+<c:if test="${ group eq 'admin'}">
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<div class="panel panel-danger">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">系统管理员</h3>
+		  </div>
+		  <div class="panel-body">
+			<h3>
+			<a href="/users">用户管理</a>
+			<a href="/roles">角色定义</a>
+			<a href="/fr/expedite/news/summary" onclick="return openWin(this.href,'formrunner');">通告管理</a>
+			<a href="#" onclick="alert('公务平台数据库为gongwu, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">系统信息</a>
+			</h3>
+		  </div>
+		</div>	
+	</div>
+</c:if>
 </div>
 <div class="modal fade" id="exportFormDataDialog" tabindex="-1">
 	<div class="modal-dialog">
@@ -198,26 +224,6 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-</c:if>
-<div class="row">
-<c:if test="${ group eq 'admin'}">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<div class="panel panel-danger">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">系统管理员</h3>
-		  </div>
-		  <div class="panel-body">
-			<h3>
-			<a href="/users">用户管理</a>
-			<a href="/roles">角色定义</a>
-			<a href="/fr/expedite/news/summary" onclick="return openWin(this.href,'formrunner');">通告管理</a>
-			<a href="#" onclick="alert('公务平台数据库为gongwu, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">系统信息</a>
-			</h3>
-		  </div>
-		</div>	
-	</div>
-</c:if>
-</div>
 <div class="modal fade" id="personalInfoDialog" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
