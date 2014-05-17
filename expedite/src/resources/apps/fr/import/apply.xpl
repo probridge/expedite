@@ -84,7 +84,7 @@
                 </xsl:for-each>
             </rows>
         </p:input>
-        <p:output name="data" id="rows"/>
+        <p:output name="data" id="rows" debug="rows"/>
     </p:processor>
 
     <!-- Obtain the form definition -->
@@ -119,7 +119,7 @@
 
             </xsl:transform>
         </p:input>
-        <p:output name="data" id="full-form"/>
+        <p:output name="data" id="full-form" debug="fullform"/>
     </p:processor>
 
     <!-- Process -->

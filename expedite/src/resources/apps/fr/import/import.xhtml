@@ -226,7 +226,7 @@
                 </xf:action>
 
                 <fr:section id="upload-validate-section" ref="instance()/upload">
-                    <xf:label>Selection and validation</xf:label>:label>
+                    <xf:label>选择导入的文件</xf:label>
 
                     <xf:var name="tab" value="."/>
                     <xf:var name="validating" value="xs:boolean($tab/validating)"/>
@@ -237,8 +237,8 @@
                                 <fr:td colspan="3">
 
                                     <xf:upload ref=".">
-                                        <xf:label>Select a file to import:</xf:label>
-                                        <xf:hint>File can be an Excel 2007 (.xlsx) or a plain zip archive of XML documents</xf:hint>
+                                        <xf:label>请选择导入的文件：</xf:label>
+                                        <xf:hint>文件必须为Excel 2007-2010 (.xlsx)格式。第一个工作簿的首行填写控件名称，其余每行代表一份数据。</xf:hint>
                                         <xf:alert/>
 
                                         <xf:filename ref="@filename"/>
@@ -258,12 +258,12 @@
                             <fr:tr>
                                 <fr:td>
                                     <xf:output ref="@filename">
-                                        <xf:label>File name:</xf:label>
+                                        <xf:label>文件名:</xf:label>
                                     </xf:output>
                                 </fr:td>
                                 <fr:td>
                                     <xf:output value="format-number(@size, '#,###')">
-                                        <xf:label>Size:</xf:label>
+                                        <xf:label>文件大小:</xf:label>
                                     </xf:output>
                                 </fr:td>
                             </fr:tr>
@@ -275,7 +275,7 @@
                                 <fr:td>
                                     <!-- Progress status -->
                                     <xf:group>
-                                        <xf:label>Validating:</xf:label>
+                                        <xf:label>正在验证数据完整性:</xf:label>
                                         <xh:div class="progress progress-striped">
                                             <xh:div class="bar" style="width: {format-number(instance('fr-batch-stats')/progress, '###%')}"/>
                                         </xh:div>
@@ -294,7 +294,7 @@
                                 <fr:td>
                                     <!-- Cancel validation -->
                                     <xf:trigger>
-                                        <xf:label>Cancel</xf:label>
+                                        <xf:label>取消</xf:label>
                                         <xf:action ev:event="DOMActivate" type="xpath">
                                             xxf:set-session-attribute('org.orbeon.fr.import.cancel', true())
                                         </xf:action>
