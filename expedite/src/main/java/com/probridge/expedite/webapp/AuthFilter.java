@@ -1,7 +1,10 @@
 package com.probridge.expedite.webapp;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -14,8 +17,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.ibatis.session.SqlSession;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.orbeon.oxf.xml.dom4j.Dom4jUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.probridge.expedite.dao.expdb.RoleInfoMapper;
+import com.probridge.expedite.model.expdb.RoleInfo;
+import com.probridge.expedite.model.expdb.RoleInfoExample;
 
 public class AuthFilter implements Filter {
 
@@ -81,6 +98,79 @@ public class AuthFilter implements Filter {
 				httpRequest.addHeader(rolesHeader, "Anonymous");
 		} else
 			logger.debug("Got existing header " + rolesHeader + " = " + httpRequest.getHeader(rolesHeader));
+		// check new form action
+		if (uri.endsWith("/new")) {
+			String[] uriArray = uri.split("/");
+			String formName = uriArray[uriArray.length - 2];
+			String appName = uriArray[uriArray.length - 3];
+			// get max allowed data instance
+			int maxAllowed = -1;
+			SqlSession sqlSess = Constant.sqlSessionFactory.openSession();
+			try {
+				RoleInfoMapper rmapper = sqlSess.getMapper(RoleInfoMapper.class);
+				//
+				RoleInfoExample rExp = new RoleInfoExample();
+				rExp.createCriteria().andAppNameEqualTo(appName).andFormNameEqualTo(formName);
+				List<RoleInfo> rList = rmapper.selectByExample(rExp);
+				//
+				if (rList.size() == 0 && (!"orbeon".equals(appName) && !"builder".equals(formName)))
+					maxAllowed = 1;
+				//
+				String strRoleLists = Utility.getStringVal(sess.getAttribute(Constant.SESSION_ROLE_LIST));
+				HashSet<String> roleList = new HashSet<String>();
+				if (strRoleLists != null)
+					roleList.addAll(Arrays.asList(strRoleLists.split("\\s*,\\s*")));
+				//
+				for (RoleInfo eachRoleInfo : rList)
+					for (String eachRoleHave : roleList)
+						if (eachRoleInfo.getRoleName().equals(eachRoleHave))
+							if (eachRoleInfo.getDataLimit() != null)
+								maxAllowed = Math.max(maxAllowed, eachRoleInfo.getDataLimit());
+				//
+			} finally {
+				if (sqlSess != null)
+					sqlSess.close();
+			}
+			//
+			if (maxAllowed > -1) {
+				String searchString = "<search xmlns=\"\"><query/><page-size>10000</page-size><page-number>1</page-number><lang /></search>";
+				StringEntity requestBody = new StringEntity(searchString);
+				//
+				HttpClient httpClient = new DefaultHttpClient();
+				try {
+					HttpPost httpPostRequest = new HttpPost(
+							"http://localhost:8080/expedite/fr/service/persistence/search/" + appName + "/" + formName);
+					httpPostRequest.setHeader("Cookie", "JSESSIONID=" + sess.getId());
+					httpPostRequest.setHeader("Content-Type", "application/xml");
+					httpPostRequest.setEntity(requestBody);
+					//
+					HttpResponse httpPostResp = httpClient.execute(httpPostRequest);
+					//
+					HttpEntity entity = httpPostResp.getEntity();
+					//
+					Document document = null;
+					if (entity != null) {
+						InputStream inputStream = entity.getContent();
+						BufferedInputStream bis = new BufferedInputStream(inputStream);
+						document = Dom4jUtils.readDom4j(bis);
+						bis.close();
+					}
+					//
+					int currentData = 0;
+					for (Object eachFormData : document.getRootElement().elements())
+						if ("N".equalsIgnoreCase(((Element) eachFormData).attributeValue("draft")))
+							currentData++;
+					//
+					if (currentData >= maxAllowed)
+						httpResponse.sendError(401, "表单数据超过允许的范围");
+					//
+				} catch (Exception e) {
+					logger.error("error processing export", e);
+				} finally {
+					httpClient.getConnectionManager().shutdown();
+				}
+			}
+		}
 		//
 		filterChain.doFilter(httpRequest, httpResponse);
 	}

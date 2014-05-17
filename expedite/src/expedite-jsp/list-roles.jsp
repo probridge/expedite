@@ -15,13 +15,16 @@
 		if ($('#roleTypeEditor').prop('checked')){
 			$('#formName').attr('disabled','disabled').val('');
 			$('#customRoleName').attr('disabled','disabled').val('');
+			$('#dataLimit').attr('disabled','disabled').val('');
 		}
 		if ($('#roleTypeParticipant').prop('checked')) {
 			$('#formName').removeAttr('disabled');
+			$('#dataLimit').removeAttr('disabled');
 			$('#customRoleName').attr('disabled','disabled').val('');
 		}
 		if ($('#roleTypeCustom').prop('checked')) {
 			$('#formName').removeAttr('disabled');
+			$('#dataLimit').removeAttr('disabled');
 			$('#customRoleName').removeAttr('disabled');
 		}
 		//
@@ -113,6 +116,7 @@
             <th>表单</th>
             <th>角色名</th>
             <th>描述</th>
+            <th>最大文档数</th>
             <th>#</th>
             <th>#</th>
             <th>#</th>
@@ -125,6 +129,7 @@
             <td><c:out value="${(empty role.formName)?'*':role.formName}" /></td>
             <td><c:out value="${role.roleName}" /></td>
             <td><c:out value="${role.description}" /></td>
+            <td><c:out value="${(empty role.formName)?'-':((empty role.dataLimit)?'∞':role.dataLimit)}" /></td>
         <c:if test="${ role.appName eq sandboxApp }">
             <td>-</td>
             <td>-</td>
@@ -200,6 +205,13 @@
       <label for="appName" class="col-lg-2 control-label">描述</label>
       <div class="col-lg-6">
         <input type="text" class="form-control" id="description" name="description" value="<c:out value="${role.description}"/>" onchange="updateVal();" placeholder="角色的描述信息"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dataLimit" class="col-lg-2 control-label">允许提交次数</label>
+      <div class="col-lg-6">
+        <input type="text" class="form-control" id="dataLimit" name="dataLimit" value="<c:out value="${role.dataLimit}"/>" onchange="updateVal();" placeholder="每用户提交次数"/>
+        <span class="help-block">请输入正整数，留空为无限，不定义本角色则默认每用户每表单允许提交一份数据</span>
       </div>
     </div>
     <div class="form-group">

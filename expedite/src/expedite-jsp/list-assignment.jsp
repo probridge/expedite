@@ -82,7 +82,7 @@
 	</c:if>
     <div class="form-group">
       <div class="col-lg-6 col-lg-offset-2">
-		<a class="btn btn-default" onclick="window.history.back()">返回</a>
+		<a class="btn btn-default" onclick="window.history.back()">后退</a>
 		<input type="submit" value="增加" class="btn btn-primary" />
 	  </div>
 	</div>

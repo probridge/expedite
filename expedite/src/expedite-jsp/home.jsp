@@ -7,22 +7,11 @@
 		<link rel="stylesheet" type="text/css" media="screen"
 			href="/ops/exp_res/css/theme-style.css" />	
 		<xf:model id="home-form-model" xxf:xpath-analysis="true">
+<exp:sectionVisible requiredRole="survey-homepage-visible">
 			<xf:instance id="my-info">
 				<documents />
 			</xf:instance>
-			<xf:instance id="news">
-				<documents />
-			</xf:instance>
 			<xf:instance id="search-instance">
-                <search xmlns="">
-                    <query/>
-                    <query name="title" path="main-section/title" summary-field="true"/>
-                    <page-size>10</page-size>
-                    <page-number>1</page-number>
-                    <lang />
-                </search>
-            </xf:instance>	
-			<xf:instance id="news-search-instance">
                 <search xmlns="">
                     <query />
                     <page-size>10</page-size>
@@ -36,12 +25,27 @@
 				resource="/fr/service/persistence/search/survey/userinfo"
 				replace="instance" instance="my-info">
             </xf:submission>
+			<xf:send ev:event="xforms-ready" submission="read-my-info" />
+</exp:sectionVisible>
+			<xf:instance id="news">
+				<documents />
+			</xf:instance>
+			<xf:instance id="news-search-instance">
+                <search xmlns="">
+                    <query/>
+                    <query name="title" path="main-section/title" summary-field="true"/>
+                    <page-size>10</page-size>
+                    <page-number>1</page-number>
+                    <lang />
+                </search>
+            </xf:instance>	
             <xf:submission id="read-news"
-				ref="instance('search-instance')" validate="false"
+				ref="instance('news-search-instance')" validate="false"
 				method="post"
 				resource="/fr/service/persistence/search/expedite/news"
 				replace="instance" instance="news">
             </xf:submission>
+			<xf:send ev:event="xforms-ready" submission="read-news" />
 <exp:roleIterator mode="participant">
 			<xf:instance id="instance-${pageScope.tagRoleName}">
 				<documents />
@@ -54,10 +58,6 @@
 			</xf:submission>
 			<xf:send ev:event="xforms-ready" submission="submission-${pageScope.tagRoleName}" />
 </exp:roleIterator>
-			<xf:action ev:event="xforms-ready">
-				<xf:send submission="read-my-info"/>
-				<xf:send submission="read-news"/>
-			</xf:action>
 		</xf:model>	
     </jsp:attribute>
 	<jsp:attribute name="jscode">
@@ -111,7 +111,7 @@
 		  	<h4>公务平台表单</h4>
 			<hr/>
 <exp:formIterator mode="participant" appName="gongwu">
-			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
 </exp:formIterator>
 		  </div>
 		</div>	
@@ -127,7 +127,23 @@
 		  	<h4>资源申请表单</h4>
 			<hr/>
 <exp:formIterator mode="participant" appName="acem">
-			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+</exp:formIterator>
+		  </div>
+		</div>
+	</div>
+</exp:sectionVisible>
+<exp:sectionVisible requiredRole="device-homepage-visible">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">设备处 Device Mgmt</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<h4>设备处管理平台</h4>
+			<hr/>
+<exp:formIterator mode="participant" appName="device">
+			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
 </exp:formIterator>
 		  </div>
 		</div>
@@ -159,9 +175,9 @@
 <div class="row">
 <c:if test="${ group eq 'admin' or group eq 'editor'}">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<div class="panel panel-danger">
+		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">表单管理</h3>
+		    <h3 class="panel-title">表单管理员</h3>
 		  </div>
 		  <div class="panel-body">
 			<h3>
@@ -176,7 +192,7 @@
 </c:if>
 <c:if test="${ group eq 'admin'}">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-		<div class="panel panel-danger">
+		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">系统管理员</h3>
 		  </div>
@@ -185,7 +201,7 @@
 			<a href="/users">用户管理</a>
 			<a href="/roles">角色定义</a>
 			<a href="/fr/expedite/news/summary" onclick="return openWin(this.href,'formrunner');">通告管理</a>
-			<a href="#" onclick="alert('公务平台数据库为gongwu, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">系统信息</a>
+			<a href="#" onclick="alert('公务平台数据库为gongwu, 设备处平台数据库为device, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">配置信息</a>
 			</h3>
 		  </div>
 		</div>	
@@ -252,8 +268,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<c:if test="${ group eq 'admin'}">
+<c:if test="${ group eq 'zadmin'}">
  	<fr:xforms-inspector/>
 </c:if>
     </jsp:body>

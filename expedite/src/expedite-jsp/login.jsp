@@ -22,6 +22,12 @@
 		});
 	</script>
 	</exp:hasToken>
+	<script type="text/javascript">
+		function startLogin() {
+			$('#loginIcon').removeClass('icon-lock').addClass('icon-refresh icon-spin');
+			$('#loginIcon').parent().addClass('disabled');
+		}
+	</script>
     </jsp:attribute>
 	<jsp:body>
 		<div class="row">
@@ -94,7 +100,7 @@
 									</div>
 									<div class="form-group"> 
 										<div class="col-lg-4 col-lg-offset-3 col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3">
-											<button type="submit" class="btn btn-primary btn-sm" style="width: 80px;"><i class="icon-lock icon-large spacer-right"></i>登录</button>
+											<button type="submit" class="btn btn-primary btn-sm" style="width: 80px;" onClick="startLogin();"><i class="icon-lock icon-large spacer-right" id="loginIcon"></i>登录</button>
 										</div>
 									</div>
 									<a href="register.jsp" class="pull-right">没有统一认证帐号？请点击这里注册。</a>

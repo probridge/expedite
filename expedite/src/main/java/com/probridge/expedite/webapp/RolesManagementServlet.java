@@ -128,6 +128,11 @@ public class RolesManagementServlet extends HttpServlet {
 		role.setAppName(req.getParameter("appName"));
 		role.setFormName(req.getParameter("formName"));
 		role.setDescription(req.getParameter("description"));
+		try {
+			role.setDataLimit(Integer.parseInt(req.getParameter("dataLimit")));
+		} catch (Exception e) {
+			role.setDataLimit(null);
+		}
 		//
 		HttpSession sess = req.getSession();
 		String strGroup = Utility.getStringVal(sess.getAttribute(Constant.SESSION_GROUP_NAME));
