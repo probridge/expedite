@@ -23,7 +23,7 @@
 		<!-- Jumbotron -->
 		<div class="jumbotron" style="height: 320px">
 			<h1>你好！</h1>
-			<p class="lead">欢迎使用Expedite表单平台，设计、发布和管理交互式表单问卷。</p>
+			<p class="lead">欢迎使用安泰数据平台，设计、发布和管理交互式表单问卷。</p>
 			<p><a class="btn btn-success" href="/jaccount">开始使用 &raquo;</a></p>
 			<h5><i class="icon-lock"></i>&nbsp;<em>Expedite使用上海交大jAccount统一认证体系</em></h5>
 		</div>
