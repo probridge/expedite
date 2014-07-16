@@ -15,6 +15,7 @@
         <thead>
           <tr>
             <th><c:out value="${ listBy eq 'user' ? '角色' : '用户'}"/></th>
+            <th>过期日</th>
             <th>
             <a href="assign?action=removeall&amp;roleName=${param.listRole}&amp;listUser=${param.listUser}&amp;listRole=${param.listRole}" onclick="return confirm('确认操作吗？');">
             <c:out value="${ listBy eq 'user' ? '' : '移除所有'}"/>
@@ -31,6 +32,12 @@
           <c:if test="${ listBy eq 'role' }">
           <td><a href="assign?listUser=${assignment.userName}"><c:out value="${assignment.userName}" /></a></td>        
           </c:if>
+          <c:if test="${ empty assignment.userRoleExpiration }">
+          	<td>-</td>        
+		  </c:if>
+          <c:if test="${ not empty assignment.userRoleExpiration }">
+			<td><fmt:formatDate value="${assignment.userRoleExpiration}" pattern="yyyy-MM-dd"/></td>
+		  </c:if>
           <td>
           <c:if test="${ assignment.userRoles ne sandboxEditor }">
           <a href="assign?action=remove&amp;roleName=${assignment.userRoles}&amp;userName=${assignment.userName}&amp;listUser=${param.listUser}&amp;listRole=${param.listRole}" onclick="return confirm('确认操作吗？');">移除</a>
@@ -80,6 +87,12 @@
       </div>
     </div>
 	</c:if>
+	<div class="form-group">
+      <label for="expiration" class="col-lg-2 control-label">有效期</label>
+      <div class="col-lg-6">
+        <input type="text" class="form-control" id="expiration" name="expiration" placeholder="格式为YYYY-MM-DD，空为不设过期"/>
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-lg-6 col-lg-offset-2">
 		<a class="btn btn-default" onclick="window.history.back()">后退</a>

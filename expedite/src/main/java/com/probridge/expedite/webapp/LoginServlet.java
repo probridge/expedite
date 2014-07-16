@@ -13,10 +13,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.probridge.expedite.dao.expdb.RoleInfoMapper;
 import com.probridge.expedite.dao.expdb.UserRolesMapper;
 import com.probridge.expedite.dao.expdb.UsersMapper;
+import com.probridge.expedite.model.expdb.RoleInfo;
+import com.probridge.expedite.model.expdb.UserRoles;
 import com.probridge.expedite.model.expdb.UserRolesExample;
-import com.probridge.expedite.model.expdb.UserRolesKey;
 import com.probridge.expedite.model.expdb.Users;
 
 /**
@@ -107,12 +109,20 @@ public class LoginServlet extends HttpServlet {
 			logger.debug("Login successful: " + userName);
 			UserRolesMapper rMapper = sqlSess.getMapper(UserRolesMapper.class);
 			UserRolesExample exp = new UserRolesExample();
-			exp.createCriteria().andUserNameEqualTo(loginUser.getUserName());
-			List<UserRolesKey> roleList = rMapper.selectByExample(exp);
+			exp.createCriteria().andUserNameEqualTo(loginUser.getUserName()).andUserRoleExpirationIsNull();
+			exp.or().andUserNameEqualTo(loginUser.getUserName()).andUserRoleExpirationGreaterThan(new Date());
+			List<UserRoles> roleList = rMapper.selectByExample(exp);
 			StringBuilder sb = new StringBuilder();
+			//
+			RoleInfoMapper riMapper = sqlSess.getMapper(RoleInfoMapper.class);
 			if (roleList != null)
-				for (UserRolesKey role : roleList)
-					sb.append(role.getUserRoles()).append(",");
+				for (UserRoles role : roleList) {
+					// check role expiration
+					RoleInfo thisRole = riMapper.selectByPrimaryKey(role.getUserRoles());
+					if (thisRole != null)
+						if (thisRole.getRoleExpiration() == null || thisRole.getRoleExpiration().after(new Date()))
+							sb.append(role.getUserRoles()).append(",");
+				}
 			if (sb.length() > 0)
 				sb.deleteCharAt(sb.length() - 1);
 			//

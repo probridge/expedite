@@ -115,6 +115,7 @@
             <th>数据库</th>
             <th>表单</th>
             <th>角色名</th>
+            <th>过期</th>
             <th>描述</th>
             <th>最大文档数</th>
             <th>#</th>
@@ -128,6 +129,12 @@
             <td><c:out value="${(empty role.formName)? role.appName : '-' }" /></td>
             <td><c:out value="${(empty role.formName)?'*':role.formName}" /></td>
             <td><c:out value="${role.roleName}" /></td>
+        <c:if test="${ empty role.roleExpiration }">
+            <td>-</td>        
+		</c:if>
+        <c:if test="${ not empty role.roleExpiration }">
+            <td><fmt:formatDate value="${role.roleExpiration}" pattern="yyyy-MM-dd"/></td>
+		</c:if>
             <td><c:out value="${role.description}" /></td>
             <td><c:out value="${(empty role.formName)?'-':((empty role.dataLimit)?'∞':role.dataLimit)}" /></td>
         <c:if test="${ role.appName eq sandboxApp }">
@@ -195,14 +202,20 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="formName" class="col-lg-2 control-label">角色名</label>
+      <label for="customRoleName" class="col-lg-2 control-label">角色名</label>
       <div class="col-lg-6">
         <input type="text" class="form-control" id="customRoleName" name="customRoleName" value="<c:out value="${fn:split(role.roleName,'-')[2]}"/>" onchange="updateVal();" placeholder="角色名"/>
         <span class="help-block">首页显示角色为visible</span>
       </div>
     </div>
     <div class="form-group">
-      <label for="appName" class="col-lg-2 control-label">描述</label>
+      <label for="expiration" class="col-lg-2 control-label">角色有效期</label>
+      <div class="col-lg-6">
+        <input type="text" class="form-control" id="expiration" name="expiration" value="<fmt:formatDate value="${role.roleExpiration}" pattern="yyyy-MM-dd"/>" onchange="updateVal();" placeholder="角色的过期日期，格式为YYYY-MM-DD，空为不设过期"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="col-lg-2 control-label">描述</label>
       <div class="col-lg-6">
         <input type="text" class="form-control" id="description" name="description" value="<c:out value="${role.description}"/>" onchange="updateVal();" placeholder="角色的描述信息"/>
       </div>

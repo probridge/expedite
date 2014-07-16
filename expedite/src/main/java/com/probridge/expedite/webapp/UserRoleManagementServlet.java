@@ -2,7 +2,10 @@ package com.probridge.expedite.webapp;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,6 +29,7 @@ import com.probridge.expedite.dao.expdb.UserRolesMapper;
 import com.probridge.expedite.dao.expdb.UsersMapper;
 import com.probridge.expedite.model.expdb.RoleInfo;
 import com.probridge.expedite.model.expdb.RoleInfoExample;
+import com.probridge.expedite.model.expdb.UserRoles;
 import com.probridge.expedite.model.expdb.UserRolesExample;
 import com.probridge.expedite.model.expdb.UserRolesKey;
 import com.probridge.expedite.model.expdb.Users;
@@ -91,7 +95,7 @@ public class UserRoleManagementServlet extends HttpServlet {
 					resp.sendError(500, "不允许删除系统角色");
 					return;
 				}
-				//			
+				//
 				UserRolesMapper um = sqlSess.getMapper(UserRolesMapper.class);
 				UserRolesExample exp = new UserRolesExample();
 				exp.createCriteria().andUserRolesEqualTo(roleName);
@@ -123,7 +127,7 @@ public class UserRoleManagementServlet extends HttpServlet {
 			} else {
 				throw new Exception("invalid request");
 			}
-			List<UserRolesKey> assignment = urm.selectByExample(exp);
+			List<UserRoles> assignment = urm.selectByExample(exp);
 			req.setAttribute("assignments", assignment);
 			req.setAttribute("sandboxEditor", Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX);
 			forward = LIST_ASSIGNMENT;
@@ -157,6 +161,14 @@ public class UserRoleManagementServlet extends HttpServlet {
 		//
 		String[] userNames = req.getParameterValues("userName");
 		String[] roleNames = req.getParameterValues("roleName");
+		//
+		Date expiration = null;
+		try {
+			expiration = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("expiration"));
+		} catch (ParseException e) {
+			expiration = null;
+		}
+
 		boolean xform = false;
 		//
 		if (userNames == null && roleNames == null) {
@@ -164,7 +176,7 @@ public class UserRoleManagementServlet extends HttpServlet {
 			Document document = null;
 			try {
 				document = Dom4jUtils.readDom4j(bis);
-				userNames = document.selectSingleNode("//selectedUser").getText().split("\\s* \\s*");
+				userNames = document.selectSingleNode("//selectedUser").getText().split("\\s*[\\s,]\\s*");
 				roleNames = new String[] { document.selectSingleNode("//selectedRole").getText() };
 				if ((userNames == null || userNames[0].length() == 0)
 						|| (roleNames == null || roleNames[0].length() == 0))
@@ -184,9 +196,10 @@ public class UserRoleManagementServlet extends HttpServlet {
 			UserRolesMapper urm = sqlSess.getMapper(UserRolesMapper.class);
 			for (String eachUser : userNames)
 				for (String eachRole : roleNames) {
-					UserRolesKey assignment = new UserRolesKey();
+					UserRoles assignment = new UserRoles();
 					assignment.setUserName(eachUser);
 					assignment.setUserRoles(eachRole);
+					assignment.setUserRoleExpiration(expiration);
 					// editors (and admins) can add new mapping of users to
 					// manageable
 					// role
