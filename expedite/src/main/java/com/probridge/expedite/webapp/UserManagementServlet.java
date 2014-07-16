@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 
 import com.probridge.expedite.dao.expdb.UserRolesMapper;
 import com.probridge.expedite.dao.expdb.UsersMapper;
+import com.probridge.expedite.model.expdb.UserRoles;
 import com.probridge.expedite.model.expdb.UserRolesExample;
-import com.probridge.expedite.model.expdb.UserRolesKey;
 import com.probridge.expedite.model.expdb.Users;
 import com.probridge.expedite.model.expdb.UsersExample;
 
@@ -150,9 +150,10 @@ public class UserManagementServlet extends HttpServlet {
 			if (Constant.GROUP_EDITOR.equals(user.getUserGroup()) || Constant.GROUP_ADMIN.equals(user.getUserGroup())) {
 				// add sandbox editor role
 				UserRolesMapper urm = sqlSess.getMapper(UserRolesMapper.class);
-				UserRolesKey assignment = new UserRolesKey();
+				UserRoles assignment = new UserRoles();
 				assignment.setUserName(user.getUserName());
 				assignment.setUserRoles(Constant.SANDBOX_DB_NAME + Constant.ROLE_EDITOR_SUFFIX);
+				assignment.setUserRoleExpiration(null);
 				urm.deleteByPrimaryKey(assignment);
 				urm.insert(assignment);
 			}
