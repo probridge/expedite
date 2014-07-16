@@ -1,7 +1,10 @@
 package com.probridge.expedite.webapp;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -129,6 +132,12 @@ public class RolesManagementServlet extends HttpServlet {
 		role.setFormName(req.getParameter("formName"));
 		role.setDescription(req.getParameter("description"));
 		try {
+			role.setRoleExpiration(new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("expiration")));
+		} catch (ParseException e) {
+			// ignore illegal data format
+			role.setRoleExpiration(null);
+		}
+		try {
 			role.setDataLimit(Integer.parseInt(req.getParameter("dataLimit")));
 		} catch (Exception e) {
 			role.setDataLimit(null);
@@ -167,7 +176,8 @@ public class RolesManagementServlet extends HttpServlet {
 			// editor role for app)
 			if (Constant.GROUP_ADMIN.equals(strGroup)) {
 				RoleInfoExample exp = new RoleInfoExample();
-				exp.createCriteria().andFormNameIsNull();
+				exp.createCriteria().andFormNameIsNull().andRoleExpirationIsNull();
+				exp.or().andFormNameIsNull().andRoleExpirationGreaterThan(new Date());
 				roles = rmapper.selectByExample(exp);
 				Utility.updatePermissionFile(roles);
 			}

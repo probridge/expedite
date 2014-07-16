@@ -1,6 +1,7 @@
 package com.probridge.expedite.webapp;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -78,7 +79,8 @@ public class Constant {
 				logger.info("Loading role information...");
 				RoleInfoMapper rmapper = sqlSess.getMapper(RoleInfoMapper.class);
 				RoleInfoExample exp = new RoleInfoExample();
-				exp.createCriteria().andFormNameIsNull();
+				exp.createCriteria().andFormNameIsNull().andRoleExpirationIsNull();
+				exp.or().andFormNameIsNull().andRoleExpirationGreaterThan(new Date());
 				List<RoleInfo> roles = rmapper.selectByExample(exp);
 				logger.info("Writing role configuraion file: " + permissionFilePath);
 				Utility.updatePermissionFile(roles);
