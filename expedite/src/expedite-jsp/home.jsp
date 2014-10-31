@@ -126,7 +126,7 @@
 		  <div class="panel-body">
 		  	<h4>资源申请表单</h4>
 			<hr/>
-<exp:formIterator mode="participant" appName="acem">
+<exp:formIterator mode="participant" appName="acem" requiredPermission="create">
 			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
 </exp:formIterator>
 		  </div>
@@ -143,6 +143,22 @@
 		  	<h4>设备处管理平台</h4>
 			<hr/>
 <exp:formIterator mode="participant" appName="device">
+			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+</exp:formIterator>
+		  </div>
+		</div>
+	</div>
+</exp:sectionVisible>
+<exp:sectionVisible requiredRole="jiaowu-homepage-visible">
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">教务处 Academic Affair</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<h4>教务处管理平台</h4>
+			<hr/>
+<exp:formIterator mode="participant" appName="jiaowu">
 			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
 </exp:formIterator>
 		  </div>
@@ -268,7 +284,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<c:if test="${ group eq 'zadmin'}">
+<c:if test="${ group eq 'admin'}">
  	<fr:xforms-inspector/>
 </c:if>
     </jsp:body>

@@ -64,6 +64,10 @@
 			<name>mode</name>
 			<required>true</required>
 		</attribute>
+		<attribute>
+			<name>requiredPermission</name>
+			<required>false</required>
+		</attribute>
 	</tag>
 	<tag>
 		<description>Displays body content for forms of which current user has required role or "*"</description>
