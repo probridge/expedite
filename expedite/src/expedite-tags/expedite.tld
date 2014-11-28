@@ -70,6 +70,24 @@
 		</attribute>
 	</tag>
 	<tag>
+		<description>Whether user has document data for specific app and form excluding draft</description>
+		<name>formDataIterator</name>
+		<tag-class>com.probridge.expedite.webapp.tags.FormDataIteratorTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>appName</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>formName</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>dataExists</name>
+			<required>true</required>
+		</attribute>
+	</tag>	
+	<tag>
 		<description>Displays body content for forms of which current user has required role or "*"</description>
 		<name>sectionVisible</name>
 		<tag-class>com.probridge.expedite.webapp.tags.SectionVisibleTag</tag-class>

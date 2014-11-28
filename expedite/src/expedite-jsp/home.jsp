@@ -20,10 +20,9 @@
                 </search>
             </xf:instance>	
             <xf:submission id="read-my-info"
-				ref="instance('search-instance')" validate="false"
-				method="post"
-				resource="/fr/service/persistence/search/survey/userinfo"
-				replace="instance" instance="my-info">
+					ref="instance('search-instance')" validate="false" method="post"
+					resource="/fr/service/persistence/search/survey/userinfo"
+					replace="instance" instance="my-info">
             </xf:submission>
 			<xf:send ev:event="xforms-ready" submission="read-my-info" />
 </exp:sectionVisible>
@@ -32,8 +31,9 @@
 			</xf:instance>
 			<xf:instance id="news-search-instance">
                 <search xmlns="">
-                    <query/>
-                    <query name="title" path="main-section/title" summary-field="true"/>
+                    <query />
+                    <query name="title" path="main-section/title"
+					summary-field="true" />
                     <page-size>10</page-size>
                     <page-number>1</page-number>
                     <lang />
@@ -51,17 +51,26 @@
 				<documents />
 			</xf:instance>
 			<xf:submission id="submission-${pageScope.tagRoleName}"
-				ref="instance('search-instance')" validate="false"
-				method="post"
-				resource="/fr/service/persistence/search/${pageScope.tagAppName}/${pageScope.tagFormName}"
-				replace="instance" instance="instance-${pageScope.tagRoleName}">
+					ref="instance('search-instance')" validate="false" method="post"
+					resource="/fr/service/persistence/search/${pageScope.tagAppName}/${pageScope.tagFormName}"
+					replace="instance" instance="instance-${pageScope.tagRoleName}">
 			</xf:submission>
-			<xf:send ev:event="xforms-ready" submission="submission-${pageScope.tagRoleName}" />
+			<xf:send ev:event="xforms-ready"
+					submission="submission-${pageScope.tagRoleName}" />
 </exp:roleIterator>
 		</xf:model>	
     </jsp:attribute>
 	<jsp:attribute name="jscode">
-	<script language="JavaScript" src="/ops/exp_res/js/home.js"/>
+	<script language="JavaScript" src="/ops/exp_res/js/home.js" />
+	<script language="JavaScript">
+		$.blockUI.defaults.overlayCSS = {
+			backgroundColor : '#FFFFFF',
+			opacity : 0.8,
+			cursor : 'default'
+		};
+		//
+		$.blockUI.defaults.css.border = '0px';
+	</script>
 	</jsp:attribute>
 	<jsp:body>
 	<div class="row">
@@ -73,7 +82,8 @@
 		</div>
 	</div>
 	<div class="row">
-<c:if test="${ group eq 'user' or group eq 'editor' or group eq 'admin'}">
+<c:if
+				test="${ group eq 'user' or group eq 'editor' or group eq 'admin'}">
 <exp:sectionVisible requiredRole="survey-homepage-visible">
 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="panel panel-success">
@@ -84,18 +94,25 @@
 			<h4>我收到的问卷邀请</h4>
 			<exp:roleIterator mode="participant">
 				${pageScope.tagDescription}
-				<xf:repeat ref="instance('instance-${pageScope.tagRoleName}')/document">
-					<xf:var name="link" value="concat('/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/view/', @name)" />
-					<a href="{$link}" class="pull-right" onclick="return openWin(this.href,'formrunner');">完成</a>
+				<xf:repeat
+										ref="instance('instance-${pageScope.tagRoleName}')/document">
+					<xf:var name="link"
+											value="concat('/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/view/', @name)" />
+					<a href="{$link}" class="pull-right"
+											onclick="return openWin(this.href,'formrunner');">完成</a>
 				</xf:repeat>
-				<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new" class="pull-right" onclick="return openWin(this.href,'formrunner');">
-				<xf:output value="if (count(instance('instance-${pageScope.tagRoleName}')/document) = 0) then '开始' else ''"/>
+				<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new"
+										class="pull-right"
+										onclick="return openWin(this.href,'formrunner');">
+				<xf:output
+											value="if (count(instance('instance-${pageScope.tagRoleName}')/document) = 0) then '开始' else ''" />
 				</a>
-				<br/>
+				<br />
 			</exp:roleIterator>
-			<hr/>
+			<hr />
 			<a href="#" onclick="show_personal_info_dialog();">
-			<xf:output value="if (count(instance('my-info')/document) = 0) then '报名参加调研' else '调研报名信息'"/>
+			<xf:output
+										value="if (count(instance('my-info')/document) = 0) then '报名参加调研' else '调研报名信息'" />
 			</a>
 		  </div>
 		</div>	
@@ -109,9 +126,9 @@
 		  </div>
 		  <div class="panel-body">
 		  	<h4>公务平台表单</h4>
-			<hr/>
+			<hr />
 <exp:formIterator mode="participant" appName="gongwu">
-			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+	<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br />
 </exp:formIterator>
 		  </div>
 		</div>	
@@ -125,9 +142,13 @@
 		  </div>
 		  <div class="panel-body">
 		  	<h4>资源申请表单</h4>
-			<hr/>
-<exp:formIterator mode="participant" appName="acem" requiredPermission="create">
-			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+			<hr />
+<exp:formIterator mode="participant" appName="acem"
+									requiredPermission="read">
+			<a
+										href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary"
+										onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a>
+									<br />
 </exp:formIterator>
 		  </div>
 		</div>
@@ -141,9 +162,12 @@
 		  </div>
 		  <div class="panel-body">
 		  	<h4>设备处管理平台</h4>
-			<hr/>
+			<hr />
 <exp:formIterator mode="participant" appName="device">
-			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+			<a
+										href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary"
+										onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a>
+									<br />
 </exp:formIterator>
 		  </div>
 		</div>
@@ -157,9 +181,12 @@
 		  </div>
 		  <div class="panel-body">
 		  	<h4>教务处管理平台</h4>
-			<hr/>
+			<hr />
 <exp:formIterator mode="participant" appName="jiaowu">
-			<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary" onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a><br/>
+			<a
+										href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/summary"
+										onclick="return openWin(this.href,'formrunner');">${pageScope.tagFormTitle}</a>
+									<br />
 </exp:formIterator>
 		  </div>
 		</div>
@@ -177,7 +204,7 @@
 			<li>
 				<xf:var name="link" value="concat('/fr/expedite/news/view/', @name)" />
 				<a href="{$link}" onclick="return openWin(this.href,'formrunner');">
-				<xf:output value="details/detail[1]/text()"/>
+				<xf:output value="details/detail[1]/text()" />
 				</a>
 			</li>
 			</xf:repeat>
@@ -198,7 +225,8 @@
 		  <div class="panel-body">
 			<h3>
 			<a href="/roles">准备权限</a>
-			<a href="/fr/orbeon/builder/summary" onclick="return openWin(this.href,'formbuilder');">设计问卷</a>
+			<a href="/fr/orbeon/builder/summary"
+									onclick="return openWin(this.href,'formbuilder');">设计问卷</a>
 			<a href="/xquery">样本筛选</a>
 			<a href="#" onclick="show_export_dialog();">问卷数据</a>
 			</h3>
@@ -216,8 +244,10 @@
 			<h3>
 			<a href="/users">用户管理</a>
 			<a href="/roles">角色定义</a>
-			<a href="/fr/expedite/news/summary" onclick="return openWin(this.href,'formrunner');">通告管理</a>
-			<a href="#" onclick="alert('公务平台数据库为gongwu, 设备处平台数据库为device, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">配置信息</a>
+			<a href="/fr/expedite/news/summary"
+									onclick="return openWin(this.href,'formrunner');">通告管理</a>
+			<a href="#"
+									onclick="alert('公务平台数据库为gongwu, 设备处平台数据库为device, 安泰实验室数据库为acem, 新闻为expedite数据库的news表单, 调研报名样本库为survey/userinfo')">配置信息</a>
 			</h3>
 		  </div>
 		</div>	
@@ -235,27 +265,33 @@
 			</div>
 			<div class="modal-body">
 			<h4>可以将选择的表单所有样本数据以Excel形式导出</h4>
-			<hr style="margin: 2px 0"/>
+			<hr style="margin: 2px 0" />
 			<p>
 			<select onchange="openWin(this.value,'_self');">
 			<option>请选择要导出的表单</option>
 <exp:formIterator mode="editor">
-			<option value="../export?appName=${pageScope.tagAppName}&amp;formName=${pageScope.tagFormName}">
+			<option
+										value="../export?appName=${pageScope.tagAppName}&amp;formName=${pageScope.tagFormName}">
 			${pageScope.tagFormTitle}
 			</option>
 </exp:formIterator>
 			</select>
 			</p>
-			<a href="/fr/survey/userinfo/new" onclick="return openWin(this.href,'formrunner');">
-			<xf:output value="if (count(instance('my-info')/document) = 0) then '点击报名参加调研' else ''"/>
+			<a href="/fr/survey/userinfo/new"
+							onclick="return openWin(this.href,'formrunner');">
+			<xf:output
+								value="if (count(instance('my-info')/document) = 0) then '点击报名参加调研' else ''" />
 			</a>
 			</div>
 			<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+		</div>
+				<!-- /.modal-content -->
+	</div>
+			<!-- /.modal-dialog -->
+</div>
+		<!-- /.modal -->
 <div class="modal fade" id="personalInfoDialog" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -267,25 +303,45 @@
 			</div>
 			<div class="modal-body">
 			<h4>提供准确的个人信息将有助于老师根据调研样本的准确筛选，提高调研结果的准确性。</h4>
-			<hr style="margin: 2px 0"/>
+			<hr style="margin: 2px 0" />
 			<p>
-			<xf:repeat ref="instance('my-info')/document[contains(@operations,'update')]">
-				<xf:var name="link" value="concat('/fr/survey/userinfo/view/', @name)" />
+			<xf:repeat
+								ref="instance('my-info')/document[contains(@operations,'update')]">
+				<xf:var name="link"
+									value="concat('/fr/survey/userinfo/view/', @name)" />
 				<a href="{$link}" onclick="return openWin(this.href,'formrunner');">维护我的信息</a>
 			</xf:repeat>
 			</p>
-			<a href="/fr/survey/userinfo/new" onclick="return openWin(this.href,'formrunner');">
-			<xf:output value="if (count(instance('my-info')/document) = 0) then '点击报名参加调研' else ''"/>
+			<a href="/fr/survey/userinfo/new"
+							onclick="return openWin(this.href,'formrunner');">
+			<xf:output
+								value="if (count(instance('my-info')/document) = 0) then '点击报名参加调研' else ''" />
 			</a>
 			</div>
 			<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<c:if test="${ group eq 'admin'}">
- 	<fr:xforms-inspector/>
+		</div>
+				<!-- /.modal-content -->
+	</div>
+			<!-- /.modal-dialog -->
+</div>
+		<!-- /.modal -->
+<c:if test="${ group ne 'admin'}">
+<exp:formDataIterator appName="gongwu" formName="yonghuzhuce" dataExists="false">
+	<div id="divProfile" style="display: none; margin-bottom: 0px;" class="alert alert-warning">
+		<h4>您尚未填写首次登陆注册表</h4>
+		新用户请点击填写<a href="/fr/gongwu/yonghuzhuce/new" class="alert-link" onclick="return openWin(this.href,'formrunner');">首次登陆注册表</a>，完成后请点击<a href="#" onclick="javascript:window.location.reload();" class="alert-link">刷新</a>，谢谢！
+	</div>
+	<script language="JavaScript">
+	$('document').ready(function() {
+		$.blockUI({ message : $('#divProfile') });
+	});
+	</script>
+</exp:formDataIterator>
 </c:if>
-    </jsp:body>
+<c:if test="${ group eq 'admin'}">
+	<fr:xforms-inspector />
+</c:if>
+</jsp:body>
 </t:template>
