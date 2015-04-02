@@ -93,7 +93,7 @@ public class FormIteratorTag extends SimpleTagSupport {
 						getJspBody().invoke(null);
 					}
 					if (!"editor".equals(mode) && Utility.isEmptyOrNull(available)) {
-						boolean skip = false;
+						boolean skip = true;
 						//
 						if (!Utility.isEmptyOrNull(requiredPermission) && permission != null) {
 							for (Object eachPermission : permission) {
@@ -103,7 +103,6 @@ public class FormIteratorTag extends SimpleTagSupport {
 										// find required permission definition
 										List sub = ((Element) eachPermission).selectNodes("user-role");
 										if (sub != null && sub.size() > 0) {
-											skip = true;
 											String allowedRoleList = ((Element) sub.get(0)).attributeValue("any-of");
 											if (allowedRoleList != null) {
 												StringTokenizer st = new StringTokenizer(allowedRoleList);
@@ -114,6 +113,14 @@ public class FormIteratorTag extends SimpleTagSupport {
 														break;
 													}
 												}
+											}
+										} else {
+											// bypass owner def
+											List owner = ((Element) eachPermission).selectNodes("owner");
+											List group = ((Element) eachPermission).selectNodes("group-member");
+											if ((owner == null || owner.isEmpty())
+													&& (group == null || group.isEmpty())) {
+												skip = false;
 											}
 										}
 									}
