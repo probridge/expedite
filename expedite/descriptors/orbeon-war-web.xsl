@@ -179,7 +179,7 @@
                 </init-param>
                 <init-param>
                     <param-name>expedite.unprotected</param-name>
-                    <param-value>/, /pages/index.jsp, /pages/login.jsp, /pages/logout.jsp, /pages/register.jsp, /pages/about.jsp, /jaccount, /logout, /login, /register, /xforms-renderer, /ops/, /config/theme/, /apps/fr/style/, /fr/style/</param-value>
+                    <param-value>/, /pages/index.jsp, /pages/index-en.jsp, /pages/login.jsp, /pages/logout.jsp, /pages/register.jsp, /pages/about.jsp, /jaccount, /logout, /login, /register, /xforms-renderer, /ops/, /config/theme/, /apps/fr/style/, /fr/style/</param-value>
                 </init-param>
             </filter>
             <filter-mapping>
