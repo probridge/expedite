@@ -79,6 +79,8 @@
     <property as="xs:boolean" name="oxf.fr.summary.show-last-modified.*.*"                      value="true"/>
     <property as="xs:string"  name="oxf.fr.summary.buttons.*.*"                                 value="home review delete new"/>
     <property as="xs:string"  name="oxf.fr.summary.buttons.acem.*"                              value="home review import delete new"/>
+    <property as="xs:string"  name="oxf.fr.summary.buttons.device.*"                            value="home review import delete new"/>
+    <property as="xs:string"  name="oxf.fr.summary.buttons.jiaowu.*"                            value="home review import delete new"/>
 
     <property as="xs:boolean" name="oxf.fr.detail.noscript.table.*.*"                           value="true"/>
     <property as="xs:boolean" name="oxf.fr.detail.noscript.section.collapse.*.*"                value="true"/>
