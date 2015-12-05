@@ -61,7 +61,7 @@
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="/pages/home.jsp">Form Center</a></li>
+						<li><a href="/pages/home-en.jsp">Form Center</a></li>
 						<li><a href="#">How to use</a></li>
 						<li><a href="#">Contact Us</a></li>
 						<li><a href="/pages/about.jsp">About</a></li>
@@ -81,7 +81,7 @@
 								data-toggle="dropdown"> Login<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="/jaccount"><i class="icon-lock spacer-right"></i>jAccount Sign-on</a></li>
-									<li><a href="/pages/login.jsp?other=1"><i
+									<li><a href="/pages/login-en.jsp?other=1"><i
 											class="icon-lock spacer-right"></i>Other Users</a></li>
 								</ul></li>
 						</ul>
@@ -102,7 +102,7 @@
 	<!-- /container -->
 	<div class="container">
 		<div id="footer" class="row">
-			<div id="footer-content">上海交大安泰经管学院实验中心</div>
+			<div id="footer-content">Experimental Center, Antai College of Economics & Management, Shanghai Jiao Tong University</div>
 		</div>
 	</div>
 	<!-- /container -->
