@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
@@ -32,6 +33,7 @@ public class FormIteratorTag extends SimpleTagSupport {
 	private static final Logger logger = LoggerFactory.getLogger(FormIteratorTag.class);
 	private String appName = null;
 	private String mode = null;
+	private String requiredPermission = null;
 
 	@Override
 	public void doTag() throws JspException, IOException {
@@ -77,6 +79,11 @@ public class FormIteratorTag extends SimpleTagSupport {
 					String formTitle = ((Element) eachForm).elementText("title");
 					String formDescription = ((Element) eachForm).elementText("description");
 					String available = ((Element) eachForm).elementText("available");
+					Element permissions = ((Element) eachForm).element("permissions");
+					List permission = null;
+					if (permissions != null)
+						permission = permissions.selectNodes("permission");
+					//
 					if ("editor".equals(mode) && roleList.contains(appName + Constant.ROLE_EDITOR_SUFFIX)
 							&& Utility.isEmptyOrNull(available)) {
 						context.setAttribute("tagAppName", appName);
@@ -86,6 +93,43 @@ public class FormIteratorTag extends SimpleTagSupport {
 						getJspBody().invoke(null);
 					}
 					if (!"editor".equals(mode) && Utility.isEmptyOrNull(available)) {
+						boolean skip = true;
+						//
+						if (!Utility.isEmptyOrNull(requiredPermission) && permission != null) {
+							for (Object eachPermission : permission) {
+								if (eachPermission instanceof Element) {
+									String ops = ((Element) eachPermission).attributeValue("operations");
+									if (ops != null && ops.indexOf(requiredPermission) >= 0) {
+										// find required permission definition
+										List sub = ((Element) eachPermission).selectNodes("user-role");
+										if (sub != null && sub.size() > 0) {
+											String allowedRoleList = ((Element) sub.get(0)).attributeValue("any-of");
+											if (allowedRoleList != null) {
+												StringTokenizer st = new StringTokenizer(allowedRoleList);
+												while (st.hasMoreTokens()) {
+													boolean found = roleList.contains(st.nextToken());
+													if (found) {
+														skip = false;
+														break;
+													}
+												}
+											}
+										} else {
+											// bypass owner def
+											List owner = ((Element) eachPermission).selectNodes("owner");
+											List group = ((Element) eachPermission).selectNodes("group-member");
+											if ((owner == null || owner.isEmpty())
+													&& (group == null || group.isEmpty())) {
+												skip = false;
+											}
+										}
+									}
+								}
+							}
+						}
+						//
+						if (skip)
+							continue;
 						context.setAttribute("tagAppName", appName);
 						context.setAttribute("tagFormName", formName);
 						context.setAttribute("tagFormTitle", Utility.isEmptyOrNull(formTitle) ? "未命名" : formTitle);
@@ -115,5 +159,13 @@ public class FormIteratorTag extends SimpleTagSupport {
 
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+
+	public String getRequiredPermission() {
+		return requiredPermission;
+	}
+
+	public void setRequiredPermission(String requiredPermission) {
+		this.requiredPermission = requiredPermission;
 	}
 }
