@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="exp" uri="http://www.probridge.com.cn/expedite-tags"%>
-<t:template jquery="no">
+<t:template_en jquery="no">
 	<jsp:attribute name="header">
 		<link rel="stylesheet" type="text/css" media="screen"
 			href="/ops/exp_res/css/theme-style.css" />	
@@ -61,12 +61,6 @@
 		</xf:model>	
     </jsp:attribute>
 	<jsp:attribute name="jscode">
-	<script language="JavaScript">
-		var lang = navigator.languages? navigator.languages[0] : (navigator.language || navigator.userLanguage);
-		if (lang.substring(0, 2) != "zh") {
-			document.location.href = 'home-en.jsp';
-		}
-	</script>
 	<script language="JavaScript" src="/ops/exp_res/js/home.js" />
 	<script language="JavaScript">
 		$.blockUI.defaults.overlayCSS = {
@@ -81,9 +75,9 @@
 	<jsp:body>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h2 style="margin-top: 0px">欢迎使用安泰实验中心数据平台!</h2>
+			<h2 style="margin-top: 0px">Welcome to use Antai experimental center data platform!</h2>
 			<h5>
-			今天您想从哪儿开始？
+			Where do you want to start today?
 			</h5>
 		</div>
 	</div>
@@ -97,7 +91,7 @@
 		    <h3 class="panel-title">调研问卷 Survey</h3>
 		  </div>
 		  <div class="panel-body">
-			<h4>我收到的问卷邀请</h4>
+			<h4>Survey Received</h4>
 			<exp:roleIterator mode="participant">
 				${pageScope.tagDescription}
 				<xf:repeat
@@ -105,20 +99,20 @@
 					<xf:var name="link"
 											value="concat('/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/view/', @name)" />
 					<a href="{$link}" class="pull-right"
-											onclick="return openWin(this.href,'formrunner');">完成</a>
+											onclick="return openWin(this.href,'formrunner');">Complete</a>
 				</xf:repeat>
 				<a href="/fr/${pageScope.tagAppName}/${pageScope.tagFormName}/new"
 										class="pull-right"
 										onclick="return openWin(this.href,'formrunner');">
 				<xf:output
-											value="if (count(instance('instance-${pageScope.tagRoleName}')/document) = 0) then '开始' else ''" />
+											value="if (count(instance('instance-${pageScope.tagRoleName}')/document) = 0) then 'Start' else ''" />
 				</a>
 				<br />
 			</exp:roleIterator>
 			<hr />
 			<a href="#" onclick="show_personal_info_dialog();">
 			<xf:output
-										value="if (count(instance('my-info')/document) = 0) then '报名参加调研' else '调研报名信息'" />
+										value="if (count(instance('my-info')/document) = 0) then 'Participant in survey' else 'Survey Enrollment Info'" />
 			</a>
 		  </div>
 		</div>	
@@ -350,4 +344,4 @@
 	<fr:xforms-inspector />
 </c:if>
 </jsp:body>
-</t:template>
+</t:template_en>
