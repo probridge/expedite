@@ -54,16 +54,18 @@ public class RoleIteratorTag extends SimpleTagSupport {
 				for (String eachRole : roleList) {
 					if (eachRole.endsWith(Constant.ROLE_EDITOR_SUFFIX)) {
 						String app = eachRole.substring(0, eachRole.lastIndexOf(Constant.ROLE_EDITOR_SUFFIX));
-						exp.or().andRoleNameLike(app + "-%" + Constant.ROLE_PARTICIPANT_SUFFIX);
+						exp.or().andRoleNameLike(app + "-%");
 					}
 				}
 				List<RoleInfo> formRoleList = rmapper.selectByExample(exp);
 				for (RoleInfo role : formRoleList) {
-					context.setAttribute("tagRoleName", role.getRoleName());
-					context.setAttribute("tagAppName", role.getAppName());
-					context.setAttribute("tagFormName", role.getFormName());
-					context.setAttribute("tagDescription", role.getDescription());
-					getJspBody().invoke(null);
+					if (!role.getRoleName().endsWith(Constant.ROLE_EDITOR_SUFFIX)) {
+						context.setAttribute("tagRoleName", role.getRoleName());
+						context.setAttribute("tagAppName", role.getAppName());
+						context.setAttribute("tagFormName", role.getFormName());
+						context.setAttribute("tagDescription", role.getDescription());
+						getJspBody().invoke(null);
+					}
 				}
 			}
 		} catch (Exception e) {
