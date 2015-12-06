@@ -102,7 +102,7 @@
 	<!-- /container -->
 	<div class="container">
 		<div id="footer" class="row">
-			<div id="footer-content">Experimental Center, Antai College of Economics & Management, Shanghai Jiao Tong University</div>
+			<div id="footer-content">Experimental Center, Antai College of Economics and Management, Shanghai Jiao Tong University</div>
 		</div>
 	</div>
 	<!-- /container -->

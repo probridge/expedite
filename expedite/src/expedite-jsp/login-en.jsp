@@ -76,7 +76,7 @@
 								<div class="tab-pane active" id="jaccount" style="padding-top: 30px; padding-bottom: 20px; background-color: white; border: 1px #ddd; border-style: none solid solid">
 									<div class="form-group">
 										<div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-3">
-											<a class="btn btn-success btn-sm" href="/jaccount" style="width: 180px;"><i class="icon-lock icon-large spacer-right"></i>jAccount统一认证登录</a> 
+											<a class="btn btn-success btn-sm" href="/jaccount" style="width: 180px;"><i class="icon-lock icon-large spacer-right"></i>jAccount Login</a> 
 										</div>
 									</div>
 								</div>
@@ -86,7 +86,7 @@
 										<div class="col-lg-8 col-md-8 col-sm-8">
 										<div class="input-group" style="width: 100%">
 											<input type="email" class="form-control" id="inputEmail" name="inputEmail"
-												placeholder="您的邮箱地址" value="${requestScope.email}" maxlength="30"/>
+												placeholder="Email" value="${requestScope.email}" maxlength="30"/>
 								         </div>
 										</div>
 									</div>
