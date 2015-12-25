@@ -2,7 +2,6 @@ package com.probridge.expedite.webapp;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -165,7 +164,7 @@ public class UserRoleManagementServlet extends HttpServlet {
 		Date expiration = null;
 		try {
 			expiration = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("expiration"));
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			expiration = null;
 		}
 
