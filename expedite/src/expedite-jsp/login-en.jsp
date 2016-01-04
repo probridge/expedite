@@ -65,7 +65,7 @@
 									</div>							
 								</div>
 							</div>
-							<input type="hidden" name="loginToken" value="true"/>							
+							<input type="hidden" name="loginToken" value="true"/>
 							</exp:hasToken>
 							<exp:noToken>
 							<ul class="nav nav-tabs" id="loginTab">
