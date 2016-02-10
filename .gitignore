@@ -10,3 +10,6 @@
 
 /expedite/build
 /expedite/.cache
+
+/expedite/data/jakey
+/expedite/data/mybatis-gen.xml
